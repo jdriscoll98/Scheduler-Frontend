@@ -1,94 +1,45 @@
 <template>
   <div class="overview">
-    <div class="card">
-      <div class="card-header">
-        <h1 class="semester-number">Semeseter 1 - Fall 2020</h1>
-        <font-awesome-icon :icon="['fas', 'user-secret']" />
-      </div>
-      <div class="card-body">
-        <div class="card-table">
-          <table>
-            <tr>
-              <th>Class</th>
-              <th>Name</th>
-              <th>Credits</th>
-            </tr>
-            <tr>
-              <td>ACG2021</td>
-              <td>Introduction to Financial Accounting</td>
-              <td>4</td>
-            </tr>
-            <tr>
-              <td>CDA3101</td>
-              <td>Introduction to Computer Organization</td>
-              <td>3</td>
-            </tr>
-            <tr>
-              <td>ENC3246</td>
-              <td>Professional Communcation for Engineers</td>
-              <td>3</td>
-            </tr>
-            <tr>
-              <td>ENT3503</td>
-              <td>Introduction to Social Entrepreneurship</td>
-              <td>2</td>
-            </tr>
-            <tfoot>
-              <tr>
-                <td colspan="2" style="text-align: right; font-weight: 800">
-                  Total:
-                </td>
-                <td style="font-weight: 800">12</td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-      </div>
-    </div>
+    <Card />
+    <button class="add-btn">
+      <img class="add" src="../assets/images/plus-solid.svg" />
+    </button>
   </div>
 </template>
 
 <script>
+import Card from "./Card";
 export default {
   name: "Overview",
+  components: {
+    Card,
+  },
 };
 </script>
 
 <style scoped>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td,
-th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-.semester-number {
-  font-size: 22px;
-  text-align: left;
-  margin: 10px;
-}
-.card-header {
-  border-bottom: 1px solid black;
-}
-.card {
+.add-btn {
   display: inline-block;
-  height: 325px;
-  width: 400px;
-  margin: 25px;
-  border: 2px solid #285797;
-  border-radius: 5px;
-  background-color: white;
+  height: 50px;
+  width: 50px;
   position: relative;
-  left: 0;
-  top: 75px;
+  top: 200px;
+  left: 75px;
+  border-radius: 30px;
+  background-color: green;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.add {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.add-btn:hover {
+  transform: scale(1.1);
 }
 </style>

@@ -14,10 +14,10 @@
     </button>
     <div class="subnav">
       <div class="left-nav">
-        <h3 class="nav-item current">OVERVIEW</h3>
+        <h3 class="nav-item not-current">OVERVIEW</h3>
       </div>
       <div class="right-nav">
-        <h3 class="nav-item">PROGRAM</h3>
+        <h3 class="nav-item not-current">PROGRAM</h3>
       </div>
     </div>
   </div>
@@ -38,6 +38,9 @@ export default {
 }
 .current {
   border-bottom: 4px solid #e0812e;
+}
+.not-current {
+  border-bottom: 4px solid #285797;
 }
 .nav-item:hover {
   background-color: #f1f1f1;
@@ -65,6 +68,7 @@ export default {
   background-color: whitesmoke;
   position: absolute;
   top: 65px;
+  cursor: pointer;
 }
 .oneuf {
   color: white;
