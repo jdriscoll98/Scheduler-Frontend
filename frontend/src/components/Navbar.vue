@@ -1,0 +1,85 @@
+<template>
+  <div class="nav">
+    <button class="menu">
+      <img class="menu-btn" src="../assets/images/menu.svg" />
+    </button>
+    <a>
+      <img class="logo" src="../assets/images/logo-uf.svg" />
+    </a>
+    <h1 class="oneuf">ONE.UF</h1>
+    <h2 class="label">| SCHEDULER</h2>
+    <button class="user-icon">
+      <img src="../assets/images/user-icon.svg" />
+    </button>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "Navbar",
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+.oneuf {
+  color: white;
+  position: absolute;
+  left: 110px;
+  padding: 18px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.label {
+  color: white;
+  position: absolute;
+  left: 180px;
+  padding: 18px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.user-icon {
+  position: absolute;
+  right: 50px;
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: #285797;
+  cursor: pointer;
+  outline: none;
+}
+.user-icon img {
+  padding: 14px;
+}
+.nav {
+  height: 60px;
+  width: 100vw;
+  background-color: #285797;
+  border-bottom: 4px solid #e0812e;
+  font-size: 20px;
+}
+.nav .menu {
+  position: absolute;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  margin: 0;
+  padding: 0;
+  border-radius: 30px;
+  border: none;
+  border-radius: 30px;
+  background-color: #285797;
+  cursor: pointer;
+  outline: none;
+}
+
+.nav .logo {
+  width: 32px;
+  height: 32px;
+  padding: 14px;
+  position: absolute;
+  left: 60px;
+}
+</style>
