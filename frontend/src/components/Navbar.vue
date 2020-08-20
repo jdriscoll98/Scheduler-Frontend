@@ -10,6 +10,7 @@
     <h2 class="label">| SCHEDULER</h2>
     <button class="user-icon">
       <img src="../assets/images/user-icon.svg" />
+      <i class="arrow down"></i>
     </button>
   </div>
 </template>
@@ -40,7 +41,7 @@ export default {
 }
 .user-icon {
   position: absolute;
-  right: 50px;
+  right: 55px;
   width: 30px;
   height: 30px;
   margin: 0;
@@ -49,6 +50,19 @@ export default {
   background-color: #285797;
   cursor: pointer;
   outline: none;
+}
+.arrow {
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  position: fixed;
+  right: 20px;
+  top: 25px;
+}
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
 }
 .user-icon img {
   padding: 14px;
