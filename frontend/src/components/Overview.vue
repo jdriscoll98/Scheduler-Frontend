@@ -3,6 +3,7 @@
     <div class="card">
       <div class="card-header">
         <h1 class="semester-number">Semeseter 1 - Fall 2020</h1>
+        <font-awesome-icon :icon="['fas', 'user-secret']" />
       </div>
       <div class="card-body">
         <div class="card-table">
@@ -34,7 +35,9 @@
             </tr>
             <tfoot>
               <tr>
-                <td colspan="2" style="text-align: right; font-weight: 800">Total:</td>
+                <td colspan="2" style="text-align: right; font-weight: 800">
+                  Total:
+                </td>
                 <td style="font-weight: 800">12</td>
               </tr>
             </tfoot>
