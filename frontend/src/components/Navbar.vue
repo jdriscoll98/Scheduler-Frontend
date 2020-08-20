@@ -12,6 +12,14 @@
       <img src="../assets/images/user-icon.svg" />
       <i class="arrow down"></i>
     </button>
+    <div class="subnav">
+      <div class="left-nav">
+        <h3 class="nav-item current">OVERVIEW</h3>
+      </div>
+      <div class="right-nav">
+        <h3 class="nav-item">PROGRAM</h3>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -23,6 +31,41 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.nav-item {
+  padding: 20px;
+  font-weight: 400;
+  transition: background-color 0.3s;
+}
+.current {
+  border-bottom: 4px solid #e0812e;
+}
+.nav-item:hover {
+  background-color: #f1f1f1;
+  border-bottom: 4px solid #e0812e;
+}
+.left-nav {
+  display: inline-block;
+  height: inherit;
+  width: 50%;
+  background-color: white;
+  color: blue;
+  font-size: 14px;
+}
+.right-nav {
+  display: inline-block;
+  height: inherit;
+  width: 50%;
+  background-color: white;
+  color: blue;
+  font-size: 14px;
+}
+.subnav {
+  height: 60px;
+  width: 100vw;
+  background-color: whitesmoke;
+  position: absolute;
+  top: 65px;
+}
 .oneuf {
   color: white;
   position: absolute;
