@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
-    <title>One.UF - Scheduler</title>
-  </head>
 
-  <body>
-    <noscript>
-      <strong
-        >We're sorry but One.UF - Scheduler doesn't work properly without
-        JavaScript enabled. Please enable it to continue.</strong
-      >
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+  <title>One.UF - Scheduler</title>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but One.UF - Scheduler doesn't work properly without
+      JavaScript enabled. Please enable it to continue.</strong>
+  </noscript>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+</body>
+
 </html>
 
 <script>
@@ -28,6 +28,7 @@
     e.dataTransfer.effectAllowed = "copy";
     e.dataTransfer.setData("text/html", this.innerHTML);
   }
+
   function handleDragOver(e) {
     if (e.preventDefault) {
       e.preventDefault();
@@ -35,6 +36,7 @@
 
     return false;
   }
+
   function handleDrop(e) {
     if (e.stopPropagation) {
       e.stopPropagation(); // stops the browser from redirecting.
@@ -53,10 +55,11 @@
 
     return false;
   }
+
   function handleDragEnd(e) {
     this.style.opacity = "1";
 
-    items.forEach(function(item) {
+    items.forEach(function (item) {
       item.classList.remove("over");
     });
   }
@@ -70,7 +73,7 @@
   }
 
   let items = document.querySelectorAll(".box");
-  items.forEach(function(item) {
+  items.forEach(function (item) {
     item.addEventListener("dragenter", handleDragEnter, false);
     item.addEventListener("dragleave", handleDragLeave, false);
     item.addEventListener("drop", handleDrop, false);
@@ -78,7 +81,7 @@
   });
 
   let draggables = document.querySelectorAll(".courses .course");
-  draggables.forEach(function(item) {
+  draggables.forEach(function (item) {
     item.addEventListener("dragstart", handleDragStart, false);
     item.addEventListener("dragend", handleDragEnd, false);
   });

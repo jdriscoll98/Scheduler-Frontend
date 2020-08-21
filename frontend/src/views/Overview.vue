@@ -1,14 +1,14 @@
 <template>
   <div class="overview">
     <Card />
-    <button class="add-btn">
+    <button @click="$router.push('add')" class="add-btn">
       <img class="add" src="../assets/images/plus-solid.svg" />
     </button>
   </div>
 </template>
 
 <script>
-import Card from "./Card";
+import Card from "../components/Card";
 export default {
   name: "Overview",
   components: {
