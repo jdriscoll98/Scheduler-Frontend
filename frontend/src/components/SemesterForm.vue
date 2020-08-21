@@ -1,47 +1,30 @@
 <template>
   <div class="semester-form">
+    <button id="delete-button" class="delete-btn">
+      <img class="delete" src="../assets/images/times-solid.svg" />
+    </button>
     <div class="courses">
       <h1 class="courses-header">Remaining Courses</h1>
       <div class="course-category">
         <h3 class="category-heading">Major Courses (39)</h3>
         <ul>
           <li>
-            <div
-              id="drag1"
-              draggable="true"
-              ondragstart="drag(event)"
-              class="course"
-            >
+            <div id="drag1" draggable="true" ondragstart="drag(event)" class="course">
               <div class="course-code">COP3502</div>
               <div class="course-name">Prog. Fundamentals 1</div>
               <div class="course-credits">3 credits</div>
             </div>
-            <div
-              id="drag1"
-              draggable="true"
-              ondragstart="drag(event)"
-              class="course"
-            >
+            <div id="drag1" draggable="true" ondragstart="drag(event)" class="course">
               <div class="course-code">COP3502</div>
               <div class="course-name">Prog. Fundamentals 1</div>
               <div class="course-credits">3 credits</div>
             </div>
-            <div
-              id="drag1"
-              draggable="true"
-              ondragstart="drag(event)"
-              class="course"
-            >
+            <div id="drag1" draggable="true" ondragstart="drag(event)" class="course">
               <div class="course-code">COP3502</div>
               <div class="course-name">Prog. Fundamentals 1</div>
               <div class="course-credits">3 credits</div>
             </div>
-            <div
-              id="drag1"
-              draggable="true"
-              ondragstart="drag(event)"
-              class="course"
-            >
+            <div id="drag1" draggable="true" ondragstart="drag(event)" class="course">
               <div class="course-code">COP3502</div>
               <div class="course-name">Prog. Fundamentals 1</div>
               <div class="course-credits">3 credits</div>
@@ -53,12 +36,7 @@
         <h3 class="category-heading">Major Courses (39)</h3>
         <ul>
           <li>
-            <div
-              id="drag1"
-              draggable="true"
-              ondragstart="drag(event)"
-              class="course"
-            >
+            <div id="drag1" draggable="true" class="course">
               <div class="course-code">COP3502</div>
               <div class="course-name">Prog. Fundamentals 1</div>
               <div class="course-credits">3 credits</div>
@@ -90,12 +68,7 @@
         <h3 class="category-heading">Major Courses (39)</h3>
         <ul>
           <li>
-            <div
-              id="drag1"
-              draggable="true"
-              ondragstart="drag(event)"
-              class="course"
-            >
+            <div id="drag1" draggable="true" ondragstart="drag(event)" class="course">
               <div class="course-code">COP3502</div>
               <div class="course-name">Prog. Fundamentals 1</div>
               <div class="course-credits">3 credits</div>
@@ -126,11 +99,9 @@
     </div>
     <div class="semester-builder">
       <h1 class="semester-header">Semester 3</h1>
-      <button class="save-button">
-        Save
-      </button>
+      <button class="save-button">Save</button>
       <div class="semester-term">
-        <label class="term-label" for="term">Term: </label>
+        <label class="term-label" for="term">Term:</label>
         <select id="term" class="semester-select">
           <option>Fall 2020</option>
           <option>Spring 2021</option>
@@ -138,25 +109,12 @@
         </select>
       </div>
       <div class="semester-list">
-        <ol id="list" ondrop="drop(event)" ondragover="allowDrop(event)">
-          <li>
-            <div class="course">
-              <div class="course-code">COP3502</div>
-              <div class="course-name">Prog. Fundamentals 1</div>
-              <div class="course-credits">3 credits</div>
-            </div>
-            <div class="delete-course">
-              <button class="delete-btn">
-                <img class="delete" src="../assets/images/times-solid.svg" />
-              </button>
-            </div>
-          </li>
-        </ol>
-        <h3 class="drag-header">Drag Courses Above to Add</h3>
+        <ol id="list"></ol>
+        <div class="drag-header box" id="list">Drag Courses Here to Add</div>
       </div>
       <div class="notes">
         <h4>Notes</h4>
-        <textarea class="notes-input"> </textarea>
+        <textarea class="notes-input"></textarea>
       </div>
     </div>
   </div>
@@ -173,6 +131,9 @@ export default {
 </script>
 
 <style scoped>
+.over {
+  border: 3px dotted #666;
+}
 .save-button {
   width: 75px;
   height: 40px;
@@ -193,10 +154,7 @@ export default {
 .save-button:hover {
   transform: scale(1.1);
 }
-ol {
-  min-height: 50px;
-  min-width: 500px;
-}
+
 .drag-header {
   background-color: #285797;
   color: white;
@@ -210,13 +168,13 @@ ol {
   width: 25px;
   position: relative;
   left: 350px;
-  bottom: 36px;
+  bottom: 35px;
   border-radius: 12px;
   background-color: red;
   border: none;
   outline: none;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  display: none;
 }
 .delete {
   width: 12px;
@@ -291,6 +249,7 @@ ol {
   width: 90%;
   margin: 5px auto 5px auto;
   border-radius: 50px;
+  cursor: move;
 }
 .category-heading {
   text-align: left;
