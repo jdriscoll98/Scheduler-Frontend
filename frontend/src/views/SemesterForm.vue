@@ -1,21 +1,16 @@
 <template>
   <div class="semester-form">
-    <button id="delete-button" class="delete-btn">
-      <img class="delete" src="../assets/images/times-solid.svg" />
-    </button>
     <div class="courses">
       <h1 class="courses-header">Remaining Courses</h1>
       <div class="course-category">
         <h3 class="category-heading">Major Courses (39)</h3>
         <ul>
-          <div
-            v-for="course in courseList"
-            :key="course.code"
-            class="course-list"
-          >
+          <div v-for="course in courseList" :key="course.code" class="course-list">
             <li>
               <div
                 v-on:dragstart="handleDragStart($event, course)"
+                @dragstart="handleDragStart($event, course)"
+                @dragend="handleDragEnd($event)"
                 id="drag1"
                 draggable="true"
                 class="course"
@@ -41,8 +36,29 @@
         </select>
       </div>
       <div class="semester-list">
-        <ol id="list"></ol>
-        <div class="drag-header box" id="list">Drag Courses Here to Add</div>
+        <ol id="list">
+          <div v-for="course in addedCourses" :key="course.code" class="added-classes">
+            <li>
+              <div id="drag1" draggable="true" class="course">
+                <div class="course-code">{{ course.code }}</div>
+                <div class="course-name">{{ course.name }}</div>
+                <div class="course-credits">{{ course.credits }} credits</div>
+              </div>
+              <button id="delete-button" class="delete-btn">
+                <img class="delete" src="../assets/images/times-solid.svg" />
+              </button>
+            </li>
+          </div>
+        </ol>
+        <div
+          class="drag-header box"
+          @drop="handleDrop($event)"
+          @dragover.prevent
+          @dragenter.prevent
+          @dragEnter="handleDragEnter($event)"
+          @dragLeave="handleDragLeave($event)"
+          id="list"
+        >Drag Courses Here to Add</div>
       </div>
       <div class="notes">
         <h4>Notes</h4>
@@ -55,7 +71,7 @@
 <script>
 export default {
   name: "SemesterForm",
-  data: function() {
+  data: function () {
     return {
       dragSrcEl: null,
       courses: [
@@ -65,6 +81,7 @@ export default {
           credits: 3,
         },
       ],
+      addedCourses: [],
     };
   },
   computed: {
@@ -73,52 +90,44 @@ export default {
     },
   },
   methods: {
-    handleDragStart: function(event, course) {
-      console.log(course);
+    handleDragStart: function (event, course) {
       event.target.style.opacity = "0.4";
-      course.dragSrcEl = course;
+      this.dragSrcEl = course;
 
       event.dataTransfer.effectAllowed = "copy";
       event.dataTransfer.setData("text/html", course.innerHTML);
     },
-    handleDragOver: function(e) {
+    handleDragOver: function (e) {
       if (e.preventDefault) {
         e.preventDefault();
       }
 
       return false;
     },
-    handleDrop: function(e) {
+    handleDrop: function (e) {
       if (e.stopPropagation) {
         e.stopPropagation(); // stops the browser from redirecting.
       }
-
-      if (this.dragSrcEl !== this) {
-        var list = document.getElementById("list");
-        var listItem = document.createElement("li");
-        var deleteButton = document.getElementById("delete-button");
-        let cloneBtn = deleteButton.cloneNode(true);
-        cloneBtn.style.display = "inline";
-        listItem.appendChild(this.dragSrcEl);
-        listItem.appendChild(cloneBtn);
-        list.appendChild(listItem);
-      }
-
+      this.addedCourses.push(this.dragSrcEl);
+      this.courses.splice(
+        this.courses.findIndex((c) => c.code === this.dragSrcEl.code),
+        1
+      );
       return false;
     },
-    handleDragEnd: function() {
-      this.style.opacity = "1";
+    handleDragEnd: function (e) {
+      e.target.style.opacity = "1";
       let items = document.querySelectorAll(".box");
 
-      items.forEach(function(item) {
+      items.forEach(function (item) {
         item.classList.remove("over");
       });
     },
-    handleDragEnter: function() {
-      this.classList.add("over");
+    handleDragEnter: function (e) {
+      e.target.classList.add("over");
     },
-    handleDragLeave: function() {
-      this.classList.remove("over");
+    handleDragLeave: function (e) {
+      e.target.classList.remove("over");
     },
   },
 };
