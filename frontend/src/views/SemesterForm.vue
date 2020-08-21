@@ -8,92 +8,24 @@
       <div class="course-category">
         <h3 class="category-heading">Major Courses (39)</h3>
         <ul>
-          <li>
-            <div id="drag1" draggable="true" class="course">
-              <div class="course-code">COP3502</div>
-              <div class="course-name">Prog. Fundamentals 1</div>
-              <div class="course-credits">3 credits</div>
-            </div>
-            <div id="drag1" draggable="true" class="course">
-              <div class="course-code">COP3502</div>
-              <div class="course-name">Prog. Fundamentals 1</div>
-              <div class="course-credits">3 credits</div>
-            </div>
-            <div id="drag1" draggable="true" class="course">
-              <div class="course-code">COP3502</div>
-              <div class="course-name">Prog. Fundamentals 1</div>
-              <div class="course-credits">3 credits</div>
-            </div>
-            <div id="drag1" draggable="true" class="course">
-              <div class="course-code">COP3502</div>
-              <div class="course-name">Prog. Fundamentals 1</div>
-              <div class="course-credits">3 credits</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="course-category">
-        <h3 class="category-heading">Major Courses (39)</h3>
-        <ul>
-          <li>
-            <div id="drag1" draggable="true" class="course">
-              <div class="course-code">COP3502</div>
-              <div class="course-name">Prog. Fundamentals 1</div>
-              <div class="course-credits">3 credits</div>
-            </div>
-            <div class="course">
-              <div class="course-code">COP3502</div>
-              <div class="course-name">Prog. Fundamentals 1</div>
-              <div class="course-credits">3 credits</div>
-            </div>
-            <div class="course">
-              <div class="course-code">COP3502</div>
-              <div class="course-name">Prog. Fundamentals 1</div>
-              <div class="course-credits">3 credits</div>
-            </div>
-            <div class="course">
-              <div class="course-code">COP3502</div>
-              <div class="course-name">Prog. Fundamentals 1</div>
-              <div class="course-credits">3 credits</div>
-            </div>
-            <div class="course">
-              <div class="course-code">COP3502</div>
-              <div class="course-name">Prog. Fundamentals 1</div>
-              <div class="course-credits">3 credits</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="course-category">
-        <h3 class="category-heading">Major Courses (39)</h3>
-        <ul>
-          <li>
-            <div id="drag1" draggable="true" class="course">
-              <div class="course-code">COP3502</div>
-              <div class="course-name">Prog. Fundamentals 1</div>
-              <div class="course-credits">3 credits</div>
-            </div>
-            <div class="course">
-              <div class="course-code">COP3502</div>
-              <div class="course-name">Prog. Fundamentals 1</div>
-              <div class="course-credits">3 credits</div>
-            </div>
-            <div class="course">
-              <div class="course-code">COP3502</div>
-              <div class="course-name">Prog. Fundamentals 1</div>
-              <div class="course-credits">3 credits</div>
-            </div>
-            <div class="course">
-              <div class="course-code">COP3502</div>
-              <div class="course-name">Prog. Fundamentals 1</div>
-              <div class="course-credits">3 credits</div>
-            </div>
-            <div class="course">
-              <div class="course-code">COP3502</div>
-              <div class="course-name">Prog. Fundamentals 1</div>
-              <div class="course-credits">3 credits</div>
-            </div>
-          </li>
+          <div
+            v-for="course in courseList"
+            :key="course.code"
+            class="course-list"
+          >
+            <li>
+              <div
+                v-on:dragstart="handleDragStart($event, course)"
+                id="drag1"
+                draggable="true"
+                class="course"
+              >
+                <div class="course-code">{{ course.code }}</div>
+                <div class="course-name">{{ course.name }}</div>
+                <div class="course-credits">{{ course.credits }} credits</div>
+              </div>
+            </li>
+          </div>
         </ul>
       </div>
     </div>
@@ -123,6 +55,72 @@
 <script>
 export default {
   name: "SemesterForm",
+  data: function() {
+    return {
+      dragSrcEl: null,
+      courses: [
+        {
+          code: "COP3503",
+          name: "Prog. Fundamentals 2",
+          credits: 3,
+        },
+      ],
+    };
+  },
+  computed: {
+    courseList() {
+      return this.courses;
+    },
+  },
+  methods: {
+    handleDragStart: function(event, course) {
+      console.log(course);
+      event.target.style.opacity = "0.4";
+      course.dragSrcEl = course;
+
+      event.dataTransfer.effectAllowed = "copy";
+      event.dataTransfer.setData("text/html", course.innerHTML);
+    },
+    handleDragOver: function(e) {
+      if (e.preventDefault) {
+        e.preventDefault();
+      }
+
+      return false;
+    },
+    handleDrop: function(e) {
+      if (e.stopPropagation) {
+        e.stopPropagation(); // stops the browser from redirecting.
+      }
+
+      if (this.dragSrcEl !== this) {
+        var list = document.getElementById("list");
+        var listItem = document.createElement("li");
+        var deleteButton = document.getElementById("delete-button");
+        let cloneBtn = deleteButton.cloneNode(true);
+        cloneBtn.style.display = "inline";
+        listItem.appendChild(this.dragSrcEl);
+        listItem.appendChild(cloneBtn);
+        list.appendChild(listItem);
+      }
+
+      return false;
+    },
+    handleDragEnd: function() {
+      this.style.opacity = "1";
+      let items = document.querySelectorAll(".box");
+
+      items.forEach(function(item) {
+        item.classList.remove("over");
+      });
+    },
+    handleDragEnter: function() {
+      this.classList.add("over");
+    },
+    handleDragLeave: function() {
+      this.classList.remove("over");
+    },
+  },
 };
 </script>
 
