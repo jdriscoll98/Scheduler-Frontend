@@ -3,10 +3,12 @@
     <button class="menu">
       <img class="menu-btn" src="../assets/images/menu.svg" />
     </button>
-    <a>
+    <a href="http://ufl.edu" target="_blank">
       <img class="logo" src="../assets/images/logo-uf.svg" />
     </a>
-    <h1 class="oneuf">ONE.UF</h1>
+    <h1 class="oneuf">
+      <a class="link" href="http://one.uf.edu" target="_blank">ONE.UF</a>
+    </h1>
     <h2 class="label">| SCHEDULER</h2>
     <button class="user-icon">
       <img src="../assets/images/user-icon.svg" />
@@ -31,6 +33,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.link {
+  color: inherit;
+  text-decoration: none;
+}
 .nav-item {
   padding: 20px;
   font-weight: 400;

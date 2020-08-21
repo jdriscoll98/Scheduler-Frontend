@@ -1,6 +1,42 @@
 <template>
   <div class="overview">
-    <Card />
+    <div v-for="semester in semesters" :key="semester.number">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="semester-number">Semeseter {{ semester.number }} - {{ semester.term }}</h1>
+          <button class="edit-btn">
+            <img class="edit" src="../assets/images/edit-regular.svg" />
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="card-table">
+            <table>
+              <tr>
+                <th>Class</th>
+                <th>Name</th>
+                <th>Credits</th>
+              </tr>
+              <div v-for="course in semester.courses" :key="course.code">
+                <tr>
+                  <td>ACG2021</td>
+                  <td>Introduction to Financial Accounting</td>
+                  <td>4</td>
+                </tr>
+              </div>
+              <tfoot>
+                <tr>
+                  <td colspan="2" style="text-align: right; font-weight: 800">Total:</td>
+                  <td style="font-weight: 800">12</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="empty">
+      <h3 class="heading">No Semesters Added Yet!</h3>
+    </div>
     <button @click="$router.push('add')" class="add-btn">
       <img class="add" src="../assets/images/plus-solid.svg" />
     </button>
@@ -8,23 +44,32 @@
 </template>
 
 <script>
-import Card from "../components/Card";
 export default {
   name: "Overview",
-  components: {
-    Card,
+  data: function () {
+    return {
+      semesters: [],
+    };
   },
 };
 </script>
 
 <style scoped>
+.empty {
+  position: relative;
+  top: 135px;
+}
+.heading {
+  font-size: 24px;
+  font-weight: 800;
+}
 .add-btn {
   display: inline-block;
   height: 50px;
   width: 50px;
   position: relative;
   top: 200px;
-  left: 75px;
+  margin: 20px;
   border-radius: 30px;
   background-color: green;
   border: none;
@@ -41,5 +86,63 @@ export default {
 }
 .add-btn:hover {
   transform: scale(1.1);
+}
+.edit-btn {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  border-radius: 10px;
+  border: none;
+  background-color: #285797;
+  cursor: pointer;
+  outline: none;
+}
+.edit {
+  height: 30px;
+  width: 30px;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+.semester-number {
+  font-size: 22px;
+  text-align: left;
+  margin: 0 10px 10px 10px;
+  padding-top: 10px;
+}
+.card-header {
+  border-bottom: 1px solid black;
+  background-color: #285797;
+  color: white;
+}
+.card {
+  display: inline-block;
+  height: 325px;
+  width: 400px;
+  margin: 25px;
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: white;
+  position: relative;
+  left: 0;
+  top: 75px;
 }
 </style>
