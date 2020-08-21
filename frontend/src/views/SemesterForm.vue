@@ -9,42 +9,22 @@
         <h3 class="category-heading">Major Courses (39)</h3>
         <ul>
           <li>
-            <div
-              id="drag1"
-              draggable="true"
-              ondragstart="drag(event)"
-              class="course"
-            >
+            <div id="drag1" draggable="true" class="course">
               <div class="course-code">COP3502</div>
               <div class="course-name">Prog. Fundamentals 1</div>
               <div class="course-credits">3 credits</div>
             </div>
-            <div
-              id="drag1"
-              draggable="true"
-              ondragstart="drag(event)"
-              class="course"
-            >
+            <div id="drag1" draggable="true" class="course">
               <div class="course-code">COP3502</div>
               <div class="course-name">Prog. Fundamentals 1</div>
               <div class="course-credits">3 credits</div>
             </div>
-            <div
-              id="drag1"
-              draggable="true"
-              ondragstart="drag(event)"
-              class="course"
-            >
+            <div id="drag1" draggable="true" class="course">
               <div class="course-code">COP3502</div>
               <div class="course-name">Prog. Fundamentals 1</div>
               <div class="course-credits">3 credits</div>
             </div>
-            <div
-              id="drag1"
-              draggable="true"
-              ondragstart="drag(event)"
-              class="course"
-            >
+            <div id="drag1" draggable="true" class="course">
               <div class="course-code">COP3502</div>
               <div class="course-name">Prog. Fundamentals 1</div>
               <div class="course-credits">3 credits</div>
@@ -88,12 +68,7 @@
         <h3 class="category-heading">Major Courses (39)</h3>
         <ul>
           <li>
-            <div
-              id="drag1"
-              draggable="true"
-              ondragstart="drag(event)"
-              class="course"
-            >
+            <div id="drag1" draggable="true" class="course">
               <div class="course-code">COP3502</div>
               <div class="course-name">Prog. Fundamentals 1</div>
               <div class="course-credits">3 credits</div>
