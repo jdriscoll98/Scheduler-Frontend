@@ -14,10 +14,14 @@
     </button>
     <div class="subnav">
       <div class="left-nav">
-        <h3 class="nav-item not-current">OVERVIEW</h3>
+        <h3 class="nav-item not-current">
+          <router-link to="/"> OVERVIEW</router-link>
+        </h3>
       </div>
       <div class="right-nav">
-        <h3 class="nav-item not-current">PROGRAM</h3>
+        <h3 class="nav-item not-current">
+          <router-link to="/program">PROGRAM</router-link>
+        </h3>
       </div>
     </div>
   </div>

@@ -3,7 +3,8 @@
     <Navbar />
     <!-- <Overview /> -->
     <!-- <SemesterForm /> -->
-    <Program />
+    <!-- <Program /> -->
+    <!-- <router-view /> -->
   </div>
 </template>
 
@@ -11,7 +12,7 @@
 import Navbar from "./components/Navbar.vue";
 // import Overview from "./components/Overview.vue";
 // import SemesterForm from "./components/SemesterForm.vue";
-import Program from "./components/Program.vue";
+// import Program from "./components/Program.vue";
 
 export default {
   name: "App",
@@ -19,7 +20,7 @@ export default {
     Navbar,
     // Overview,
     // SemesterForm,
-    Program,
+    // Program,
   },
 };
 </script>
