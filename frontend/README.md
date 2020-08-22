@@ -1,5 +1,11 @@
 # frontend
 
+# To run the project locally:
+```
+npm install
+npm run serve
+```
+
 ## Project setup
 ```
 npm install
