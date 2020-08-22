@@ -33,11 +33,12 @@
       </div>
     </div>
     <div class="semester-builder">
-      <h1 class="semester-header">Semester 3</h1>
+      <h1 class="semester-header">Semester {{ semester.number }}</h1>
       <button class="save-button">Save</button>
       <div class="semester-term">
         <label class="term-label" for="term">Term:</label>
         <select id="term" class="semester-select">
+          <option selected>{{ semester.term}}</option>
           <option>Fall 2020</option>
           <option>Spring 2021</option>
           <option>Summer 2021</option>
@@ -70,7 +71,7 @@
       </div>
       <div class="notes">
         <h4>Notes</h4>
-        <textarea class="notes-input"></textarea>
+        <textarea class="notes-input" v-model="semester.notes"></textarea>
       </div>
     </div>
   </div>
@@ -81,20 +82,25 @@ export default {
   name: "SemesterForm",
   data: function () {
     return {
+      semester: {
+        number: 1,
+        term: "Spring 2021",
+        notes: "Example Notes",
+      },
       dragSrcEl: null,
       dragCat: null,
       remainingCourses: [
-        // {
-        //   name: "Major Courses",
-        //   credits: 39,
-        //   courses: [
-        //     {
-        //       code: "COP3503",
-        //       name: "Prog. Fundamentals 2",
-        //       credits: 3,
-        //     },
-        //   ],
-        // },
+        {
+          name: "Major Courses",
+          credits: 39,
+          courses: [
+            {
+              code: "COP3503",
+              name: "Prog. Fundamentals 2",
+              credits: 3,
+            },
+          ],
+        },
       ],
       addedCourses: [],
     };
