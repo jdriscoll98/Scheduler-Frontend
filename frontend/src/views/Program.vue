@@ -12,19 +12,16 @@
             <span>{{ program.department }}</span>
           </h3>
         </div>
-        <div v-for="category in program.categories" :key="category.name" class="program-categories">
-          <div class="category">
-            <h3 class="category-title">Major Courses (39)</h3>
-            <ul>
-              <div v-for="course in category.courses" :key="course.code" class="category-course">
-                <li>
-                  {{ course.code}} {{ course.name }}
-                  <span class="dots">.</span>
-                  {{ course.credits }}
-                </li>
-              </div>
-            </ul>
-          </div>
+        <div v-for="category in program.categories" :key="category.name" class="category">
+          <h3 class="category-title">Major Courses (39)</h3>
+          <ul>
+            <div v-for="course in category.courses" :key="course.code" class="category-course">
+              <li class="course-item">
+                <label class="course-label">{{ course.code}} {{ course.name }}</label>
+                <p class="course-value">{{ course.credits }}</p>
+              </li>
+            </div>
+          </ul>
         </div>
       </div>
     </div>
@@ -43,13 +40,64 @@ export default {
   name: "Program",
   data: function () {
     return {
-      programs: [],
+      programs: [
+        {
+          college: "Engineering",
+          major: "Major",
+          department: "Computer Science and Engineering",
+          categories: [
+            {
+              name: "Major Courses",
+              credits: 39,
+              courses: [
+                {
+                  code: "COP3503",
+                  name: "Prog. Fundamentals 2",
+                  credits: 3,
+                },
+                {
+                  code: "COP3530",
+                  name: "Data Structures and Algorithms",
+                  credits: 4,
+                },
+                {
+                  code: "EEL3701C",
+                  name: "Digital Logic and Circuits",
+                  credits: 4,
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
   },
 };
 </script>
 
 <style scoped>
+.course-label,
+.course-value {
+  display: inline-block;
+}
+
+.course-label {
+  width: 380px;
+  overflow: hidden;
+  white-space: nowrap;
+  float: left;
+}
+.course-value {
+  width: 20px;
+  float: right;
+  overflow: hidden;
+}
+.course-label:after {
+  content: "................................................................................................................";
+}
+.course-item {
+  width: 400px;
+}
 .empty {
   position: relative;
   top: 135px;

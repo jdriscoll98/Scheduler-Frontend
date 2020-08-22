@@ -1,7 +1,7 @@
 <template>
   <div class="main">
-    <div v-for="semester in semesters" :key="semester.number">
-      <div class="card">
+    <div>
+      <div v-for="semester in semesters" :key="semester.number" class="card">
         <div class="card-header">
           <h1 class="semester-number">Semeseter {{ semester.number }} - {{ semester.term }}</h1>
           <button class="edit-btn">
@@ -16,17 +16,15 @@
                 <th>Name</th>
                 <th>Credits</th>
               </tr>
-              <div v-for="course in semester.courses" :key="course.code">
-                <tr>
-                  <td>ACG2021</td>
-                  <td>Introduction to Financial Accounting</td>
-                  <td>4</td>
-                </tr>
-              </div>
+              <tr v-for="course in semester.courses" :key="course.code">
+                <td>{{ course.code }}</td>
+                <td>{{ course.name }}</td>
+                <td>{{ course.credits }}</td>
+              </tr>
               <tfoot>
                 <tr>
                   <td colspan="2" style="text-align: right; font-weight: 800">Total:</td>
-                  <td style="font-weight: 800">12</td>
+                  <td style="font-weight: 800">{{ semester.total }}</td>
                 </tr>
               </tfoot>
             </table>
@@ -34,7 +32,7 @@
         </div>
       </div>
     </div>
-    <div class="empty">
+    <div v-if="semesters.length == 0" class="empty">
       <h3 class="heading">No Semesters Added Yet!</h3>
     </div>
     <button @click="$router.push('add')" class="add-btn">
@@ -48,7 +46,89 @@ export default {
   name: "Overview",
   data: function () {
     return {
-      semesters: [],
+      semesters: [
+        {
+          number: 1,
+          term: "Fall 2020",
+          courses: [
+            {
+              code: "ACG2021",
+              name: "Intro to Financial Accounting",
+              credits: 4,
+            },
+            {
+              code: "CDA3101",
+              name: "Intro to Computer Organization",
+              credits: 4,
+            },
+            {
+              code: "CDA3101",
+              name: "Intro to Computer Organization",
+              credits: 4,
+            },
+            {
+              code: "CDA3101",
+              name: "Intro to Computer Organization",
+              credits: 4,
+            },
+          ],
+          total: 8,
+        },
+        {
+          number: 1,
+          term: "Fall 2020",
+          courses: [
+            {
+              code: "ACG2021",
+              name: "Intro to Financial Accounting",
+              credits: 4,
+            },
+            {
+              code: "CDA3101",
+              name: "Intro to Computer Organization",
+              credits: 4,
+            },
+            {
+              code: "CDA3101",
+              name: "Intro to Computer Organization",
+              credits: 4,
+            },
+            {
+              code: "CDA3101",
+              name: "Intro to Computer Organization",
+              credits: 4,
+            },
+          ],
+          total: 8,
+        },
+        {
+          number: 1,
+          term: "Fall 2020",
+          courses: [
+            {
+              code: "ACG2021",
+              name: "Intro to Financial Accounting",
+              credits: 4,
+            },
+            {
+              code: "CDA3101",
+              name: "Intro to Computer Organization",
+              credits: 4,
+            },
+            {
+              code: "CDA3101",
+              name: "Intro to Computer Organization",
+              credits: 4,
+            },
+            {
+              code: "CDA3101",
+              name: "Intro to Computer Organization",
+              credits: 4,
+            },
+          ],
+          total: 8,
+        },
+      ],
     };
   },
 };
@@ -135,7 +215,7 @@ tr:nth-child(even) {
 }
 .card {
   display: inline-block;
-  height: 325px;
+  height: 100%;
   width: 400px;
   margin: 25px;
   border: 2px solid black;
