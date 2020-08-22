@@ -1,5 +1,5 @@
 <template>
-  <div class="overview">
+  <div class="main">
     <div v-for="semester in semesters" :key="semester.number">
       <div class="card">
         <div class="card-header">
@@ -68,7 +68,7 @@ export default {
   height: 50px;
   width: 50px;
   position: relative;
-  top: 200px;
+  top: 150px;
   margin: 20px;
   border-radius: 30px;
   background-color: green;

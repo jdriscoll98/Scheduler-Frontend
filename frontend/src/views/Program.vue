@@ -1,99 +1,39 @@
 <template>
-  <div class="programs">
-    <div class="program">
-      <div class="headings">
-        <h3 class="college">
-          COLLEGE :
-          <span>Herbert Wertheim College of Engineering</span>
-        </h3>
-        <h3 class="major">
-          MAJOR :
-          <span>Computer Science and Engineering</span>
-        </h3>
-      </div>
-      <div class="category">
-        <h3 class="category-title">Major Courses (39)</h3>
-        <ul>
-          <li>COP 3502 Prog. Fundamentals 1 (mac23111)...................................3</li>
-          <li>COP 3503 Prog. Fundamentals 2 (mac2311,cop3502).....................3</li>
-          <li>COT 3100 App. of Discrete Structures (mac2311,cop35031 ...........3</li>
-          <li>COP 3530 Data Struct & Algorithms (cop3503, cot3100, cal2) .......4</li>
-          <li>CDA3101 Intro Comp Organization (mac2311, cop3503, cot3100).3</li>
-        </ul>
-      </div>
-      <div class="category">
-        <h3 class="category-title">Major Courses (39)</h3>
-        <ul>
-          <li>COP 3502 Prog. Fundamentals 1 (mac23111)...................................3</li>
-          <li>COP 3503 Prog. Fundamentals 2 (mac2311,cop3502).....................3</li>
-          <li>COT 3100 App. of Discrete Structures (mac2311,cop35031 ...........3</li>
-          <li>COP 3530 Data Struct & Algorithms (cop3503, cot3100, cal2) .......4</li>
-          <li>CDA3101 Intro Comp Organization (mac2311, cop3503, cot3100).3</li>
-        </ul>
-      </div>
-      <div class="category">
-        <h3 class="category-title">Major Courses (39)</h3>
-        <ul>
-          <li>COP 3502 Prog. Fundamentals 1 (mac23111)...................................3</li>
-          <li>COP 3503 Prog. Fundamentals 2 (mac2311,cop3502).....................3</li>
-          <li>COT 3100 App. of Discrete Structures (mac2311,cop35031 ...........3</li>
-          <li>COP 3530 Data Struct & Algorithms (cop3503, cot3100, cal2) .......4</li>
-          <li>CDA3101 Intro Comp Organization (mac2311, cop3503, cot3100).3</li>
-        </ul>
-      </div>
-      <div class="category">
-        <h3 class="category-title">Major Courses (39)</h3>
-        <ul>
-          <li>COP 3502 Prog. Fundamentals 1 (mac23111)...................................3</li>
-          <li>COP 3503 Prog. Fundamentals 2 (mac2311,cop3502).....................3</li>
-          <li>COT 3100 App. of Discrete Structures (mac2311,cop35031 ...........3</li>
-          <li>COP 3530 Data Struct & Algorithms (cop3503, cot3100, cal2) .......4</li>
-          <li>CDA3101 Intro Comp Organization (mac2311, cop3503, cot3100).3</li>
-        </ul>
-      </div>
-      <div class="category">
-        <h3 class="category-title">Major Courses (39)</h3>
-        <ul>
-          <li>COP 3502 Prog. Fundamentals 1 (mac23111)...................................3</li>
-          <li>COP 3503 Prog. Fundamentals 2 (mac2311,cop3502).....................3</li>
-          <li>COT 3100 App. of Discrete Structures (mac2311,cop35031 ...........3</li>
-          <li>COP 3530 Data Struct & Algorithms (cop3503, cot3100, cal2) .......4</li>
-          <li>CDA3101 Intro Comp Organization (mac2311, cop3503, cot3100).3</li>
-        </ul>
+  <div class="main">
+    <div v-for="program in programs" :key="program.id" class="programs">
+      <div class="program">
+        <div class="headings">
+          <h3 class="college">
+            COLLEGE :
+            <span>{{ program.college }}</span>
+          </h3>
+          <h3 class="major">
+            {{ program.major }} :
+            <span>{{ program.department }}</span>
+          </h3>
+        </div>
+        <div v-for="category in program.categories" :key="category.name" class="program-categories">
+          <div class="category">
+            <h3 class="category-title">Major Courses (39)</h3>
+            <ul>
+              <div v-for="course in category.courses" :key="course.code" class="category-course">
+                <li>
+                  {{ course.code}} {{ course.name }}
+                  <span class="dots">.</span>
+                  {{ course.credits }}
+                </li>
+              </div>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="program">
-      <div class="headings">
-        <h3 class="college">
-          COLLEGE :
-          <span>Warrington College of Business</span>
-        </h3>
-        <h3 class="major">
-          MINOR :
-          <span>Entrepreneurship</span>
-        </h3>
-      </div>
-      <div class="category">
-        <h3 class="category-title">Required Courses (39)</h3>
-        <ul>
-          <li>COP 3502 Prog. Fundamentals 1 (mac23111)...................................3</li>
-          <li>COP 3503 Prog. Fundamentals 2 (mac2311,cop3502).....................3</li>
-          <li>COT 3100 App. of Discrete Structures (mac2311,cop35031 ...........3</li>
-          <li>COP 3530 Data Struct & Algorithms (cop3503, cot3100, cal2) .......4</li>
-          <li>CDA3101 Intro Comp Organization (mac2311, cop3503, cot3100).3</li>
-        </ul>
-      </div>
-
-      <div class="category">
-        <h3 class="category-title">Major Courses (39)</h3>
-        <ul>
-          <li>COP 3502 Prog. Fundamentals 1 (mac23111)...................................3</li>
-          <li>COP 3503 Prog. Fundamentals 2 (mac2311,cop3502).....................3</li>
-          <li>COT 3100 App. of Discrete Structures (mac2311,cop35031 ...........3</li>
-          <li>COP 3530 Data Struct & Algorithms (cop3503, cot3100, cal2) .......4</li>
-          <li>CDA3101 Intro Comp Organization (mac2311, cop3503, cot3100).3</li>
-        </ul>
-      </div>
+    <div class="empty" v-if="programs.length == 0">
+      <h3>No Programs Available</h3>
+      <h6>
+        Upload one
+        <a href="#">here</a>
+      </h6>
     </div>
   </div>
 </template>
@@ -101,10 +41,20 @@
 <script>
 export default {
   name: "Program",
+  data: function () {
+    return {
+      programs: [],
+    };
+  },
 };
 </script>
 
 <style scoped>
+.empty {
+  position: relative;
+  top: 135px;
+  font-size: 24px;
+}
 ul {
   list-style: none;
 }

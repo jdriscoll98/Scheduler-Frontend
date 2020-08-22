@@ -118,8 +118,13 @@ body {
   margin: 0;
   padding: 0;
 }
+.main {
+  display: block;
+  height: 100vh;
+}
 .footer {
-  position: fixed;
+  display: inline-block;
+  position: relative;
   bottom: 0;
   width: 100%;
 }

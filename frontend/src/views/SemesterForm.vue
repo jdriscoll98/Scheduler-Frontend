@@ -1,5 +1,5 @@
 <template>
-  <div class="semester-form">
+  <div class="main">
     <div class="courses">
       <h1 class="courses-header">Remaining Courses</h1>
       <div class="course-category">

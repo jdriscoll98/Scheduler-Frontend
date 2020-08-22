@@ -36,6 +36,7 @@ export default {
 .link {
   color: inherit;
   text-decoration: none;
+  margin: 0 5px 0 5px;
 }
 .nav-item {
   padding: 20px;
