@@ -215,8 +215,8 @@ export default {
 }
 .notes-input {
   resize: none;
-  height: 150px;
   width: 99%;
+  height: 100%;
 }
 .notes {
   position: absolute;
@@ -224,6 +224,7 @@ export default {
   left: 0;
   padding: 10px 0 0 10px;
   width: 99%;
+  height: 150px;
   text-align: left;
   border-top: 1px solid black;
 }
