@@ -29,7 +29,7 @@
       <h3>No Programs Available</h3>
       <h6>
         Upload one
-        <a href="#">here</a>
+        <a @click="$router.push('/upload')" href="#">here</a>
       </h6>
     </div>
   </div>
@@ -41,34 +41,34 @@ export default {
   data: function () {
     return {
       programs: [
-        {
-          college: "Engineering",
-          major: "Major",
-          department: "Computer Science and Engineering",
-          categories: [
-            {
-              name: "Major Courses",
-              credits: 39,
-              courses: [
-                {
-                  code: "COP3503",
-                  name: "Prog. Fundamentals 2",
-                  credits: 3,
-                },
-                {
-                  code: "COP3530",
-                  name: "Data Structures and Algorithms",
-                  credits: 4,
-                },
-                {
-                  code: "EEL3701C",
-                  name: "Digital Logic and Circuits",
-                  credits: 4,
-                },
-              ],
-            },
-          ],
-        },
+        // {
+        //   college: "Engineering",
+        //   major: "Major",
+        //   department: "Computer Science and Engineering",
+        //   categories: [
+        //     {
+        //       name: "Major Courses",
+        //       credits: 39,
+        //       courses: [
+        //         {
+        //           code: "COP3503",
+        //           name: "Prog. Fundamentals 2",
+        //           credits: 3,
+        //         },
+        //         {
+        //           code: "COP3530",
+        //           name: "Data Structures and Algorithms",
+        //           credits: 4,
+        //         },
+        //         {
+        //           code: "EEL3701C",
+        //           name: "Digital Logic and Circuits",
+        //           credits: 4,
+        //         },
+        //       ],
+        //     },
+        //   ],
+        // },
       ],
     };
   },

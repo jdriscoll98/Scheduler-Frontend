@@ -24,6 +24,13 @@
           </ul>
         </div>
       </div>
+      <div class="empty" v-if="remainingCourses.length == 0">
+        <h3>No Program Available</h3>
+        <h5>
+          Upload one
+          <a @click="$router.push('/upload')" href="#">here</a>
+        </h5>
+      </div>
     </div>
     <div class="semester-builder">
       <h1 class="semester-header">Semester 3</h1>
@@ -77,17 +84,17 @@ export default {
       dragSrcEl: null,
       dragCat: null,
       remainingCourses: [
-        {
-          name: "Major Courses",
-          credits: 39,
-          courses: [
-            {
-              code: "COP3503",
-              name: "Prog. Fundamentals 2",
-              credits: 3,
-            },
-          ],
-        },
+        // {
+        //   name: "Major Courses",
+        //   credits: 39,
+        //   courses: [
+        //     {
+        //       code: "COP3503",
+        //       name: "Prog. Fundamentals 2",
+        //       credits: 3,
+        //     },
+        //   ],
+        // },
       ],
       addedCourses: [],
     };
@@ -144,6 +151,10 @@ export default {
 </script>
 
 <style scoped>
+.empty {
+  font-size: 20px;
+  margin: 20px 0 0 0;
+}
 .over {
   border: 3px dotted #666;
 }

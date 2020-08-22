@@ -3,9 +3,9 @@
     <div>
       <div v-for="semester in semesters" :key="semester.number" class="card">
         <div class="card-header">
-          <h1 class="semester-number">Semeseter {{ semester.number }} - {{ semester.term }}</h1>
+          <h1 class="semester-number">Semester {{ semester.number }} - {{ semester.term }}</h1>
           <button class="edit-btn">
-            <img class="edit" src="../assets/images/edit-regular.svg" />
+            <img @click="$router.push('/add')" class="edit" src="../assets/images/edit-regular.svg" />
           </button>
         </div>
         <div class="card-body">

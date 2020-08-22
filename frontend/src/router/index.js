@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import Overview from '../views/Overview.vue'
 
 const routes = [
@@ -20,11 +20,17 @@ const routes = [
     name: 'SemesterForm',
 
     component: () => import(/* webpackChunkName: "program" */ '../views/SemesterForm.vue')
+  },
+  {
+    path: '/upload',
+    name: 'Upload',
+
+    component: () => import(/* webpackChunkName: "program" */ '../views/Upload.vue')
   }
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes
 })
 
