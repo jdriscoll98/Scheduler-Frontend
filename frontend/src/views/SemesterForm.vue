@@ -2,26 +2,27 @@
   <div class="main">
     <div class="courses">
       <h1 class="courses-header">Remaining Courses</h1>
-      <div class="course-category">
-        <h3 class="category-heading">Major Courses (39)</h3>
-        <ul>
-          <div v-for="course in courseList" :key="course.code" class="course-list">
-            <li>
-              <div
-                v-on:dragstart="handleDragStart($event, course)"
-                @dragstart="handleDragStart($event, course)"
-                @dragend="handleDragEnd($event)"
-                id="drag1"
-                draggable="true"
-                class="course"
-              >
-                <div class="course-code">{{ course.code }}</div>
-                <div class="course-name">{{ course.name }}</div>
-                <div class="course-credits">{{ course.credits }} credits</div>
-              </div>
-            </li>
-          </div>
-        </ul>
+      <div v-for="category in remainingCourses" :key="category.name" class="course-catgegories">
+        <div class="course-category">
+          <h3 class="category-heading">{{ category.name }} ({{ category.credits }})</h3>
+          <ul>
+            <div v-for="course in category.courses" :key="course.code" class="course-list">
+              <li>
+                <div
+                  v-on:dragstart="handleDragStart($event, course, category)"
+                  @dragend="handleDragEnd($event)"
+                  id="drag1"
+                  draggable="true"
+                  class="course"
+                >
+                  <div class="course-code">{{ course.code }}</div>
+                  <div class="course-name">{{ course.name }}</div>
+                  <div class="course-credits">{{ course.credits }} credits</div>
+                </div>
+              </li>
+            </div>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="semester-builder">
@@ -74,11 +75,18 @@ export default {
   data: function () {
     return {
       dragSrcEl: null,
-      courses: [
+      dragCat: null,
+      remainingCourses: [
         {
-          code: "COP3503",
-          name: "Prog. Fundamentals 2",
-          credits: 3,
+          name: "Major Courses",
+          credits: 39,
+          courses: [
+            {
+              code: "COP3503",
+              name: "Prog. Fundamentals 2",
+              credits: 3,
+            },
+          ],
         },
       ],
       addedCourses: [],
@@ -90,9 +98,11 @@ export default {
     },
   },
   methods: {
-    handleDragStart: function (event, course) {
+    handleDragStart: function (event, course, category) {
       event.target.style.opacity = "0.4";
       this.dragSrcEl = course;
+      console.log(category);
+      this.dragCat = category;
 
       event.dataTransfer.effectAllowed = "copy";
       event.dataTransfer.setData("text/html", course.innerHTML);
@@ -109,8 +119,8 @@ export default {
         e.stopPropagation(); // stops the browser from redirecting.
       }
       this.addedCourses.push(this.dragSrcEl);
-      this.courses.splice(
-        this.courses.findIndex((c) => c.code === this.dragSrcEl.code),
+      this.dragCat.courses.splice(
+        this.dragCat.courses.findIndex((c) => c.code === this.dragSrcEl.code),
         1
       );
       return false;
