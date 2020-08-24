@@ -5,19 +5,36 @@
         <div class="headings">
           <h3 class="college">{{ program.label }}</h3>
         </div>
+        <div class="overall-progress">
+          <div :style="{ width: program.overall_progress + '%'}" class="progress-bar">
+            <p
+              class="inner-text"
+            >{{ program.met_groups }} / {{ program.num_of_requirements }} Requirements Met</p>
+          </div>
+        </div>
         <div v-for="category in program.categories" :key="category.name" class="category">
-          <h3 @click="toggleCollapse($event)" class="category-title">{{ category.name }}</h3>
+          <h3
+            @click="toggleCollapse($event)"
+            :style="{width: category.percent_complete + '%'}"
+            class="category-title"
+          >{{category.name }}</h3>
+
           <div class="category-content">
             <table>
               <tr>
                 <th>Class</th>
                 <th>Name</th>
-                <th>Credits</th>
+                <th>Credits Required</th>
+                <th>Credits Taken or In Progress</th>
+                <th>Status</th>
               </tr>
               <tr v-for="course in category.courses" :key="course.code">
                 <td>{{ course.code }}</td>
                 <td>{{ course.name }}</td>
-                <td>{{ course.credits }}</td>
+                <td>{{ course.credits_required }}</td>
+                <td>{{ course.credits_towards }}</td>
+                <td class="met" v-if="course.passed || course.inProgress">MET</td>
+                <td class="not-met" v-else>NOT MET</td>
               </tr>
             </table>
           </div>
@@ -43,176 +60,262 @@ export default {
         {
           label:
             "BACHELOR OF SCIENCE WITH A MAJOR IN COMPUTER SCIENCE  - COLLEGE OF ENGINEERING",
+          overall_progress: 70.0,
+          met_groups: 7,
+          num_of_requirements: 10,
           categories: [
             {
               name: "Critical Tracking Courses",
               courses: [
                 {
-                  name: "General Chemistry or CHM2095 ",
+                  name: "CHM2045 ",
                   code: "CHM2045",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "3.00",
+                  passed: true,
+                  inProgress: false,
                   group: 503572,
                 },
                 {
-                  name: "Analyt Geom and Calc 1",
+                  name: "MAC2311 ",
                   code: "MAC2311",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "4.00",
+                  passed: true,
+                  inProgress: false,
                   group: 503572,
                 },
                 {
-                  name: "Analyt Geom and Calc 2",
+                  name: "MAC2312 ",
                   code: "MAC2312",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "4.00",
+                  passed: true,
+                  inProgress: false,
                   group: 503572,
                 },
                 {
-                  name: "Analyt Geom and Calc 3",
+                  name: "MAC2313 ",
                   code: "MAC2313",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "4.00",
+                  passed: true,
+                  inProgress: false,
                   group: 503572,
                 },
                 {
-                  name: "Programming Fundamentals 1",
+                  name: "COP3502 ",
                   code: "COP3502",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "3.00",
+                  passed: true,
+                  inProgress: false,
                   group: 503572,
                 },
                 {
-                  name: "Physics with Calculus 1",
+                  name: "PHY2048 ",
                   code: "PHY2048",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "3.00",
+                  passed: true,
+                  inProgress: false,
                   group: 503572,
                 },
                 {
-                  name: "Physics with Calculus 2",
+                  name: "PHY2049 ",
                   code: "PHY2049",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "3.00",
+                  passed: true,
+                  inProgress: false,
                   group: 503572,
                 },
               ],
+              completed: 7,
+              percent_complete: 100.0,
             },
             {
               name: "Computer Science - Core",
               courses: [
                 {
-                  name: "Programming Fundamentals 2",
+                  name: "COP3503 ",
                   code: "COP3503",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "3.00",
+                  passed: true,
+                  inProgress: false,
                   group: 503571,
                 },
                 {
-                  name: "Introduction to Computer Organization",
+                  name: "CDA 3101",
                   code: "CDA 310",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "3.00",
+                  passed: true,
+                  inProgress: true,
                   group: 503571,
                 },
                 {
-                  name: "Applications of Discrete Structures",
+                  name: "COT3100 ",
                   code: "COT3100",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "3.00",
+                  passed: true,
+                  inProgress: false,
                   group: 503571,
                 },
                 {
-                  name: "Data Structures and Algorithm",
+                  name: "COP3530 ",
                   code: "COP3530",
-                  credits: "4.00",
+                  credits_required: "4.00",
+                  credits_towards: "4.00",
+                  passed: true,
+                  inProgress: false,
                   group: 503571,
                 },
                 {
-                  name: "Numerical Analysis",
+                  name: "COT4501 ",
                   code: "COT4501",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "0.00",
+                  passed: false,
+                  inProgress: false,
                   group: 503571,
                 },
                 {
-                  name: "Digital Logic and Computer Systems",
+                  name: "EEL3701C",
                   code: "EEL3701",
-                  credits: "4.00",
+                  credits_required: "4.00",
+                  credits_towards: "4.00",
+                  passed: true,
+                  inProgress: false,
                   group: 503571,
                 },
                 {
-                  name: "Information and Database Systems 1",
+                  name: "CIS4301 ",
                   code: "CIS4301",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "0.00",
+                  passed: false,
+                  inProgress: false,
                   group: 503571,
                 },
                 {
-                  name: "Operating Systems",
+                  name: "COP4600 ",
                   code: "COP4600",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "0.00",
+                  passed: false,
+                  inProgress: false,
                   group: 503571,
                 },
                 {
-                  name: "Introduction to Software Engineering",
+                  name: "CEN3031 ",
                   code: "CEN3031",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "0.00",
+                  passed: false,
+                  inProgress: false,
                   group: 503571,
                 },
                 {
-                  name: "Computer Network Fundamentals",
+                  name: "CNT4007C",
                   code: "CNT4007",
-                  credits: "4.00",
+                  credits_required: "4.00",
+                  credits_towards: "0.00",
+                  passed: false,
+                  inProgress: false,
                   group: 503571,
                 },
                 {
-                  name: "Senior Project or CIS4913C ",
+                  name: "CIS4914 ",
                   code: "CIS4914",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "0.00",
+                  passed: false,
+                  inProgress: false,
                   group: 503571,
                 },
               ],
+              completed: 5,
+              percent_complete: 45.45454545454545,
             },
             {
               name: "Pre-professional Labs",
               courses: [
                 {
-                  name: "General Chemistry 1 Lab",
+                  name: "CHM2045L",
                   code: "CHM2045",
-                  credits: "1.00",
+                  credits_required: "1.00",
+                  credits_towards: "1.00",
+                  passed: true,
+                  inProgress: false,
                   group: 503571,
                 },
                 {
-                  name: "Physics 1 Lab",
+                  name: "PHY2048L",
                   code: "PHY2048",
-                  credits: "1.00",
+                  credits_required: "1.00",
+                  credits_towards: "1.00",
+                  passed: true,
+                  inProgress: false,
                   group: 503571,
                 },
                 {
-                  name: "Physics 2 Lab",
+                  name: "PHY2049L",
                   code: "PHY2049",
-                  credits: "1.00",
+                  credits_required: "1.00",
+                  credits_towards: "0.00",
+                  passed: false,
+                  inProgress: false,
                   group: 503571,
                 },
               ],
+              completed: 2,
+              percent_complete: 66.66666666666666,
             },
             {
               name: "Summary of Major Coursework",
               courses: [
                 {
-                  name: "Tech Writing",
+                  name: "ENC3246 ",
                   code: "ENC3246",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "3.00",
+                  passed: true,
+                  inProgress: true,
                   group: 503571,
                 },
                 {
-                  name: "Linear Algebra",
+                  name: "MAS3114 ",
                   code: "MAS3114",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "3.00",
+                  passed: true,
+                  inProgress: false,
                   group: 503571,
                 },
                 {
-                  name: "Engineering Statistics",
+                  name: "STA3032 ",
                   code: "STA3032",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "3.00",
+                  passed: true,
+                  inProgress: false,
                   group: 503571,
                 },
                 {
-                  name: "Professional Ethics",
+                  name: "EGS4034 ",
                   code: "EGS4034",
-                  credits: "1.00",
+                  credits_required: "1.00",
+                  credits_towards: "1.00",
+                  passed: true,
+                  inProgress: false,
                   group: 503571,
                 },
               ],
+              completed: 4,
+              percent_complete: 100.0,
             },
             {
               name: "Computer Science - Communications (3 Credits)",
@@ -221,10 +324,14 @@ export default {
                   name:
                     "Approved Writing or Public Speaking Courses.  – (3 Credits)",
                   code: "Elective(s)",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "3.00",
                   group: 503571,
+                  passed: true,
                 },
               ],
+              completed: 0,
+              percent_complete: 100.0,
             },
             {
               name:
@@ -233,16 +340,22 @@ export default {
                 {
                   name: "Option A:  3000 Level or Above",
                   code: "Elective(s)",
-                  credits: "14.00",
+                  credits_required: "14.00",
+                  credits_towards: "0.00",
                   group: 503571,
+                  passed: false,
                 },
                 {
                   name: "Option B: Minor",
                   code: "Elective(s)",
-                  credits: "14.00",
+                  credits_required: "14.00",
+                  credits_towards: "0.00",
                   group: 503571,
+                  passed: false,
                 },
               ],
+              completed: 0,
+              percent_complete: 0.0,
             },
             {
               name: "Computer Science - Technical Electives (15 Credits)",
@@ -250,21 +363,30 @@ export default {
                 {
                   name: "Technical Electives and Co-Op/Internship Courses",
                   code: "Elective(s)",
-                  credits: "15.00",
+                  credits_required: "15.00",
+                  credits_towards: "9.00",
                   group: 503571,
+                  passed: false,
                 },
               ],
+              completed: 0,
+              percent_complete: 60.0,
             },
             {
               name: "University Required Course",
               courses: [
                 {
-                  name: "What is the Good Life",
+                  name: "IUF1000 ",
                   code: "IUF1000",
-                  credits: "0.00",
+                  credits_required: "0.00",
+                  credits_towards: "2.00",
+                  passed: true,
+                  inProgress: false,
                   group: 502147,
                 },
               ],
+              completed: 1,
+              percent_complete: 100.0,
             },
             {
               name: "State General Education Requirement",
@@ -272,34 +394,46 @@ export default {
                 {
                   name: "Composition",
                   code: "Elective(s)",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "3.00",
                   group: 502147,
+                  passed: true,
                 },
                 {
                   name: "Humanities",
                   code: "Elective(s)",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "3.00",
                   group: 502147,
+                  passed: true,
                 },
                 {
                   name: "Social and Behavioral Science",
                   code: "Elective(s)",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "3.00",
                   group: 502147,
+                  passed: true,
                 },
                 {
                   name: "Mathematics",
                   code: "Elective(s)",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "4.00",
                   group: 502147,
+                  passed: true,
                 },
                 {
                   name: "Biological and Physical Sciences",
                   code: "Elective(s)",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "3.00",
                   group: 502147,
+                  passed: true,
                 },
               ],
+              completed: 0,
+              percent_complete: 100.0,
             },
             {
               name: "Composition (6 Credits)",
@@ -307,10 +441,14 @@ export default {
                 {
                   name: "Composition",
                   code: "Elective(s)",
-                  credits: "6.00",
+                  credits_required: "6.00",
+                  credits_towards: "6.00",
                   group: 503650,
+                  passed: true,
                 },
               ],
+              completed: 0,
+              percent_complete: 100.0,
             },
             {
               name: "Humanities (6 Credits)",
@@ -318,10 +456,14 @@ export default {
                 {
                   name: "Humanities Courses",
                   code: "Elective(s)",
-                  credits: "6.00",
+                  credits_required: "6.00",
+                  credits_towards: "6.00",
                   group: 503650,
+                  passed: true,
                 },
               ],
+              completed: 0,
+              percent_complete: 100.0,
             },
             {
               name: "Social & Behavioral Science Courses (6 Credits)",
@@ -329,68 +471,99 @@ export default {
                 {
                   name: "Social Science Courses",
                   code: "Elective(s)",
-                  credits: "6.00",
+                  credits_required: "6.00",
+                  credits_towards: "6.00",
                   group: 503650,
+                  passed: true,
                 },
               ],
+              completed: 0,
+              percent_complete: 100.0,
             },
             {
               name: "Mathematics (6 Credits)",
               courses: [
                 {
-                  name: "Analytical Geometry ",
+                  name: "MAC2311 ",
                   code: "MAC2311",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "4.00",
+                  passed: true,
+                  inProgress: false,
                   group: 503650,
                 },
                 {
-                  name: "Calculus 2",
+                  name: "MAC2312 ",
                   code: "MAC2312",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "4.00",
+                  passed: true,
+                  inProgress: false,
                   group: 503650,
                 },
               ],
+              completed: 2,
+              percent_complete: 100.0,
             },
             {
               name: "Physical/Biological Sciences (12 Credits)",
               courses: [
                 {
-                  name: "General Chemistry 1",
+                  name: "CHM2045 ",
                   code: "CHM2045",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "3.00",
+                  passed: true,
+                  inProgress: false,
                   group: 503650,
                 },
                 {
                   name: "CHM2045l - General Chemistry 1 Laboratory",
                   code: "Elective(s)",
-                  credits: "1.00",
+                  credits_required: "1.00",
+                  credits_towards: "1.00",
                   group: 503650,
+                  passed: true,
                 },
                 {
-                  name: "Physics with Calculus 1",
+                  name: "PHY2048 ",
                   code: "PHY2048",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "3.00",
+                  passed: true,
+                  inProgress: false,
                   group: 503650,
                 },
                 {
-                  name: "Physics with Calculus 1 Lab",
+                  name: "PHY2048L",
                   code: "PHY2048",
-                  credits: "1.00",
+                  credits_required: "1.00",
+                  credits_towards: "1.00",
+                  passed: true,
+                  inProgress: false,
                   group: 503650,
                 },
                 {
-                  name: "Physics with Calculus 2",
+                  name: "PHY2049 ",
                   code: "PHY2049",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "3.00",
+                  passed: true,
+                  inProgress: false,
                   group: 503650,
                 },
                 {
-                  name: "Physics with Calculus 2 Lab",
+                  name: "PHY2049L",
                   code: "PHY2049",
-                  credits: "1.00",
+                  credits_required: "1.00",
+                  credits_towards: "0.00",
+                  passed: false,
+                  inProgress: false,
                   group: 503650,
                 },
               ],
+              completed: 4,
+              percent_complete: 100.0,
             },
             {
               name: "International/Diversity Requirement",
@@ -398,16 +571,22 @@ export default {
                 {
                   name: "International Focus - 3 Credits",
                   code: "Elective(s)",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "3.00",
                   group: 502146,
+                  passed: true,
                 },
                 {
                   name: "Diversity Focus - 3 Credits",
                   code: "Elective(s)",
-                  credits: "3.00",
+                  credits_required: "3.00",
+                  credits_towards: "3.00",
                   group: 502146,
+                  passed: true,
                 },
               ],
+              completed: 0,
+              percent_complete: 100.0,
             },
             {
               name: "Summer Enrollment",
@@ -415,10 +594,14 @@ export default {
                 {
                   name: "OPTION 1: UF Summer Courses (9 Credits)",
                   code: "Elective(s)",
-                  credits: "9.00",
+                  credits_required: "9.00",
+                  credits_towards: "48.00",
                   group: 502149,
+                  passed: true,
                 },
               ],
+              completed: 0,
+              percent_complete: 100,
             },
           ],
         },
@@ -428,6 +611,7 @@ export default {
   methods: {
     toggleCollapse: function (e) {
       e.target.classList.toggle("active");
+      console.log(e.target);
       var content = e.target.nextElementSibling;
       if (content.style.maxHeight) {
         content.style.maxHeight = null;
@@ -440,6 +624,38 @@ export default {
 </script>
 
 <style scoped>
+.inner-text {
+  padding-left: 10px;
+}
+.progress-bar {
+  background-color: lightgreen;
+}
+.overall-progress {
+  height: 30px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: left;
+  border: 1px solid black;
+  width: 25%;
+  margin: auto;
+  padding-bottom: 3px;
+  white-space: nowrap;
+}
+.visible {
+  background-color: white;
+}
+
+.met {
+  background-color: lightgreen;
+  color: white;
+  font-weight: 700;
+}
+.not-met {
+  background-color: lightcoral;
+  color: white;
+  font-weight: 700;
+}
 .course-label,
 .course-value {
   display: inline-block;
@@ -470,11 +686,13 @@ export default {
   width: 90%;
 }
 .category-title {
-  padding: 10px;
+  padding: 10px 0 10px 0;
+  white-space: nowrap;
+  background-color: lightgreen;
+  color: black;
 }
-.active,
 .category-title:hover {
-  background-color: #ccc;
+  background-color: white;
 }
 .category-content {
   padding: 0 18px;
