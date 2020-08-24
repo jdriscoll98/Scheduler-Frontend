@@ -47,87 +47,87 @@ export default {
   data: function () {
     return {
       semesters: [
-        // {
-        //   number: 1,
-        //   term: "Fall 2020",
-        //   courses: [
-        //     {
-        //       code: "ACG2021",
-        //       name: "Intro to Financial Accounting",
-        //       credits: 4,
-        //     },
-        //     {
-        //       code: "CDA3101",
-        //       name: "Intro to Computer Organization",
-        //       credits: 4,
-        //     },
-        //     {
-        //       code: "CDA3101",
-        //       name: "Intro to Computer Organization",
-        //       credits: 4,
-        //     },
-        //     {
-        //       code: "CDA3101",
-        //       name: "Intro to Computer Organization",
-        //       credits: 4,
-        //     },
-        //   ],
-        //   total: 8,
-        // },
-        // {
-        //   number: 1,
-        //   term: "Fall 2020",
-        //   courses: [
-        //     {
-        //       code: "ACG2021",
-        //       name: "Intro to Financial Accounting",
-        //       credits: 4,
-        //     },
-        //     {
-        //       code: "CDA3101",
-        //       name: "Intro to Computer Organization",
-        //       credits: 4,
-        //     },
-        //     {
-        //       code: "CDA3101",
-        //       name: "Intro to Computer Organization",
-        //       credits: 4,
-        //     },
-        //     {
-        //       code: "CDA3101",
-        //       name: "Intro to Computer Organization",
-        //       credits: 4,
-        //     },
-        //   ],
-        //   total: 8,
-        // },
-        // {
-        //   number: 1,
-        //   term: "Fall 2020",
-        //   courses: [
-        //     {
-        //       code: "ACG2021",
-        //       name: "Intro to Financial Accounting",
-        //       credits: 4,
-        //     },
-        //     {
-        //       code: "CDA3101",
-        //       name: "Intro to Computer Organization",
-        //       credits: 4,
-        //     },
-        //     {
-        //       code: "CDA3101",
-        //       name: "Intro to Computer Organization",
-        //       credits: 4,
-        //     },
-        //     {
-        //       code: "CDA3101",
-        //       name: "Intro to Computer Organization",
-        //       credits: 4,
-        //     },
-        //   ],
-        //   total: 8,
-        // },
+        {
+          number: 1,
+          term: "Fall 2020",
+          courses: [
+            {
+              code: "ACG2021",
+              name: "Intro to Financial Accounting",
+              credits: 4,
+            },
+            {
+              code: "CDA3101",
+              name: "Intro to Computer Organization",
+              credits: 4,
+            },
+            {
+              code: "CDA3101",
+              name: "Intro to Computer Organization",
+              credits: 4,
+            },
+            {
+              code: "CDA3101",
+              name: "Intro to Computer Organization",
+              credits: 4,
+            },
+          ],
+          total: 8,
+        },
+        {
+          number: 1,
+          term: "Fall 2020",
+          courses: [
+            {
+              code: "ACG2021",
+              name: "Intro to Financial Accounting",
+              credits: 4,
+            },
+            {
+              code: "CDA3101",
+              name: "Intro to Computer Organization",
+              credits: 4,
+            },
+            {
+              code: "CDA3101",
+              name: "Intro to Computer Organization",
+              credits: 4,
+            },
+            {
+              code: "CDA3101",
+              name: "Intro to Computer Organization",
+              credits: 4,
+            },
+          ],
+          total: 8,
+        },
+        {
+          number: 1,
+          term: "Fall 2020",
+          courses: [
+            {
+              code: "ACG2021",
+              name: "Intro to Financial Accounting",
+              credits: 4,
+            },
+            {
+              code: "CDA3101",
+              name: "Intro to Computer Organization",
+              credits: 4,
+            },
+            {
+              code: "CDA3101",
+              name: "Intro to Computer Organization",
+              credits: 4,
+            },
+            {
+              code: "CDA3101",
+              name: "Intro to Computer Organization",
+              credits: 4,
+            },
+          ],
+          total: 8,
+        },
       ],
     };
   },

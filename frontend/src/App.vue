@@ -120,12 +120,12 @@ body {
 }
 .main {
   display: block;
-  height: 100vh;
+  height: 100%;
+  padding-bottom: 200px;
 }
 .footer {
   display: inline-block;
   position: relative;
-  bottom: 0;
   width: 100%;
 }
 .uf-logo {

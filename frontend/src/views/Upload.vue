@@ -2,7 +2,7 @@
   <div class="main">
     <div class="instructions">
       <ol>
-        <li>In a seperate browser, log in to ONE.UF</li>
+        <li>In a seperate tab, log in to ONE.UF</li>
         <li>
           Once Logged in, stay on the ONE.UF homepage and enter "http://one.uf.edu/api/degreeaudit/loaddegreeaudit" into the address bar (without quotations)
           <p>(This may take a few seconds to load)</p>
