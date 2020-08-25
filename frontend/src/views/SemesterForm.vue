@@ -617,11 +617,11 @@ export default {
   name: "SemesterForm",
   data: function () {
     return {
-      level: null,
-      department: null,
-      course_number: null,
-      class_number: null,
-      course_title: null,
+      level: "",
+      department: "",
+      course_number: "",
+      class_number: "",
+      course_title: "",
       semester: {
         number: 1,
         term: "Spring 2021",
@@ -720,7 +720,10 @@ export default {
       form.append("json", JSON.stringify(data));
       fetch("http://localhost:8000/api/fetch/", {
         method: "post",
-        body: form,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
       })
         .then((res) => res.json())
         .then((res) => (this.availableCourses = res.parsed_courses));
