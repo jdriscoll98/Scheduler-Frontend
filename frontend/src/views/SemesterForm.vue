@@ -709,7 +709,21 @@ export default {
       }
     },
     fetchCourses: function () {
-      console.log("submitting");
+      var data = {
+        level: this.level,
+        department: this.department,
+        course_number: this.course_number,
+        class_number: this.class_number,
+        course_title: this.course_title,
+      };
+      var form = new FormData();
+      form.append("json", JSON.stringify(data));
+      fetch("http://localhost:8000/api/fetch/", {
+        method: "post",
+        body: form,
+      })
+        .then((res) => res.json())
+        .then((res) => (this.availableCourses = res.parsed_courses));
     },
   },
 };
