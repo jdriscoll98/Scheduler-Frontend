@@ -4,7 +4,11 @@
       <h1 class="courses-header">Search For Courses</h1>
       <div class="search-form">
         <div class="filters collapsible">
-          <h3 @click="toggleCollapse($event)" class="divider">Filters</h3>
+          <h3 @click="toggleCollapse($event)" class="divider">
+            Filters
+            <i class="arrow down"></i>
+          </h3>
+
           <div class="content">
             <form @submit.prevent="fetchCourses">
               <div class="form-group">
@@ -515,7 +519,10 @@
         </div>
       </div>
       <div class="results collapsible">
-        <h3 @click="toggleCollapse($event)" class="divider">Results</h3>
+        <h3 @click="toggleCollapse($event)" class="divider">
+          Results
+          <i class="arrow down"></i>
+        </h3>
         <div class="content">
           <div v-for="course in availableCourses" :key="course.code" class="course-list">
             <li>
@@ -537,7 +544,10 @@
           </div>
         </div>
         <div class="placeholders collapsible"></div>
-        <h3 @click="toggleCollapse($event)" class="divider">Placeholders</h3>
+        <h3 @click="toggleCollapse($event)" class="divider">
+          Placeholders
+          <i class="arrow down"></i>
+        </h3>
         <div class="content">
           <div v-for="course in placeHolderCourses" :key="course.code" class="course-list">
             <li>
@@ -699,15 +709,24 @@ export default {
       }
     },
     fetchCourses: function () {
-      fetch(url, {
-        mode: "no-cors",
-      }).then((response) => console.log(response));
+      console.log("submitting");
     },
   },
 };
 </script>
 
 <style scoped>
+.arrow {
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  padding: 3px;
+  margin: 10px;
+  float: right;
+}
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
 .no-results {
   margin: 10px;
 }
