@@ -523,22 +523,30 @@
           Results
           <i class="arrow down"></i>
         </h3>
-        <div class="content">
-          <div v-for="course in availableCourses" :key="course.code" class="course-list">
-            <li>
-              <div
+        <div id="results" class="content">
+          <table>
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Course Title</th>
+                <th>Credits</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
                 v-on:dragstart="handleDragStart($event, course, category)"
                 @dragend="handleDragEnd($event)"
                 id="drag1"
                 draggable="true"
-                class="course"
+                v-for="course in availableCourses"
+                :key="course.code"
               >
-                <div class="course-code">{{ course.code }}</div>
-                <div class="course-name">{{ course.name }}</div>
-                <div class="course-credits">{{ course.credits }} credits</div>
-              </div>
-            </li>
-          </div>
+                <td>{{ course.code }}</td>
+                <td>{{ course.name }}</td>
+                <td>{{ course.credits }}</td>
+              </tr>
+            </tbody>
+          </table>
           <div class="empty" v-if="availableCourses.length == 0">
             <h3 class="no-results">No Courses Found</h3>
           </div>
@@ -549,21 +557,29 @@
           <i class="arrow down"></i>
         </h3>
         <div class="content">
-          <div v-for="course in placeHolderCourses" :key="course.code" class="course-list">
-            <li>
-              <div
+          <table>
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Course Title</th>
+                <th>Credits</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
                 v-on:dragstart="handleDragStart($event, course, category)"
                 @dragend="handleDragEnd($event)"
                 id="drag1"
                 draggable="true"
-                class="course"
+                v-for="course in placeHolderCourses"
+                :key="course.code"
               >
-                <div class="course-code">{{ course.code }}</div>
-                <div class="course-name">{{ course.name }}</div>
-                <div class="course-credits">{{ course.credits }} credits</div>
-              </div>
-            </li>
-          </div>
+                <td>{{ course.code }}</td>
+                <td>{{ course.name }}</td>
+                <td>{{ course.credits }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -580,29 +596,43 @@
         </select>
       </div>
       <div class="semester-list">
-        <ol id="list">
-          <div v-for="course in addedCourses" :key="course.code" class="added-classes">
-            <li>
-              <div id="drag1" draggable="true" class="course">
-                <div class="course-code">{{ course.code }}</div>
-                <div class="course-name">{{ course.name }}</div>
-                <div class="course-credits">{{ course.credits }} credits</div>
-              </div>
-              <button id="delete-button" class="delete-btn">
-                <img class="delete" src="../assets/images/times-solid.svg" />
-              </button>
-            </li>
-          </div>
-        </ol>
-        <div
-          class="drag-header box"
-          @drop="handleDrop($event)"
-          @dragover.prevent
-          @dragenter.prevent
-          @dragEnter="handleDragEnter($event)"
-          @dragLeave="handleDragLeave($event)"
-          id="list"
-        >Drag Courses Here to Add</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Course Title</th>
+              <th>Credits</th>
+              <th>Audit Requirement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="course in addedCourses" :key="course.code">
+              <td>{{ course.code }}</td>
+              <td>{{ course.name }}</td>
+              <td>{{ course.credits }}</td>
+              <td>
+                <select>
+                  <option>TEST</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4">
+                <div
+                  class="drag-header box"
+                  @drop="handleDrop($event)"
+                  @dragover.prevent
+                  @dragenter.prevent
+                  @dragEnter="handleDragEnter($event)"
+                  @dragLeave="handleDragLeave($event)"
+                  id="list"
+                >Drag Courses Here to Add</div>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
       </div>
       <div class="notes">
         <h4>Notes</h4>
@@ -727,12 +757,34 @@ export default {
       })
         .then((res) => res.json())
         .then((res) => (this.availableCourses = res.parsed_courses));
+      document.getElementById("results").style.maxHeight = "100%";
     },
   },
 };
 </script>
 
 <style scoped>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+thead {
+  background-color: #285797;
+  color: white;
+}
+tbody,
+tfoot {
+  background-color: white;
+  font-weight: 800;
+}
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
 .arrow {
   border: solid white;
   border-width: 0 3px 3px 0;
@@ -842,6 +894,7 @@ label {
   padding: 10px;
   width: 250px;
   margin: auto;
+  text-align: center;
 }
 .delete-btn {
   height: 25px;
