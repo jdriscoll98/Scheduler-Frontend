@@ -11,9 +11,17 @@
     </h1>
     <h2 class="label">| SCHEDULER</h2>
     <div class="user-logged-in" v-if="$store.state.loggedIn">
-      <img class="user-icon" src="../assets/images/user-icon.svg" />
-      <h3 class="username">{{ $store.state.profile.username }}</h3>
-      <div class="arrow down"></div>
+      <img @mouseenter="showDropdown" class="user-icon" src="../assets/images/user-icon.svg" />
+      <div @mouseleave="hideDropdown" id="dropdown" class="profile-drop-down">
+        <div class="user">
+          <img class="small-user-icon" src="../assets/images/user-icon-small.svg" />
+          <h4 class="username">{{ $store.state.profile.username }}</h4>
+        </div>
+        <hr />
+        <div class="logout">
+          <button class="logout-btn">Logout</button>
+        </div>
+      </div>
     </div>
     <button v-else class="login-btn" @click="$router.push('/login')">Log in</button>
     <div v-if="$store.state.loggedIn" class="subnav">
@@ -30,36 +38,87 @@
 <script>
 export default {
   name: "Navbar",
+  methods: {
+    showDropdown: function (e) {
+      e.target.nextElementSibling.style.display = "block";
+      setTimeout(function () {
+        e.target.nextElementSibling.style.opacity = 1;
+      }, 20);
+    },
+    hideDropdown: function (e) {
+      let dropdown = document.getElementById(e.target.id);
+      e.target.style.opacity = 0;
+      dropdown.addEventListener("transitionend", function (e) {
+        if (e.target.style.display === "none") {
+          e.target.style.display = "none";
+        }
+      });
+    },
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.username {
-  color: white;
-  padding: 18px;
-  font-size: 18px;
-  font-weight: 500;
-  position: relative;
+.logout {
+  text-align: center;
+}
+.logout-btn {
+  background-color: transparent;
+  border: none;
+  color: #285797;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 10px;
+  cursor: pointer;
+}
+.small-user-icon {
   display: inline-block;
+  width: 30px;
+  margin: 10px;
+}
+.username {
+  display: inline-block;
+  color: #285797;
+  position: relative;
+  bottom: 20px;
+  margin: 0 10px 0 10px;
+}
+.profile-drop-down {
+  display: none;
+  opacity: 0;
+  text-align: left;
+  position: absolute;
+  border: 1px solid black;
+  height: 100px;
+  width: 150px;
+  background-color: white;
+  right: 5px;
+  top: 50px;
+  z-index: 1;
+  transition: opacity 0.3s ease-in-out;
 }
 .user-icon {
   position: relative;
   width: 30px;
   height: 30px;
-  top: 10px;
-  margin: 0;
+  top: 15px;
+  right: 30px;
   padding: 0;
   border: none;
   background-color: #285797;
   cursor: pointer;
   outline: none;
-  display: inline-block;
+}
+.user-icon:hover {
+  transform: scale(1.5);
 }
 .user-logged-in {
   position: absolute;
   right: 0;
+  height: 60px;
 }
+
 .login-btn {
   right: 0;
   color: white;
@@ -143,7 +202,7 @@ export default {
   display: inline-block;
   padding: 3px;
   position: relative;
-  right: 0;
+  right: 20px;
   margin: 0 20px 0 0;
 }
 .down {
