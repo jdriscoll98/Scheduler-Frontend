@@ -22,19 +22,25 @@
           <div class="category-content">
             <table>
               <tr>
+                <td v-if="category.description" colspan="5">{{ category.description }}</td>
+              </tr>
+              <tr>
                 <th>Class</th>
                 <th>Name</th>
                 <th>Credits Required</th>
                 <th>Credits Taken or In Progress</th>
                 <th>Status</th>
+                <th>Description</th>
               </tr>
-              <tr v-for="course in category.courses" :key="course.code">
+              <tr class="tooltip" v-for="course in category.courses" :key="course.code">
                 <td>{{ course.code }}</td>
                 <td>{{ course.name }}</td>
                 <td>{{ course.credits_required }}</td>
                 <td>{{ course.credits_towards }}</td>
                 <td class="met" v-if="course.passed || course.inProgress">MET</td>
                 <td class="not-met" v-else>NOT MET</td>
+                <td v-if="course.description">{{ course.description }}</td>
+                <td v-else>N/A</td>
               </tr>
             </table>
           </div>
@@ -74,6 +80,7 @@ export default {
                   credits_towards: "3.00",
                   passed: true,
                   inProgress: false,
+                  description: "",
                   group: 503572,
                 },
                 {
@@ -83,6 +90,7 @@ export default {
                   credits_towards: "4.00",
                   passed: true,
                   inProgress: false,
+                  description: "",
                   group: 503572,
                 },
                 {
@@ -92,6 +100,7 @@ export default {
                   credits_towards: "4.00",
                   passed: true,
                   inProgress: false,
+                  description: "",
                   group: 503572,
                 },
                 {
@@ -101,6 +110,7 @@ export default {
                   credits_towards: "4.00",
                   passed: true,
                   inProgress: false,
+                  description: ".",
                   group: 503572,
                 },
                 {
@@ -110,6 +120,7 @@ export default {
                   credits_towards: "3.00",
                   passed: true,
                   inProgress: false,
+                  description: ".",
                   group: 503572,
                 },
                 {
@@ -119,6 +130,7 @@ export default {
                   credits_towards: "3.00",
                   passed: true,
                   inProgress: false,
+                  description: ".",
                   group: 503572,
                 },
                 {
@@ -128,10 +140,13 @@ export default {
                   credits_towards: "3.00",
                   passed: true,
                   inProgress: false,
+                  description: ".",
                   group: 503572,
                 },
               ],
               completed: 7,
+              description:
+                "Complete all of the following: CHM 2045 or CHM 2095, MAC 2311, MAC 2312, MAC 2313, COP 3502, PHY 2048, PHY 2049",
               percent_complete: 100.0,
             },
             {
@@ -144,6 +159,7 @@ export default {
                   credits_towards: "3.00",
                   passed: true,
                   inProgress: false,
+                  description: "A grade of &apos;C&apos; or better required.",
                   group: 503571,
                 },
                 {
@@ -153,6 +169,7 @@ export default {
                   credits_towards: "3.00",
                   passed: true,
                   inProgress: true,
+                  description: "",
                   group: 503571,
                 },
                 {
@@ -162,6 +179,7 @@ export default {
                   credits_towards: "3.00",
                   passed: true,
                   inProgress: false,
+                  description: "",
                   group: 503571,
                 },
                 {
@@ -171,6 +189,7 @@ export default {
                   credits_towards: "4.00",
                   passed: true,
                   inProgress: false,
+                  description: "",
                   group: 503571,
                 },
                 {
@@ -180,6 +199,8 @@ export default {
                   credits_towards: "0.00",
                   passed: false,
                   inProgress: false,
+                  description:
+                    "or &#xA0;MAD4401 - Introduction to Numerical Analysis",
                   group: 503571,
                 },
                 {
@@ -189,6 +210,7 @@ export default {
                   credits_towards: "4.00",
                   passed: true,
                   inProgress: false,
+                  description: "",
                   group: 503571,
                 },
                 {
@@ -198,6 +220,7 @@ export default {
                   credits_towards: "0.00",
                   passed: false,
                   inProgress: false,
+                  description: "",
                   group: 503571,
                 },
                 {
@@ -207,6 +230,7 @@ export default {
                   credits_towards: "0.00",
                   passed: false,
                   inProgress: false,
+                  description: ".",
                   group: 503571,
                 },
                 {
@@ -216,6 +240,7 @@ export default {
                   credits_towards: "0.00",
                   passed: false,
                   inProgress: false,
+                  description: "",
                   group: 503571,
                 },
                 {
@@ -225,6 +250,7 @@ export default {
                   credits_towards: "0.00",
                   passed: false,
                   inProgress: false,
+                  description: "",
                   group: 503571,
                 },
                 {
@@ -234,10 +260,12 @@ export default {
                   credits_towards: "0.00",
                   passed: false,
                   inProgress: false,
+                  description: ".",
                   group: 503571,
                 },
               ],
               completed: 5,
+              description: "",
               percent_complete: 45.45454545454545,
             },
             {
@@ -250,6 +278,7 @@ export default {
                   credits_towards: "1.00",
                   passed: true,
                   inProgress: false,
+                  description: "",
                   group: 503571,
                 },
                 {
@@ -259,6 +288,7 @@ export default {
                   credits_towards: "1.00",
                   passed: true,
                   inProgress: false,
+                  description: "",
                   group: 503571,
                 },
                 {
@@ -268,10 +298,12 @@ export default {
                   credits_towards: "0.00",
                   passed: false,
                   inProgress: false,
+                  description: "",
                   group: 503571,
                 },
               ],
               completed: 2,
+              description: "",
               percent_complete: 66.66666666666666,
             },
             {
@@ -284,6 +316,7 @@ export default {
                   credits_towards: "3.00",
                   passed: true,
                   inProgress: true,
+                  description: "",
                   group: 503571,
                 },
                 {
@@ -293,6 +326,7 @@ export default {
                   credits_towards: "3.00",
                   passed: true,
                   inProgress: false,
+                  description: "",
                   group: 503571,
                 },
                 {
@@ -302,6 +336,7 @@ export default {
                   credits_towards: "3.00",
                   passed: true,
                   inProgress: false,
+                  description: "",
                   group: 503571,
                 },
                 {
@@ -311,10 +346,12 @@ export default {
                   credits_towards: "1.00",
                   passed: true,
                   inProgress: false,
+                  description: "",
                   group: 503571,
                 },
               ],
               completed: 4,
+              description: "",
               percent_complete: 100.0,
             },
             {
@@ -328,9 +365,11 @@ export default {
                   credits_towards: "3.00",
                   group: 503571,
                   passed: true,
+                  description: "",
                 },
               ],
               completed: 0,
+              description: "",
               percent_complete: 100.0,
             },
             {
@@ -344,6 +383,8 @@ export default {
                   credits_towards: "0.00",
                   group: 503571,
                   passed: false,
+                  description:
+                    "All courses must be at the 3000 level or above and in the same area (advisor approval required).",
                 },
                 {
                   name: "Option B: Minor",
@@ -352,9 +393,12 @@ export default {
                   credits_towards: "0.00",
                   group: 503571,
                   passed: false,
+                  description:
+                    "All credits must be applied towards an official UF minor.",
                 },
               ],
               completed: 0,
+              description: "",
               percent_complete: 0.0,
             },
             {
@@ -367,9 +411,12 @@ export default {
                   credits_towards: "9.00",
                   group: 503571,
                   passed: false,
+                  description:
+                    "Complete 15 credits of 4000 level coursework with a prefix of CAP, CDA, CEN, CIS, COP, COT AND CGS 3065, EIN 4354, with a maximum of 3 credits of Co-Op/Internship allowed.",
                 },
               ],
               completed: 0,
+              description: "",
               percent_complete: 60.0,
             },
             {
@@ -382,10 +429,12 @@ export default {
                   credits_towards: "2.00",
                   passed: true,
                   inProgress: false,
+                  description: "",
                   group: 502147,
                 },
               ],
               completed: 1,
+              description: "What is the Good Life",
               percent_complete: 100.0,
             },
             {
@@ -398,6 +447,8 @@ export default {
                   credits_towards: "3.00",
                   group: 502147,
                   passed: true,
+                  description:
+                    "Complete One of the Following Courses: ENC1101, ENC1102, ENC1145, ENC2210, ENC2305, ENC3246, ENC3254, ENC3459",
                 },
                 {
                   name: "Humanities",
@@ -406,6 +457,8 @@ export default {
                   credits_towards: "3.00",
                   group: 502147,
                   passed: true,
+                  description:
+                    "Complete One of the Following Courses: ARH2000, HUM1020, LIT2000, MUL2010, PHI2010, THE2000",
                 },
                 {
                   name: "Social and Behavioral Science",
@@ -414,6 +467,8 @@ export default {
                   credits_towards: "3.00",
                   group: 502147,
                   passed: true,
+                  description:
+                    "Complete One of the Following Courses: AMH2020, ANT2000, ECO2013, POS2041, PSY2012, SYG2000",
                 },
                 {
                   name: "Mathematics",
@@ -422,6 +477,7 @@ export default {
                   credits_towards: "4.00",
                   group: 502147,
                   passed: true,
+                  description: "",
                 },
                 {
                   name: "Biological and Physical Sciences",
@@ -430,9 +486,12 @@ export default {
                   credits_towards: "3.00",
                   group: 502147,
                   passed: true,
+                  description:
+                    "Complete One of the Following Courses: AST1002, BSC2005, BSC2010, BSC2085, CHM1020, CHM2045, ESC1000, EVR2001, PHY2020, PHY2048, PHY2053",
                 },
               ],
               completed: 0,
+              description: "Complete One Course from Each of the Following",
               percent_complete: 100.0,
             },
             {
@@ -445,9 +504,11 @@ export default {
                   credits_towards: "6.00",
                   group: 503650,
                   passed: true,
+                  description: "",
                 },
               ],
               completed: 0,
+              description: "",
               percent_complete: 100.0,
             },
             {
@@ -460,9 +521,11 @@ export default {
                   credits_towards: "6.00",
                   group: 503650,
                   passed: true,
+                  description: "Humanities Courses",
                 },
               ],
               completed: 0,
+              description: "",
               percent_complete: 100.0,
             },
             {
@@ -475,9 +538,11 @@ export default {
                   credits_towards: "6.00",
                   group: 503650,
                   passed: true,
+                  description: "Social Science Courses",
                 },
               ],
               completed: 0,
+              description: "",
               percent_complete: 100.0,
             },
             {
@@ -490,6 +555,7 @@ export default {
                   credits_towards: "4.00",
                   passed: true,
                   inProgress: false,
+                  description: "",
                   group: 503650,
                 },
                 {
@@ -499,10 +565,12 @@ export default {
                   credits_towards: "4.00",
                   passed: true,
                   inProgress: false,
+                  description: "",
                   group: 503650,
                 },
               ],
               completed: 2,
+              description: "MAC2311 and MAC2312",
               percent_complete: 100.0,
             },
             {
@@ -515,6 +583,7 @@ export default {
                   credits_towards: "3.00",
                   passed: true,
                   inProgress: false,
+                  description: "",
                   group: 503650,
                 },
                 {
@@ -524,6 +593,7 @@ export default {
                   credits_towards: "1.00",
                   group: 503650,
                   passed: true,
+                  description: "",
                 },
                 {
                   name: "PHY2048 ",
@@ -532,6 +602,7 @@ export default {
                   credits_towards: "3.00",
                   passed: true,
                   inProgress: false,
+                  description: "",
                   group: 503650,
                 },
                 {
@@ -541,6 +612,7 @@ export default {
                   credits_towards: "1.00",
                   passed: true,
                   inProgress: false,
+                  description: "",
                   group: 503650,
                 },
                 {
@@ -550,6 +622,7 @@ export default {
                   credits_towards: "3.00",
                   passed: true,
                   inProgress: false,
+                  description: "",
                   group: 503650,
                 },
                 {
@@ -559,10 +632,13 @@ export default {
                   credits_towards: "0.00",
                   passed: false,
                   inProgress: false,
+                  description: "",
                   group: 503650,
                 },
               ],
               completed: 4,
+              description:
+                "CHM2045, CHM2045L, PHY2048, PHY2048L, PHY2049, PHY2049L",
               percent_complete: 100.0,
             },
             {
@@ -575,6 +651,7 @@ export default {
                   credits_towards: "3.00",
                   group: 502146,
                   passed: true,
+                  description: "International Focus - 3 Credits",
                 },
                 {
                   name: "Diversity Focus - 3 Credits",
@@ -583,9 +660,12 @@ export default {
                   credits_towards: "3.00",
                   group: 502146,
                   passed: true,
+                  description: "Diversity Focus - 3 Credits",
                 },
               ],
               completed: 0,
+              description:
+                "General Education International &amp; Diversity Focus",
               percent_complete: 100.0,
             },
             {
@@ -598,9 +678,12 @@ export default {
                   credits_towards: "48.00",
                   group: 502149,
                   passed: true,
+                  description: "Note: Only UF Courses will appear here",
                 },
               ],
               completed: 0,
+              description:
+                "Requires nine credits of summer enrollment at public state of Florida universities, or six credits of UF-sponsored, UF exchange, or approved SUS study-abroad during one or two summer terms.",
               percent_complete: 100,
             },
           ],
@@ -624,6 +707,9 @@ export default {
 </script>
 
 <style scoped>
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
 .inner-text {
   padding-left: 10px;
 }

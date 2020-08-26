@@ -10,16 +10,20 @@
       <a class="link" href="http://one.uf.edu" target="_blank">ONE.UF</a>
     </h1>
     <h2 class="label">| SCHEDULER</h2>
-    <button class="user-icon">
-      <img src="../assets/images/user-icon.svg" />
-      <i class="arrow down"></i>
+    <h3 v-if="$store.loggedIn" class="username">{{ user.username }}</h3>
+    <button v-else class="login-btn" @click="$router.push('/login')">
+      Log in
     </button>
-    <div class="subnav">
+    <div v-if="$store.loggedIn" class="subnav">
       <div class="left-nav">
-        <h3 @click="$router.push('/')" class="nav-item not-current">OVERVIEW</h3>
+        <h3 @click="$router.push('/')" class="nav-item not-current">
+          OVERVIEW
+        </h3>
       </div>
       <div class="right-nav">
-        <h3 @click="$router.push('/program')" class="nav-item not-current">PROGRAM</h3>
+        <h3 @click="$router.push('/program')" class="nav-item not-current">
+          PROGRAM
+        </h3>
       </div>
     </div>
   </div>
@@ -33,6 +37,28 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.username {
+  right: 0;
+  color: white;
+  padding: 18px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.login-btn {
+  right: 0;
+  color: white;
+  background-color: #285797;
+  border: none;
+  position: absolute;
+  padding: 18px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.login-btn:hover {
+  transform: scale(1.1);
+}
 .link {
   color: inherit;
   text-decoration: none;
@@ -76,6 +102,7 @@ export default {
   position: absolute;
   top: 65px;
   cursor: pointer;
+  box-shadow: 0 10px 10px #888888;
 }
 .oneuf {
   color: white;
