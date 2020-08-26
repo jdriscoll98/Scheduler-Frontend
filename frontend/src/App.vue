@@ -113,6 +113,7 @@ export default {
 }
 body {
   background-color: whitesmoke;
+  width: 100vw;
 }
 * {
   margin: 0;

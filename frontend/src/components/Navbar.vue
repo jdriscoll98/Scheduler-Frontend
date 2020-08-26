@@ -79,7 +79,7 @@ export default {
 }
 .small-user-icon {
   display: inline-block;
-  width: 30px;
+  width: 20%;
   margin: 10px;
 }
 .username {
@@ -87,6 +87,7 @@ export default {
   color: #285797;
   position: relative;
   bottom: 20px;
+  font-size: 70%;
   margin: 0 10px 0 10px;
 }
 .profile-drop-down {
@@ -95,7 +96,6 @@ export default {
   text-align: left;
   position: absolute;
   border: 1px solid black;
-  height: 100px;
   width: 150px;
   background-color: white;
   right: 5px;

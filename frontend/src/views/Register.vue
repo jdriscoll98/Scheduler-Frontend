@@ -3,6 +3,7 @@
     <div class="card">
       <div class="heading">
         <h3>ONE.UF - Scheduler</h3>
+        <h6>Register</h6>
       </div>
       <div class="form-group">
         <p class="error" v-if="$store.state.authError.error">{{ $store.state.authError.error }}</p>
@@ -48,7 +49,7 @@ export default {
         })
         .then(() => {
           if (!this.$store.state.errors) {
-            window.location.href = "/";
+            this.$router.push("/login");
           }
         });
     },

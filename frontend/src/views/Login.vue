@@ -3,9 +3,11 @@
     <div class="card">
       <div class="heading">
         <h3>ONE.UF - Scheduler</h3>
+        <h6>Login</h6>
       </div>
       <div class="form-group">
         <p class="error" v-if="$store.state.authError.error">{{ $store.state.authError.error }}</p>
+        <p class="success-msg" v-if="$store.state.registered">Successfully registered, login below</p>
         <label for="username" class="label">Username</label>
         <p
           class="error"
@@ -61,6 +63,13 @@ export default {
 </script>
 
 <style scoped>
+.success-msg {
+  background-color: lightgreen;
+  border-radius: 5px;
+  margin: 10px;
+  font-weight: 700;
+  padding: 10px;
+}
 .register-link {
   text-decoration: none;
 }

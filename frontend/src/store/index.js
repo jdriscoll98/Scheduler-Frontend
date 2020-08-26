@@ -13,6 +13,7 @@ export default createStore({
       "error": null,
     },
     errors: false,
+    registered: false,
   },
   mutations: {
     login(state, data) {
@@ -27,6 +28,9 @@ export default createStore({
     setAuthError(state, data) {
       state.authError = data;
       state.errors = true;
+    },
+    registered(state) {
+      state.registered = true;
     }
   },
   actions: {
@@ -60,12 +64,7 @@ export default createStore({
       })
         .then(response => response.json())
         .then(response => {
-          if (response.token) {
-            commit('login', response)
-          }
-          else {
-            commit('setAuthError', response)
-          }
+          commit("registered")
           return response;
         })
     }
