@@ -5,28 +5,22 @@
         <h3>ONE.UF - Scheduler</h3>
       </div>
       <div class="form-group">
-        <p class="error" v-if="$store.state.authError.error">
-          {{ $store.state.authError.error }}
-        </p>
+        <p class="error" v-if="$store.state.authError.error">{{ $store.state.authError.error }}</p>
         <label for="username" class="label">Username</label>
-        <p class="error" v-if="$store.state.authError.username">
-          {{ $store.state.authError.username[0] }}
-        </p>
+        <p
+          class="error"
+          v-if="$store.state.authError.username"
+        >{{ $store.state.authError.username[0] }}</p>
         <input class="input" id="username" name="username" v-model="username" />
         <label for="username" class="label">Password</label>
-        <p class="error" v-if="$store.state.authError.password">
-          {{ $store.state.authError.password[0] }}
-        </p>
-        <input
-          class="input"
-          type="password"
-          id="password"
-          v-model="password"
-          name="password"
-        />
-      </div>
-      <div class="submit">
-        <button @click="login" class="submit-btn">Login</button>
+        <p
+          class="error"
+          v-if="$store.state.authError.password"
+        >{{ $store.state.authError.password[0] }}</p>
+        <input class="input" type="password" id="password" v-model="password" name="password" />
+        <div class="submit">
+          <button @click="login" class="submit-btn">Login</button>
+        </div>
       </div>
     </div>
   </div>
@@ -35,14 +29,14 @@
 <script>
 export default {
   name: "Login",
-  data: function() {
+  data: function () {
     return {
       username: null,
       password: null,
     };
   },
   methods: {
-    login: function() {
+    login: function () {
       this.$store.dispatch("login", {
         username: this.username,
         password: this.password,
@@ -75,6 +69,7 @@ export default {
   display: block;
   position: relative;
   top: 10px;
+  padding-bottom: 30px;
 }
 
 .input {
@@ -123,7 +118,7 @@ export default {
 
 .card {
   width: 400px;
-  height: 400px;
+  min-height: 100%;
   background-color: white;
   margin: auto;
   position: relative;
