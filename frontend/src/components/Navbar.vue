@@ -10,20 +10,18 @@
       <a class="link" href="http://one.uf.edu" target="_blank">ONE.UF</a>
     </h1>
     <h2 class="label">| SCHEDULER</h2>
-    <h3 v-if="$store.loggedIn" class="username">{{ user.username }}</h3>
-    <button v-else class="login-btn" @click="$router.push('/login')">
-      Log in
-    </button>
-    <div v-if="$store.loggedIn" class="subnav">
+    <div class="user-logged-in" v-if="$store.state.loggedIn">
+      <img class="user-icon" src="../assets/images/user-icon.svg" />
+      <h3 class="username">{{ $store.state.profile.username }}</h3>
+      <div class="arrow down"></div>
+    </div>
+    <button v-else class="login-btn" @click="$router.push('/login')">Log in</button>
+    <div v-if="$store.state.loggedIn" class="subnav">
       <div class="left-nav">
-        <h3 @click="$router.push('/')" class="nav-item not-current">
-          OVERVIEW
-        </h3>
+        <h3 @click="$router.push('/')" class="nav-item not-current">OVERVIEW</h3>
       </div>
       <div class="right-nav">
-        <h3 @click="$router.push('/program')" class="nav-item not-current">
-          PROGRAM
-        </h3>
+        <h3 @click="$router.push('/program')" class="nav-item not-current">PROGRAM</h3>
       </div>
     </div>
   </div>
@@ -38,11 +36,29 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .username {
-  right: 0;
   color: white;
   padding: 18px;
   font-size: 18px;
   font-weight: 500;
+  position: relative;
+  display: inline-block;
+}
+.user-icon {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  top: 10px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: #285797;
+  cursor: pointer;
+  outline: none;
+  display: inline-block;
+}
+.user-logged-in {
+  position: absolute;
+  right: 0;
 }
 .login-btn {
   right: 0;
@@ -120,26 +136,15 @@ export default {
   font-size: 18px;
   font-weight: 500;
 }
-.user-icon {
-  position: absolute;
-  right: 55px;
-  width: 30px;
-  height: 30px;
-  margin: 0;
-  padding: 0;
-  border: none;
-  background-color: #285797;
-  cursor: pointer;
-  outline: none;
-}
+
 .arrow {
   border: solid white;
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 3px;
-  position: fixed;
-  right: 20px;
-  top: 25px;
+  position: relative;
+  right: 0;
+  margin: 0 20px 0 0;
 }
 .down {
   transform: rotate(45deg);

@@ -37,10 +37,16 @@ export default {
   },
   methods: {
     login: function () {
-      this.$store.dispatch("login", {
-        username: this.username,
-        password: this.password,
-      });
+      this.$store
+        .dispatch("login", {
+          username: this.username,
+          password: this.password,
+        })
+        .then(() => {
+          if (!this.$store.state.errors) {
+            window.location.href = "/";
+          }
+        });
     },
   },
 };
