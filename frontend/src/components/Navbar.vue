@@ -19,7 +19,7 @@
         </div>
         <hr />
         <div class="logout">
-          <button class="logout-btn">Logout</button>
+          <button @click="logout" class="logout-btn">Logout</button>
         </div>
       </div>
     </div>
@@ -54,6 +54,11 @@ export default {
         }
       });
     },
+    logout: function () {
+      this.$store.dispatch("logout").then(() => {
+        window.location.href = "/login";
+      });
+    },
   },
 };
 </script>
@@ -71,6 +76,7 @@ export default {
   font-size: 1.1rem;
   margin: 10px;
   cursor: pointer;
+  outline: none;
 }
 .small-user-icon {
   display: inline-block;

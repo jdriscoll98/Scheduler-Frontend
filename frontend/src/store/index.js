@@ -21,6 +21,9 @@ export default createStore({
       localStorage.setItem("username", data.username);
       localStorage.setItem("token", data.token);
     },
+    logout() {
+      localStorage.clear();
+    },
     setAuthError(state, data) {
       state.authError = data;
       state.errors = true;
@@ -46,6 +49,18 @@ export default createStore({
           return response;
         })
     },
+    logout({ commit }, payload) {
+      return fetch("http://localhost:8000/api/logout", {
+        method: "post",
+        header: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload)
+      })
+        .then(() => {
+          commit('logout')
+        })
+    }
 
   },
   modules: {
