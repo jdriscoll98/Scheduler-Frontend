@@ -749,14 +749,12 @@ export default {
         course_number: this.course_number,
         class_number: this.class_number,
         course_title: this.course_title,
-        token: this.$store.state.profile.token,
       };
-      var form = new FormData();
-      form.append("json", JSON.stringify(data));
       fetch("http://localhost:8000/api/fetch/", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
+          Authorization: "Token ".concat(this.$store.state.profile.token),
         },
         body: JSON.stringify(data),
       })

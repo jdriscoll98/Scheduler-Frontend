@@ -18,16 +18,12 @@
           v-if="$store.state.authError.password"
         >{{ $store.state.authError.password[0] }}</p>
         <input class="input" type="password" id="password" v-model="password" name="password" />
+        <div class="reveal-pass">
+          <input class="checkbox" type="checkbox" id="reveal" />
+          <div class="checkbox-text">Click to show password</div>
+        </div>
         <div class="submit">
-          <button @click="login" class="submit-btn">Login</button>
-          <p>
-            Don't have an account?
-            <a
-              class="register-link"
-              @click="$router.push('/register')"
-              href="#"
-            >Click here to register.</a>
-          </p>
+          <button @click="register" class="submit-btn">Register</button>
         </div>
       </div>
     </div>
@@ -44,9 +40,9 @@ export default {
     };
   },
   methods: {
-    login: function () {
+    register: function () {
       this.$store
-        .dispatch("login", {
+        .dispatch("register", {
           username: this.username,
           password: this.password,
         })
@@ -61,6 +57,15 @@ export default {
 </script>
 
 <style scoped>
+.checkbox {
+  position: relative;
+  right: 100px;
+}
+.checkbox-text {
+  position: relative;
+  bottom: 20px;
+  right: 10px;
+}
 .register-link {
   text-decoration: none;
 }

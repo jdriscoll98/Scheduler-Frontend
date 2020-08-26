@@ -55,9 +55,8 @@ export default {
       });
     },
     logout: function () {
-      this.$store.dispatch("logout").then(() => {
-        window.location.href = "/login";
-      });
+      localStorage.clear();
+      window.location.href = "/login";
     },
   },
 };

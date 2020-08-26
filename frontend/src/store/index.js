@@ -49,16 +49,24 @@ export default createStore({
           return response;
         })
     },
-    logout({ commit }, payload) {
-      return fetch("http://localhost:8000/api/logout", {
+
+    register({ commit }, payload) {
+      return fetch("http://localhost:8000/api/register/", {
         method: "post",
-        header: {
+        headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       })
-        .then(() => {
-          commit('logout')
+        .then(response => response.json())
+        .then(response => {
+          if (response.token) {
+            commit('login', response)
+          }
+          else {
+            commit('setAuthError', response)
+          }
+          return response;
         })
     }
 
