@@ -135,6 +135,7 @@ export default {
   font-size: 18px;
   font-weight: 500;
   cursor: pointer;
+  outline: none;
   transition: all 0.2s ease-in-out;
 }
 .login-btn:hover {
