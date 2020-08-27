@@ -587,18 +587,18 @@
       </div>
     </div>
     <div class="semester-builder">
-      <h1 class="semester-header">Semester {{ semester.length }}</h1>
-      <button class="save-button">Save</button>
+      <h1 class="semester-header">Semester {{ semester.number }}</h1>
+      <button @click="createSemester" class="save-button">Save</button>
       <div class="semester-term">
         <label class="term-label" for="term">Term:</label>
-        <select id="term" class="semester-select">
+        <select id="term" v-model="semester.term" class="semester-select">
           <option selected>{{ semester.term }}</option>
           <option selected>Fall</option>
           <option>Spring</option>
           <option>Summer</option>
         </select>
         <label class="term-label" for="term">Year:</label>
-        <select id="year" class="semester-select">
+        <select id="year" v-model="semester.year" class="semester-select">
           <option v-for="i in 30" :key="i">{{ 2019 + i}}</option>
         </select>
       </div>
@@ -709,6 +709,9 @@ export default {
     });
   },
   methods: {
+    createSemester: function () {
+      this.$store.dispatch("createSemester", this.semester);
+    },
     remove: function (courseToRemove) {
       this.semester.courses = this.semester.courses.filter((course) => {
         console.log(course);

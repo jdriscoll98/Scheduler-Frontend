@@ -37,9 +37,40 @@ export default createStore({
     },
     registered(state) {
       state.registered = true;
+    },
+    setSemesters(state, data) {
+      state.semesters = data.semesters;
+    },
+    updateSemesters(state, semester) {
+      state.semesters.push(semester)
     }
   },
   actions: {
+    createSemester({ commit }, payload) {
+      return fetch("http://localhost:8000/api/semesters", {
+        method: "post",
+        headers: {
+          Authorization: "Token ".concat(this.state.profile.token),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload)
+      }).then((res) => (res.json()))
+        .then((res) => {
+          commit('updateSemesters', res)
+          return res;
+        })
+    },
+    getSemesters({ commit }) {
+      return fetch("http://localhost:8000/api/semesters", {
+        method: "get",
+        headers: {
+          Authorization: "Token ".concat(this.state.profile.token),
+        }
+      }).then(res => res.json())
+        .then(res => {
+          commit('setSemesters', res)
+        })
+    },
     getCategories() {
       return fetch("http://localhost:8000/api/categories/", {
         method: "get",

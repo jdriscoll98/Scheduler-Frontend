@@ -49,6 +49,9 @@ export default {
       semesters: this.$store.getters.semesters,
     };
   },
+  created() {
+    this.$store.dispatch("getSemesters");
+  },
 };
 </script>
 
