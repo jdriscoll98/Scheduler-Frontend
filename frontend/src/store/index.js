@@ -17,9 +17,7 @@ export default createStore({
     semesters: [],
   },
   getters: {
-    semesters: state => {
-      return state.semesters
-    }
+
   },
   mutations: {
     login(state, data) {
@@ -39,7 +37,7 @@ export default createStore({
       state.registered = true;
     },
     setSemesters(state, data) {
-      state.semesters = data.semesters;
+      state.semesters = data;
     },
     updateSemesters(state, semester) {
       state.semesters.push(semester)

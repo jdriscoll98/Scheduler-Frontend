@@ -46,7 +46,7 @@ export default {
   name: "Overview",
   data: function () {
     return {
-      semesters: this.$store.getters.semesters,
+      semesters: this.$store.state.semesters,
     };
   },
   created() {

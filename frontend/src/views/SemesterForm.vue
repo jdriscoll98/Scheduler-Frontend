@@ -664,7 +664,7 @@ export default {
       class_number: "",
       course_title: "",
       semester: {
-        number: this.$store.getters.semesters.length + 1,
+        number: this.$store.state.semesters.length + 1,
         term: null,
         year: null,
         notes: "",
@@ -764,7 +764,6 @@ export default {
       }
     },
     fetchCourses: function () {
-      document.getElementById("results").style.maxHeight = "100%";
       var data = {
         level: this.level,
         department: this.department,
@@ -781,7 +780,10 @@ export default {
         body: JSON.stringify(data),
       })
         .then((res) => res.json())
-        .then((res) => (this.availableCourses = res.parsed_courses));
+        .then((res) => {
+          this.availableCourses = res.parsed_courses;
+          document.getElementById("results").style.maxHeight = "100%";
+        });
     },
   },
 };
