@@ -592,7 +592,6 @@
       <div class="semester-term">
         <label class="term-label" for="term">Term:</label>
         <select id="term" v-model="semester.term" class="semester-select">
-          <option selected>{{ semester.term }}</option>
           <option selected>Fall</option>
           <option>Spring</option>
           <option>Summer</option>
@@ -619,7 +618,7 @@
               <td>{{ course.name }}</td>
               <td>{{ course.credits }}</td>
               <td>
-                <select>
+                <select @change="updateCategory($event, course)">
                   <option v-for="category in categories" :key="category.name">{{ category.name }}</option>
                 </select>
               </td>
@@ -665,8 +664,8 @@ export default {
       course_title: "",
       semester: {
         number: this.$store.state.semesters.length + 1,
-        term: null,
-        year: null,
+        term: "Fall",
+        year: "2020",
         notes: "",
         courses: [],
       },
@@ -709,8 +708,17 @@ export default {
     });
   },
   methods: {
+    updateCategory: function (e, course) {
+      course["category"] = e.target.value;
+    },
     createSemester: function () {
-      this.$store.dispatch("createSemester", this.semester);
+      this.$store.dispatch("createSemester", this.semester).then((res) => {
+        if (res.errors) {
+          console.log(res.errors);
+        } else {
+          this.$router.push("/");
+        }
+      });
     },
     remove: function (courseToRemove) {
       this.semester.courses = this.semester.courses.filter((course) => {
@@ -721,6 +729,7 @@ export default {
     handleDragStart: function (event, course) {
       event.target.style.opacity = "0.4";
       this.dragSrcEl = course;
+      this.dragSrcEl["category"] = this.categories[0].name;
 
       event.dataTransfer.effectAllowed = "copy";
       event.dataTransfer.setData("text/html", course.innerHTML);
@@ -853,9 +862,9 @@ li {
   margin: 10px;
   color: white;
   font-weight: 800;
+  cursor: pointer;
 }
 .collapsible {
-  cursor: pointer;
   text-align: left;
   outline: none;
   font-size: 15px;

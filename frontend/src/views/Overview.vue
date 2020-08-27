@@ -46,11 +46,13 @@ export default {
   name: "Overview",
   data: function () {
     return {
-      semesters: this.$store.state.semesters,
+      semesters: this.$store.getters.semesters,
     };
   },
   created() {
-    this.$store.dispatch("getSemesters");
+    this.$store.dispatch("getSemesters").then(() => {
+      this.semesters = this.$store.getters.semesters;
+    });
   },
 };
 </script>

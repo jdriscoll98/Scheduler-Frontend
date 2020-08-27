@@ -5,13 +5,6 @@
         <div class="headings">
           <h3 class="college">{{ program.label }}</h3>
         </div>
-        <div class="overall-progress">
-          <div :style="{ width: program.overall_progress + '%'}" class="progress-bar">
-            <p
-              class="inner-text"
-            >{{ program.met_groups }} / {{ program.num_of_requirements }} Requirements Met</p>
-          </div>
-        </div>
         <div v-for="category in program.categories" :key="category.name" class="category">
           <h3
             @click="toggleCollapse($event)"
@@ -36,7 +29,7 @@
                 <td>{{ course.code }}</td>
                 <td>{{ course.name }}</td>
                 <td>{{ course.credits_required }}</td>
-                <td>{{ course.credits_towards }}</td>
+                <td>{{ course.credits }}</td>
                 <td class="met" v-if="course.passed || course.inProgress">MET</td>
                 <td class="not-met" v-else>NOT MET</td>
                 <td v-if="course.description">{{ course.description }}</td>
@@ -62,8 +55,16 @@ export default {
   name: "Program",
   data: function () {
     return {
-      programs: [],
+      programs: [{}],
     };
+  },
+  created() {
+    this.$store.dispatch("getPrograms").then((res) => {
+      if (!res.errors) {
+        console.log(res);
+        this.programs = res["programs"];
+      }
+    });
   },
   methods: {
     toggleCollapse: function (e) {

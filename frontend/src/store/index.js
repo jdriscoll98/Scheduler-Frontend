@@ -17,7 +17,9 @@ export default createStore({
     semesters: [],
   },
   getters: {
-
+    semesters: (state) => {
+      return state.semesters;
+    }
   },
   mutations: {
     login(state, data) {
@@ -44,8 +46,22 @@ export default createStore({
     }
   },
   actions: {
+    getPrograms() {
+      return fetch("http://localhost:8000/api/programs/", {
+        method: "get",
+        headers: {
+          Authorization: "Token ".concat(this.state.profile.token),
+        },
+      }).then((res) => (res.json()))
+        .then((res) => {
+          if (res.errors) {
+            console.log(res.errors)
+          }
+          return res;
+        })
+    },
     createSemester({ commit }, payload) {
-      return fetch("http://localhost:8000/api/semesters", {
+      return fetch("http://localhost:8000/api/semesters/", {
         method: "post",
         headers: {
           Authorization: "Token ".concat(this.state.profile.token),
@@ -54,12 +70,18 @@ export default createStore({
         body: JSON.stringify(payload)
       }).then((res) => (res.json()))
         .then((res) => {
-          commit('updateSemesters', res)
+          console.log(res);
+          if (res.errors) {
+            console.log("here")
+          }
+          else {
+            commit('updateSemesters', res)
+          }
           return res;
         })
     },
     getSemesters({ commit }) {
-      return fetch("http://localhost:8000/api/semesters", {
+      return fetch("http://localhost:8000/api/semesters/", {
         method: "get",
         headers: {
           Authorization: "Token ".concat(this.state.profile.token),
