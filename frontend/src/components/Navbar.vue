@@ -96,6 +96,8 @@ export default {
   text-align: left;
   position: absolute;
   border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px #888888;
   width: 150px;
   background-color: white;
   right: 5px;

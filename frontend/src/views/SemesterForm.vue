@@ -570,7 +570,7 @@
             </thead>
             <tbody>
               <tr
-                v-on:dragstart="handleDragStart($event, course, category)"
+                v-on:dragstart="handleDragStart($event, course)"
                 @dragend="handleDragEnd($event)"
                 id="drag1"
                 draggable="true"
@@ -587,15 +587,19 @@
       </div>
     </div>
     <div class="semester-builder">
-      <h1 class="semester-header">Semester {{ semester.number }}</h1>
+      <h1 class="semester-header">Semester {{ semester.length }}</h1>
       <button class="save-button">Save</button>
       <div class="semester-term">
         <label class="term-label" for="term">Term:</label>
         <select id="term" class="semester-select">
           <option selected>{{ semester.term }}</option>
-          <option>Fall 2020</option>
-          <option>Spring 2021</option>
-          <option>Summer 2021</option>
+          <option selected>Fall</option>
+          <option>Spring</option>
+          <option>Summer</option>
+        </select>
+        <label class="term-label" for="term">Year:</label>
+        <select id="year" class="semester-select">
+          <option v-for="i in 30" :key="i">{{ 2019 + i}}</option>
         </select>
       </div>
       <div class="semester-list">
@@ -606,23 +610,27 @@
               <th>Course Title</th>
               <th>Credits</th>
               <th>Audit Requirement</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="course in addedCourses" :key="course.code">
+            <tr v-for="course in semester.courses" :key="course.code">
               <td>{{ course.code }}</td>
               <td>{{ course.name }}</td>
               <td>{{ course.credits }}</td>
               <td>
                 <select>
-                  <option>TEST</option>
+                  <option v-for="category in categories" :key="category.name">{{ category.name }}</option>
                 </select>
+              </td>
+              <td>
+                <button @click="remove(course)" class="remove-btn">Delete</button>
               </td>
             </tr>
           </tbody>
           <tfoot>
             <tr>
-              <td colspan="4">
+              <td colspan="5">
                 <div
                   class="drag-header box"
                   @drop="handleDrop($event)"
@@ -656,10 +664,13 @@ export default {
       class_number: "",
       course_title: "",
       semester: {
-        number: 1,
-        term: "Spring 2021",
-        notes: "Example Notes",
+        number: this.$store.getters.semesters.length + 1,
+        term: null,
+        year: null,
+        notes: "",
+        courses: [],
       },
+      categories: [],
       dragSrcEl: null,
       dragCat: null,
       availableCourses: [],
@@ -685,7 +696,6 @@ export default {
           credits: 4,
         },
       ],
-      addedCourses: [],
     };
   },
   computed: {
@@ -693,12 +703,21 @@ export default {
       return this.courses;
     },
   },
+  created() {
+    this.$store.dispatch("getCategories").then((response) => {
+      this.categories = response;
+    });
+  },
   methods: {
-    handleDragStart: function (event, course, category) {
+    remove: function (courseToRemove) {
+      this.semester.courses = this.semester.courses.filter((course) => {
+        console.log(course);
+        return course !== courseToRemove;
+      });
+    },
+    handleDragStart: function (event, course) {
       event.target.style.opacity = "0.4";
       this.dragSrcEl = course;
-      console.log(category);
-      this.dragCat = category;
 
       event.dataTransfer.effectAllowed = "copy";
       event.dataTransfer.setData("text/html", course.innerHTML);
@@ -714,7 +733,7 @@ export default {
       if (e.stopPropagation) {
         e.stopPropagation(); // stops the browser from redirecting.
       }
-      this.addedCourses.push(this.dragSrcEl);
+      this.semester.courses.push(this.dragSrcEl);
 
       return false;
     },
@@ -766,6 +785,19 @@ export default {
 </script>
 
 <style scoped>
+.remove-btn {
+  background-color: red;
+  color: white;
+  font-weight: 800;
+  padding: 5px;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.input {
+  width: 60px;
+  height: 25px;
+}
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
@@ -934,14 +966,14 @@ label {
   border-top: 1px solid black;
 }
 .semester-list {
-  width: 50%;
-  height: 50%;
-  position: absolute;
-  top: 150px;
-  left: 50px;
+  width: 90%;
+  margin: auto;
+  position: relative;
+  top: 25px;
 }
 
 .term-label {
+  margin: 10px;
   font-size: 20px;
   font-weight: 600;
 }

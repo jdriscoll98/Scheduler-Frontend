@@ -14,6 +14,12 @@ export default createStore({
     },
     errors: false,
     registered: false,
+    semesters: [],
+  },
+  getters: {
+    semesters: state => {
+      return state.semesters
+    }
   },
   mutations: {
     login(state, data) {
@@ -34,6 +40,17 @@ export default createStore({
     }
   },
   actions: {
+    getCategories() {
+      return fetch("http://localhost:8000/api/categories/", {
+        method: "get",
+        headers: {
+          Authorization: "Token ".concat(this.state.profile.token),
+        }
+      }).then((res) => res.json())
+        .then((res) => {
+          return res;
+        })
+    },
     login({ commit }, payload) {
       return fetch("http://localhost:8000/api/login/", {
         method: "post",
