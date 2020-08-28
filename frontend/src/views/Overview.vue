@@ -24,7 +24,7 @@
               <tfoot>
                 <tr>
                   <td colspan="2" style="text-align: right; font-weight: 800">Total:</td>
-                  <td style="font-weight: 800">{{ semester.total }}</td>
+                  <td style="font-weight: 800">{{ getTotal(semester) }}</td>
                 </tr>
               </tfoot>
             </table>
@@ -55,6 +55,13 @@ export default {
   },
   methods: {
     ...mapActions(["getSemesters", "getPrograms"]),
+    getTotal: (semester) => {
+      let total = 0;
+      semester.courses.forEach((course) => {
+        total += +course.credits;
+      });
+      return total;
+    },
   },
   created() {
     if (!(this.semesters && this.semesters.length > 0)) {
