@@ -15,11 +15,10 @@ export default createStore({
     errors: false,
     registered: false,
     semesters: [],
+    programs: [],
   },
   getters: {
-    semesters: (state) => {
-      return state.semesters;
-    }
+
   },
   mutations: {
     login(state, data) {
@@ -39,14 +38,21 @@ export default createStore({
       state.registered = true;
     },
     setSemesters(state, data) {
-      state.semesters = data;
+      state.semesters = [...data];
     },
-    updateSemesters(state, semester) {
-      state.semesters.push(semester)
-    }
+    updateSemesters(state, data) {
+      state.semesters.push(data.semester)
+    },
+    updatePrograms(state, data) {
+      state.programs = [...data['programs']]
+    },
+    setPrograms(state, data) {
+      state.programs = [...data];
+    },
+
   },
   actions: {
-    getPrograms() {
+    getPrograms({ commit }) {
       return fetch("http://localhost:8000/api/programs/", {
         method: "get",
         headers: {
@@ -56,6 +62,9 @@ export default createStore({
         .then((res) => {
           if (res.errors) {
             console.log(res.errors)
+          }
+          else {
+            commit("setPrograms", res.programs);
           }
           return res;
         })
@@ -72,10 +81,11 @@ export default createStore({
         .then((res) => {
           console.log(res);
           if (res.errors) {
-            console.log("here")
+            console.log(res.errors)
           }
           else {
             commit('updateSemesters', res)
+            commit('updatePrograms', res)
           }
           return res;
         })

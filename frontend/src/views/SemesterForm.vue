@@ -722,7 +722,6 @@ export default {
     },
     remove: function (courseToRemove) {
       this.semester.courses = this.semester.courses.filter((course) => {
-        console.log(course);
         return course !== courseToRemove;
       });
     },
@@ -730,6 +729,7 @@ export default {
       event.target.style.opacity = "0.4";
       this.dragSrcEl = course;
       this.dragSrcEl["category"] = this.categories[0].name;
+      this.dragSrcEl["description"] = "User Added Course";
 
       event.dataTransfer.effectAllowed = "copy";
       event.dataTransfer.setData("text/html", course.innerHTML);
@@ -743,7 +743,7 @@ export default {
     },
     handleDrop: function (e) {
       if (e.stopPropagation) {
-        e.stopPropagation(); // stops the browser from redirecting.
+        e.stopPropagation();
       }
       this.semester.courses.push(this.dragSrcEl);
 

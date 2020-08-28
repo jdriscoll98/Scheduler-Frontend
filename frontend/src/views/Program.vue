@@ -8,7 +8,7 @@
         <div v-for="category in program.categories" :key="category.name" class="category">
           <h3
             @click="toggleCollapse($event)"
-            :style="{width: category.percent_complete + '%'}"
+            :style="{width: getPercentComplete(category) + '%'}"
             class="category-title"
           >{{category.name }}</h3>
 
@@ -51,25 +51,31 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "Program",
-  data: function () {
-    return {
-      programs: [{}],
-    };
+  computed: {
+    programs: function () {
+      return this.$store.state.programs;
+    },
   },
   created() {
-    this.$store.dispatch("getPrograms").then((res) => {
-      if (!res.errors) {
-        console.log(res);
-        this.programs = res["programs"];
-      }
-    });
+    if (!(this.programs && this.programs.length > 0)) {
+      this.getPrograms();
+    }
   },
   methods: {
+    ...mapActions(["getSemesters", "getPrograms"]),
+
+    getPercentComplete(category) {
+      let completed_courses = category.courses.filter((course) => {
+        return course.inProgress || course.passed;
+      });
+      return (completed_courses.length / category.courses.length) * 100;
+    },
     toggleCollapse: function (e) {
       e.target.classList.toggle("active");
-      console.log(e.target);
       var content = e.target.nextElementSibling;
       if (content.style.maxHeight) {
         content.style.maxHeight = null;

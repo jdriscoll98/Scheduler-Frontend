@@ -42,17 +42,27 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "Overview",
-  data: function () {
-    return {
-      semesters: this.$store.getters.semesters,
-    };
+  computed: {
+    semesters: function () {
+      return this.$store.state.semesters;
+    },
+    programs: function () {
+      return this.$store.state.programs;
+    },
+  },
+  methods: {
+    ...mapActions(["getSemesters", "getPrograms"]),
   },
   created() {
-    this.$store.dispatch("getSemesters").then(() => {
-      this.semesters = this.$store.getters.semesters;
-    });
+    if (!(this.semesters && this.semesters.length > 0)) {
+      this.getSemesters();
+    }
+    if (!(this.programs && this.programs.length > 0)) {
+      this.getPrograms();
+    }
   },
 };
 </script>
