@@ -25,11 +25,14 @@
     </div>
     <button v-else class="login-btn" @click="$router.push('/login')">Log in</button>
     <div v-if="$store.state.loggedIn" class="subnav">
-      <div class="left-nav">
+      <div class="left-nav nav-div">
         <h3 @click="$router.push('/')" class="nav-item not-current">OVERVIEW</h3>
       </div>
-      <div class="right-nav">
-        <h3 @click="$router.push('/program')" class="nav-item not-current">PROGRAM</h3>
+      <div class="left-nav nav-div">
+        <h3 @click="$router.push('/form')" class="nav-item not-current">SEMESTER FORM</h3>
+      </div>
+      <div class="right-nav nav-div">
+        <h3 @click="$router.push('/program')" class="nav-item not-current">DEGREE AUDIT</h3>
       </div>
     </div>
   </div>
@@ -64,6 +67,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.nav-div {
+  width: 33%;
+}
 .logout {
   text-align: center;
 }
@@ -165,7 +171,6 @@ export default {
 .left-nav {
   display: inline-block;
   height: inherit;
-  width: 50%;
   background-color: white;
   color: blue;
   font-size: 14px;
@@ -173,7 +178,6 @@ export default {
 .right-nav {
   display: inline-block;
   height: inherit;
-  width: 50%;
   background-color: white;
   color: blue;
   font-size: 14px;

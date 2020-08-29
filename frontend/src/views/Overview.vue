@@ -1,11 +1,15 @@
 <template>
   <div class="main">
     <div>
-      <div v-for="semester in semesters" :key="semester.number" class="card">
+      <div v-for="semester in semesters" :key="semester.id" class="card">
         <div class="card-header">
           <h1 class="semester-number">Semester {{ semester.number }} - {{ semester.term }}</h1>
           <button class="edit-btn">
-            <img @click="$router.push('/add')" class="edit" src="../assets/images/edit-regular.svg" />
+            <img
+              @click="editSemester(semester)"
+              class="edit"
+              src="../assets/images/edit-regular.svg"
+            />
           </button>
         </div>
         <div class="card-body">
@@ -35,7 +39,7 @@
     <div v-if="semesters.length == 0" class="empty">
       <h3 class="heading">No Semesters Added Yet!</h3>
     </div>
-    <button @click="$router.push('add')" class="add-btn">
+    <button @click="newSemester" class="add-btn">
       <img class="add" src="../assets/images/plus-solid.svg" />
     </button>
   </div>
@@ -61,6 +65,22 @@ export default {
         total += +course.credits;
       });
       return total;
+    },
+    newSemester: function () {
+      this.$store.state.semesterID = null;
+      this.$store.state.semesterForm = {
+        number: "",
+        term: "",
+        year: "",
+        courses: [],
+        notes: "",
+      };
+      this.$router.push("form");
+    },
+    editSemester: function (semester) {
+      this.$store.state.semesterID = semester.id;
+      this.$store.state.semesterForm = semester;
+      this.$router.push("form");
     },
   },
   created() {

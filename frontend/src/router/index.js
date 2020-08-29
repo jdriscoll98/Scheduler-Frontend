@@ -16,7 +16,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "program" */ '../views/Program.vue')
   },
   {
-    path: '/add',
+    path: '/form',
     name: 'SemesterForm',
 
     component: () => import(/* webpackChunkName: "program" */ '../views/SemesterForm.vue')

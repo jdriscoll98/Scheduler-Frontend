@@ -16,6 +16,14 @@ export default createStore({
     registered: false,
     semesters: [],
     programs: [],
+    semesterForm: {
+      number: "",
+      term: "Fall",
+      year: "2020",
+      courses: [],
+      notes: "",
+    },
+    updatingSemester: false,
   },
   getters: {
 
@@ -40,7 +48,7 @@ export default createStore({
     setSemesters(state, data) {
       state.semesters = [...data];
     },
-    updateSemesters(state, data) {
+    addSemester(state, data) {
       state.semesters.push(data.semester)
     },
     updatePrograms(state, data) {
@@ -79,16 +87,35 @@ export default createStore({
         body: JSON.stringify(payload)
       }).then((res) => (res.json()))
         .then((res) => {
-          console.log(res);
+          console.log(res)
           if (res.errors) {
             console.log(res.errors)
           }
           else {
-            commit('updateSemesters', res)
+            commit('addSemester', res)
             commit('updatePrograms', res)
           }
           return res;
         })
+    },
+    updateSemester({ commit }, payload) {
+      return fetch(`http://localhost:8000/api/semesters/${payload.id}`, {
+        method: "put",
+        headers: {
+          Authorization: "Token ".concat(this.state.profile.token),
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }).then((res) => res.json()).then((res) => {
+        console.log(res);
+        if (res.errors) {
+          console.log(res.errors)
+        }
+        else {
+          commit('updateSemester', res)
+          commit("updatePrograms", res)
+        }
+      })
     },
     getSemesters({ commit }) {
       return fetch("http://localhost:8000/api/semesters/", {
@@ -101,6 +128,7 @@ export default createStore({
           commit('setSemesters', res)
         })
     },
+
     getCategories() {
       return fetch("http://localhost:8000/api/categories/", {
         method: "get",

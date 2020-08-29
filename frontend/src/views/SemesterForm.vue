@@ -13,7 +13,7 @@
             <form @submit.prevent="fetchCourses">
               <div class="form-group">
                 <label class="form-label">Program Level</label>
-                <select class="form-input" v-model="level" name="level">
+                <select class="form-input" v-model="searchForm.level" name="level">
                   <option value class selected="selected">--</option>
                   <option label="Undergraduate" value="UGRD">Undergraduate</option>
                   <option label="Graduate" value="GRAD">Graduate</option>
@@ -27,7 +27,7 @@
               </div>
               <div class="form-group">
                 <label class="form-label">Department</label>
-                <select class="form-input" v-model="department" name="department">
+                <select class="form-input" v-model="searchForm.department" name="department">
                   <option value class selected="selected">--</option>
                   <option
                     label="Accounting, Fisher School of"
@@ -506,13 +506,28 @@
               </div>
               <div class="form-group">
                 <label class="form-label">Course Number</label>
-                <input type="text" class="form-input" v-model="course_number" name="course_number" />
+                <input
+                  type="text"
+                  class="form-input"
+                  v-model="searchForm.course_number"
+                  name="course_number"
+                />
                 <label class="form-label">Class #</label>
-                <input type="text" class="form-input" v-model="class_number" name="class_number" />
+                <input
+                  type="text"
+                  class="form-input"
+                  v-model="searchForm.class_number"
+                  name="class_number"
+                />
               </div>
               <div class="form-group">
                 <label class="form-label">Course Title</label>
-                <input type="text" class="form-input" v-model="course_title" name="course_title" />
+                <input
+                  type="text"
+                  class="form-input"
+                  v-model="searchForm.course_title"
+                  name="course_title"
+                />
               </div>
               <div class="button-container">
                 <button type="submit" class="search-button">Search</button>
@@ -587,17 +602,19 @@
       </div>
     </div>
     <div class="semester-builder">
-      <h1 class="semester-header">Semester {{ semester.number }}</h1>
-      <button @click="createSemester" class="save-button">Save</button>
+      <h1 class="semester-header">Semester {{ semesterForm.number }}</h1>
+
+      <button v-if="this.$store.state.semesterID" @click="updateSemester" class="save-button">Update</button>
+      <button v-else @click="createSemester" class="save-button">Save</button>
       <div class="semester-term">
         <label class="term-label" for="term">Term:</label>
-        <select id="term" v-model="semester.term" class="semester-select">
+        <select id="term" v-model="semesterForm.term" class="semester-select">
           <option selected>Fall</option>
           <option>Spring</option>
           <option>Summer</option>
         </select>
         <label class="term-label" for="term">Year:</label>
-        <select id="year" v-model="semester.year" class="semester-select">
+        <select id="year" v-model="semesterForm.year" class="semester-select">
           <option v-for="i in 30" :key="i">{{ 2019 + i}}</option>
         </select>
       </div>
@@ -613,7 +630,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="course in semester.courses" :key="course.code">
+            <tr v-for="course in semesterForm.courses" :key="course.code">
               <td>{{ course.code }}</td>
               <td>{{ course.name }}</td>
               <td>{{ course.credits }}</td>
@@ -646,7 +663,7 @@
       </div>
       <div class="notes">
         <h4>Notes</h4>
-        <textarea class="notes-input" v-model="semester.notes"></textarea>
+        <textarea class="notes-input" v-model="semesterForm.notes"></textarea>
       </div>
     </div>
   </div>
@@ -657,17 +674,12 @@ export default {
   name: "SemesterForm",
   data: function () {
     return {
-      level: "",
-      department: "",
-      course_number: "",
-      class_number: "",
-      course_title: "",
-      semester: {
-        number: this.$store.state.semesters.length + 1,
-        term: "Fall",
-        year: "2020",
-        notes: "",
-        courses: [],
+      searchForm: {
+        level: "",
+        department: "",
+        course_number: "",
+        class_number: "",
+        course_title: "",
       },
       categories: [],
       dragSrcEl: null,
@@ -675,23 +687,23 @@ export default {
       availableCourses: [],
       placeHolderCourses: [
         {
-          code: "PLACEHOLDER",
-          name: "Elective",
+          code: "User-Added",
+          name: "Placeholder",
           credits: 1,
         },
         {
-          code: "PLACEHOLDER",
-          name: "Elective",
+          code: "User-Added",
+          name: "Placeholder",
           credits: 2,
         },
         {
-          code: "PLACEHOLDER",
-          name: "Elective",
+          code: "User-Added",
+          name: "Placeholder",
           credits: 3,
         },
         {
-          code: "PLACEHOLDER",
-          name: "Elective",
+          code: "User-Added",
+          name: "Placeholder",
           credits: 4,
         },
       ],
@@ -706,13 +718,26 @@ export default {
     this.$store.dispatch("getCategories").then((response) => {
       this.categories = response;
     });
+    this.semesterForm = this.$store.state.semesterForm;
+    this.semesterForm.number =
+      this.semesterForm.number || this.$store.state.semesters.length + 1;
+    console.log(this.semesterForm);
   },
   methods: {
     updateCategory: function (e, course) {
       course["category"] = e.target.value;
     },
+    updateSemester: function () {
+      this.$store.dispatch("updateSemester", this.semesterForm).then((res) => {
+        if (res.errors) {
+          console.log(res.errors);
+        } else {
+          this.$router.push("/");
+        }
+      });
+    },
     createSemester: function () {
-      this.$store.dispatch("createSemester", this.semester).then((res) => {
+      this.$store.dispatch("createSemester", this.semesterForm).then((res) => {
         if (res.errors) {
           console.log(res.errors);
         } else {
@@ -721,7 +746,7 @@ export default {
       });
     },
     remove: function (courseToRemove) {
-      this.semester.courses = this.semester.courses.filter((course) => {
+      this.semesterForm.courses = this.semesterForm.courses.filter((course) => {
         return course !== courseToRemove;
       });
     },
@@ -745,7 +770,7 @@ export default {
       if (e.stopPropagation) {
         e.stopPropagation();
       }
-      this.semester.courses.push(this.dragSrcEl);
+      this.semesterForm.courses.push(this.dragSrcEl);
 
       return false;
     },
@@ -773,20 +798,13 @@ export default {
       }
     },
     fetchCourses: function () {
-      var data = {
-        level: this.level,
-        department: this.department,
-        course_number: this.course_number,
-        class_number: this.class_number,
-        course_title: this.course_title,
-      };
       fetch("http://localhost:8000/api/fetch/", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Token ".concat(this.$store.state.profile.token),
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(this.searchForm),
       })
         .then((res) => res.json())
         .then((res) => {
@@ -915,8 +933,8 @@ label {
   border: 3px dotted #666;
 }
 .save-button {
-  width: 75px;
-  height: 40px;
+  width: 90px;
+  height: 50px;
   background-color: #e0812e;
   color: white;
   font-size: 20px;
@@ -928,7 +946,7 @@ label {
   position: absolute;
   top: 0;
   right: 0;
-  margin: 10px;
+  margin: 4px;
   transition: scale 0.3s ease-in-out;
 }
 .save-button:hover {
