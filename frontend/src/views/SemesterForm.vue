@@ -619,13 +619,35 @@
         </select>
       </div>
       <div class="semester-list">
+        <div v-if="this.errors">
+          <p class="error-text" v-for="error in this.errors" :key="error[0]">{{ error }}</p>
+        </div>
         <table>
           <thead>
             <tr>
               <th>Code</th>
               <th>Course Title</th>
               <th>Credits</th>
-              <th>Audit Requirement</th>
+              <th>
+                Audit Requirement
+                <span
+                  @mouseenter="showDropdown($event)"
+                  @mouseleave="hideDropdown($event)"
+                  class="info"
+                >i</span>
+                <div id="help-box" class="help-box">
+                  <strong>What is this?</strong>
+                  <p>Certain Audit categories do not specificy which courses will satisify its requirement (i.e. electives). To correctly fill an ambigous category, select the correct category below.</p>
+                  <p>If a course belongs to a category with a code but also an elective category, choose the elective category and the code will also be met.</p>
+                  <p>
+                    <strong>Auto -></strong> Detect requirement by searching audit for course code
+                  </p>
+                  <p>
+                    <strong>Other Categories -></strong>
+                    Add a course to a specific category ( this will also search for the course code and fufill those requirements)
+                  </p>
+                </div>
+              </th>
               <th>Delete</th>
             </tr>
           </thead>
@@ -636,6 +658,8 @@
               <td>{{ course.credits }}</td>
               <td>
                 <select @change="updateCategory($event, course)">
+                  <option selected>{{ course.category }}</option>
+                  <option value="Auto">Auto</option>
                   <option v-for="category in categories" :key="category.name">{{ category.name }}</option>
                 </select>
               </td>
@@ -681,6 +705,7 @@ export default {
         class_number: "",
         course_title: "",
       },
+      errors: {},
       categories: [],
       dragSrcEl: null,
       dragCat: null,
@@ -716,12 +741,13 @@ export default {
   },
   created() {
     this.$store.dispatch("getCategories").then((response) => {
-      this.categories = response;
+      this.categories = response.filter((course) => {
+        return course.description !== "N/A";
+      });
     });
     this.semesterForm = this.$store.state.semesterForm;
     this.semesterForm.number =
       this.semesterForm.number || this.$store.state.semesters.length + 1;
-    console.log(this.semesterForm);
   },
   methods: {
     updateCategory: function (e, course) {
@@ -738,8 +764,8 @@ export default {
     },
     createSemester: function () {
       this.$store.dispatch("createSemester", this.semesterForm).then((res) => {
-        if (res.errors) {
-          console.log(res.errors);
+        if (res.non_field_errors) {
+          this.errors = res.non_field_errors;
         } else {
           this.$router.push("/");
         }
@@ -753,7 +779,7 @@ export default {
     handleDragStart: function (event, course) {
       event.target.style.opacity = "0.4";
       this.dragSrcEl = course;
-      this.dragSrcEl["category"] = this.categories[0].name;
+      this.dragSrcEl["category"] = "Auto";
       this.dragSrcEl["description"] = "User Added Course";
 
       event.dataTransfer.effectAllowed = "copy";
@@ -812,11 +838,64 @@ export default {
           document.getElementById("results").style.maxHeight = "100%";
         });
     },
+    showDropdown: function (e) {
+      e.target.nextElementSibling.style.display = "block";
+      e.target.nextElementSibling.style.zIndex = 1;
+      setTimeout(function () {
+        e.target.nextElementSibling.style.opacity = 1;
+      }, 20);
+    },
+    hideDropdown: function (e) {
+      e.target.nextElementSibling.style.opacity = 0;
+      document
+        .getElementById("help-box")
+        .addEventListener("transitionend", function (e) {
+          if (e.target.style.display === "none") {
+            e.target.target.style.zIndex = -1;
+            e.target.style.display = "none";
+          }
+        });
+    },
   },
 };
 </script>
 
 <style scoped>
+.error-text {
+  color: red;
+  font-weight: 700;
+}
+.help-box {
+  position: absolute;
+  z-index: -1;
+  font-weight: 500;
+  border: 1px solid white;
+  height: 100%;
+  width: 50%;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 5px 20px #888888;
+  color: black;
+  font-size: 75%;
+  opacity: 0;
+  display: none;
+  transition: opacity 0.3s ease-in-out;
+}
+.info {
+  background-color: #888888;
+  border: 5px solid #888888;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  text-align: center;
+  line-height: 10px;
+  transition: all 0.2s ease-in-out;
+  cursor: help;
+}
+.info:hover {
+  transform: scale(1.1);
+}
 .remove-btn {
   background-color: red;
   color: white;

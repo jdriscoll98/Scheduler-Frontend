@@ -70,8 +70,8 @@ export default {
       this.$store.state.semesterID = null;
       this.$store.state.semesterForm = {
         number: "",
-        term: "",
-        year: "",
+        term: "Fall",
+        year: "2020",
         courses: [],
         notes: "",
       };

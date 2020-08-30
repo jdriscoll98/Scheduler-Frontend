@@ -49,6 +49,13 @@ export default createStore({
       state.semesters = [...data];
     },
     addSemester(state, data) {
+      state.semesterForm = {
+        number: "",
+        term: "Fall",
+        year: "2020",
+        courses: [],
+        notes: "",
+      }
       state.semesters.push(data.semester)
     },
     updatePrograms(state, data) {
@@ -87,9 +94,8 @@ export default createStore({
         body: JSON.stringify(payload)
       }).then((res) => (res.json()))
         .then((res) => {
-          console.log(res)
-          if (res.errors) {
-            console.log(res.errors)
+          if (res.non_field_errors) {
+            console.log(res.non_field_errors)
           }
           else {
             commit('addSemester', res)
@@ -107,7 +113,6 @@ export default createStore({
         },
         body: JSON.stringify(payload)
       }).then((res) => res.json()).then((res) => {
-        console.log(res);
         if (res.errors) {
           console.log(res.errors)
         }
