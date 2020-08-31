@@ -872,8 +872,8 @@ export default {
       document
         .getElementById("help-box")
         .addEventListener("transitionend", function (e) {
-          if (e.target.style.display === "none") {
-            e.target.target.style.zIndex = -1;
+          if (e.target.style.opacity === "0") {
+            e.target.style.zIndex = -1;
             e.target.style.display = "none";
           }
         });
