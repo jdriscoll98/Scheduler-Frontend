@@ -5,7 +5,12 @@
         <div class="headings">
           <h3 class="college">{{ program.label }}</h3>
         </div>
-        <div v-for="category in program.categories" :key="category.name" class="category-section">
+        <div
+          @click="toggleCollapse($event)"
+          v-for="category in program.categories"
+          :key="category.name"
+          class="category-section"
+        >
           <svg class="progress-ring" height="60" width="60">
             <circle
               class="progress-ring__circle"
@@ -17,8 +22,8 @@
               cy="30"
             />
           </svg>
-          <h3 @click="toggleCollapse($event)" class="category-title">{{category.name }}</h3>
-
+          <h3 class="category-title">{{category.name }}</h3>
+          <i class="arrow down"></i>
           <div class="category-content">
             <table>
               <tr>
@@ -74,15 +79,12 @@ export default {
   },
   mounted() {
     var categories = document.getElementsByClassName("category-section");
-    console.log(categories);
     this.programs.forEach((program) => {
       program.categories.forEach((category) => {
-        console.log(category.name);
         categories.forEach((currentCategory) => {
           let currentCategoryName = currentCategory.getElementsByClassName(
             "category-title"
           )[0].innerHTML;
-          console.log(currentCategoryName);
           if (category.name === currentCategoryName) {
             let offset =
               138.16 - (this.getPercentComplete(category) / 100) * 138.16;
@@ -109,12 +111,16 @@ export default {
       return Math.min((credits_towards / credits_required) * 100, 100);
     },
     toggleCollapse: function (e) {
-      e.target.classList.toggle("active");
-      var content = e.target.nextElementSibling;
-      if (content.style.maxHeight) {
-        content.style.maxHeight = null;
+      let target;
+      if (e.target.tagName === "DIV") {
+        target = e.target.getElementsByClassName("category-content")[0];
       } else {
-        content.style.maxHeight = content.scrollHeight + "px";
+        target = e.target.nextElementSibling.nextElementSibling;
+      }
+      if (target.style.maxHeight) {
+        target.style.maxHeight = null;
+      } else {
+        target.style.maxHeight = target.scrollHeight + "px";
       }
     },
   },
@@ -122,6 +128,17 @@ export default {
 </script>
 
 <style scoped>
+.arrow {
+  border: solid black;
+  border-width: 0 5px 5px 0;
+  padding: 5px;
+  margin: 25px;
+  float: right;
+}
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
 .progress-ring__circle {
   stroke-dasharray: 138.16 138.16;
   stroke-dashoffset: 0;
@@ -141,7 +158,7 @@ export default {
 }
 .overall-progress {
   height: 30px;
-  font-size: 1.5rem;
+  font-size: 25vw;
   font-weight: 600;
   text-transform: uppercase;
   text-align: left;
@@ -198,19 +215,22 @@ export default {
   width: 80%;
   font-size: 1.5rem;
   display: inline-block;
+  border-radius: 5px;
 }
 .category-title {
   margin-left: 20px;
   display: inline-block;
   position: relative;
   bottom: 15px;
+  font-size: 1.5rem;
 }
 
 .category-content {
-  padding: 0 18px;
   overflow: hidden;
   max-height: 0;
   transition: max-height 0.2s ease-out;
+  font-size: 1rem;
+  margin-top: 50px;
 }
 
 .college,

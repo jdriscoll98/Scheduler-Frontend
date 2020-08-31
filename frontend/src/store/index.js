@@ -61,6 +61,18 @@ export default createStore({
     updatePrograms(state, data) {
       state.programs = [...data['programs']]
     },
+    updateSemester(state, data) {
+      state.semesters.forEach((semester) => {
+        if (semester.id == data['semester'].id) {
+          semester = data['semester']
+        }
+      })
+    },
+    removeSemester(state, id) {
+      state.semesters = state.semesters.filter((semester) => {
+        return semester.id !== id;
+      })
+    },
     setPrograms(state, data) {
       state.programs = [...data];
     },
@@ -113,13 +125,31 @@ export default createStore({
         },
         body: JSON.stringify(payload)
       }).then((res) => res.json()).then((res) => {
-        if (res.errors) {
-          console.log(res.errors)
+        if (res.non_field_errors) {
+          console.log(res.non_field_errors)
         }
         else {
           commit('updateSemester', res)
           commit("updatePrograms", res)
         }
+        return res
+      })
+    },
+    deleteSemester({ commit }, id) {
+      return fetch(`http://localhost:8000/api/semesters/${id}`, {
+        method: "delete",
+        headers: {
+          Authorization: "Token ".concat(this.state.profile.token),
+        }
+      }).then((res) => res.json()).then((res) => {
+        if (res.non_field_errors) {
+          console.log(res.non_field_errors)
+        }
+        else {
+          commit("removeSemester", id)
+          commit("updatePrograms", res)
+        }
+        return res
       })
     },
     getSemesters({ commit }) {

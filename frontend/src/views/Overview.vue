@@ -3,7 +3,9 @@
     <div>
       <div v-for="semester in semesters" :key="semester.id" class="card">
         <div class="card-header">
-          <h1 class="semester-number">Semester {{ semester.number }} - {{ semester.term }}</h1>
+          <h1
+            class="semester-number"
+          >Semester {{ semester.number }} - {{ semester.term }} {{ semester.year }}</h1>
           <button class="edit-btn">
             <img
               @click="editSemester(semester)"
@@ -80,6 +82,9 @@ export default {
     editSemester: function (semester) {
       this.$store.state.semesterID = semester.id;
       this.$store.state.semesterForm = semester;
+      semester.courses.forEach((course) => {
+        console.log(course);
+      });
       this.$router.push("form");
     },
   },
@@ -154,9 +159,8 @@ table {
 
 td,
 th {
-  border: 1px solid #dddddd;
-  text-align: left;
   padding: 8px;
+  text-align: left;
 }
 
 tr:nth-child(even) {
@@ -172,14 +176,17 @@ tr:nth-child(even) {
   border-bottom: 1px solid black;
   background-color: #285797;
   color: white;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 }
 .card {
   display: inline-block;
   height: 100%;
+  border-radius: 5px;
   width: 400px;
   margin: 25px;
-  border: 2px solid black;
-  border-radius: 5px;
+  box-shadow: 0 5px 25px #888888;
+  padding: 0 0 5px 0;
   background-color: white;
   position: relative;
   left: 0;

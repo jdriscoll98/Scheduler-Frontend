@@ -558,6 +558,7 @@
                 draggable="true"
                 v-for="course in availableCourses"
                 :key="course.code"
+                class="draggable"
               >
                 <td>{{ course.code }}</td>
                 <td>{{ course.name }}</td>
@@ -591,6 +592,7 @@
                 draggable="true"
                 v-for="course in placeHolderCourses"
                 :key="course.code"
+                class="draggable"
               >
                 <td>{{ course.code }}</td>
                 <td>{{ course.name }}</td>
@@ -605,6 +607,11 @@
       <h1 class="semester-header">Semester {{ semesterForm.number }}</h1>
 
       <button v-if="this.$store.state.semesterID" @click="updateSemester" class="save-button">Update</button>
+      <button
+        v-if="this.$store.state.semesterID"
+        @click="deleteSemester"
+        class="delete-button"
+      >Delete</button>
       <button v-else @click="createSemester" class="save-button">Save</button>
       <div class="semester-term">
         <label class="term-label" for="term">Term:</label>
@@ -755,8 +762,8 @@ export default {
     },
     updateSemester: function () {
       this.$store.dispatch("updateSemester", this.semesterForm).then((res) => {
-        if (res.errors) {
-          console.log(res.errors);
+        if (res.non_field_errors) {
+          this.errors = res.non_field_errors;
         } else {
           this.$router.push("/");
         }
@@ -770,6 +777,17 @@ export default {
           this.$router.push("/");
         }
       });
+    },
+    deleteSemester: function () {
+      this.$store
+        .dispatch("deleteSemester", this.$store.state.semesterID)
+        .then((res) => {
+          if (res.non_field_errors) {
+            this.errors = res.non_field_errors;
+          } else {
+            this.$router.push("/");
+          }
+        });
     },
     remove: function (courseToRemove) {
       this.semesterForm.courses = this.semesterForm.courses.filter((course) => {
@@ -797,7 +815,6 @@ export default {
         e.stopPropagation();
       }
       this.semesterForm.courses.push(this.dragSrcEl);
-
       return false;
     },
     handleDragEnd: function (e) {
@@ -817,10 +834,15 @@ export default {
     toggleCollapse: function (e) {
       e.target.classList.toggle("active");
       var content = e.target.nextElementSibling;
-      if (content.style.maxHeight !== "0px") {
-        content.style.maxHeight = 0 + "px";
-      } else {
+      if (!content.style.maxHeight) {
         content.style.maxHeight = content.scrollHeight + "px";
+        return;
+      }
+      if (content.style.maxHeight === "0px") {
+        content.style.maxHeight = content.scrollHeight + "px";
+      } else {
+        console.log(content.style.maxHeight);
+        content.style.maxHeight = 0 + "px";
       }
     },
     fetchCourses: function () {
@@ -861,6 +883,9 @@ export default {
 </script>
 
 <style scoped>
+.draggable {
+  cursor: grab;
+}
 .error-text {
   color: red;
   font-weight: 700;
@@ -975,6 +1000,7 @@ li {
   background-color: white;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
+  max-height: 0;
 }
 .divider {
   height: 100%;
@@ -1028,17 +1054,35 @@ label {
   margin: 4px;
   transition: scale 0.3s ease-in-out;
 }
+.delete-button {
+  width: 90px;
+  height: 50px;
+  background-color: rgb(138, 27, 27);
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 10px;
+  position: absolute;
+  top: 0;
+  right: 100px;
+  margin: 4px;
+  transition: scale 0.3s ease-in-out;
+}
+.delete-button:hover {
+  background-color: red;
+}
 .save-button:hover {
   transform: scale(1.1);
 }
 
 .drag-header {
-  background-color: #285797;
-  color: white;
-  border-radius: 20px;
-  padding: 10px;
-  width: 250px;
-  margin: auto;
+  border-top: 1px solid black dashed;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
   text-align: center;
 }
 .delete-btn {
@@ -1081,6 +1125,7 @@ label {
   margin: auto;
   position: relative;
   top: 25px;
+  box-shadow: 0 10px 5px -5px gray;
 }
 
 .term-label {
@@ -1093,6 +1138,8 @@ label {
   color: white;
   text-align: left;
   padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px #888888;
 }
 
 .semester-select {
@@ -1109,7 +1156,8 @@ label {
 .semester-builder {
   height: 80vh;
   width: 65vw;
-  border: 2px solid black;
+  box-shadow: 0 5px 25px #888888;
+  border-radius: 5px;
   position: relative;
   float: right;
   margin: 100px 3vw 0 0;
@@ -1117,7 +1165,9 @@ label {
 .courses {
   height: 80vh;
   width: 25vw;
-  border: 2px solid black;
+  box-shadow: 0 5px 25px #888888;
+  border-radius: 5px;
+
   position: relative;
   overflow-y: scroll;
   float: left;
