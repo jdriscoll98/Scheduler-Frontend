@@ -49,24 +49,33 @@ export default createStore({
       state.semesters = [...data];
     },
     addSemester(state, data) {
+      state.semesterID = null;
       state.semesterForm = {
         number: "",
         term: "Fall",
         year: "2020",
         courses: [],
         notes: "",
-      }
-      state.semesters.push(data.semester)
+      },
+        state.semesters.push(data.semester)
     },
     updatePrograms(state, data) {
       state.programs = [...data['programs']]
     },
     updateSemester(state, data) {
-      state.semesters.forEach((semester) => {
-        if (semester.id == data['semester'].id) {
-          semester = data['semester']
-        }
-      })
+      state.semesterID = null;
+      state.semesterForm = {
+        number: "",
+        term: "Fall",
+        year: "2020",
+        courses: [],
+        notes: "",
+      },
+        state.semesters.forEach((semester) => {
+          if (semester.id == data['semester'].id) {
+            semester = data['semester']
+          }
+        })
     },
     removeSemester(state, id) {
       state.semesters = state.semesters.filter((semester) => {
