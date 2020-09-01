@@ -556,8 +556,8 @@
                 @dragend="handleDragEnd($event)"
                 id="drag1"
                 draggable="true"
-                v-for="course in availableCourses"
-                :key="course.code"
+                v-for="(course, index) in availableCourses"
+                :key="index"
                 class="draggable"
               >
                 <td>{{ course.code }}</td>
@@ -590,8 +590,8 @@
                 @dragend="handleDragEnd($event)"
                 id="drag1"
                 draggable="true"
-                v-for="course in placeHolderCourses"
-                :key="course.code"
+                v-for="(course, index) in placeHolderCourses"
+                :key="index"
                 class="draggable"
               >
                 <td>{{ course.code }}</td>
@@ -615,7 +615,12 @@
       <button v-else @click="createSemester" class="save-button">Save</button>
       <div class="semester-term">
         <label class="term-label" for="term">Term:</label>
-        <select id="term" v-model="semesterForm.term" class="semester-select">
+        <select
+          @change="updateTermCode($event)"
+          id="term"
+          v-model="semesterForm.term"
+          class="semester-select"
+        >
           <option selected>Fall</option>
           <option>Spring</option>
           <option>Summer</option>
@@ -659,7 +664,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="course in semesterForm.courses" :key="course.code">
+            <tr v-for="(course, index) in semesterForm.courses" :key="index">
               <td>{{ course.code }}</td>
               <td>{{ course.name }}</td>
               <td>{{ course.credits }}</td>
@@ -667,7 +672,7 @@
                 <select @change="updateCategory($event, course)">
                   <option selected>{{ course.category }}</option>
                   <option value="Auto">Auto</option>
-                  <option v-for="category in categories" :key="category.name">{{ category.name }}</option>
+                  <option v-for="(category, index) in categories" :key="index">{{ category.name }}</option>
                 </select>
               </td>
               <td>
@@ -711,6 +716,7 @@ export default {
         course_number: "",
         class_number: "",
         course_title: "",
+        term_code: "2208",
       },
       errors: {},
       categories: [],
@@ -757,6 +763,19 @@ export default {
       this.semesterForm.number || this.$store.state.semesters.length + 1;
   },
   methods: {
+    updateTermCode: function (e) {
+      let code, term, term_code;
+      term = e.target.value;
+      if (term === "Fall") {
+        term_code = "8";
+      } else if (term === "Summer") {
+        term_code = "5";
+      } else {
+        term_code = "1";
+      }
+      code = "220".concat(term_code);
+      this.searchForm.term_code = code;
+    },
     updateCategory: function (e, course) {
       course["category"] = e.target.value;
     },
@@ -856,6 +875,7 @@ export default {
       })
         .then((res) => res.json())
         .then((res) => {
+          console.log(res);
           this.availableCourses = res.parsed_courses;
           document.getElementById("results").style.maxHeight = "100%";
         });
@@ -895,7 +915,6 @@ export default {
   z-index: -1;
   font-weight: 500;
   border: 1px solid white;
-  height: 100%;
   width: 50%;
   background-color: white;
   border-radius: 5px;
@@ -1200,7 +1219,7 @@ label {
 .courses-header {
   background-color: #285797;
   color: white;
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 24px;
+  font-weight: 700;
 }
 </style>
