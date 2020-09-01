@@ -154,7 +154,7 @@ export default {
   margin: 0 5px 0 5px;
 }
 .nav-item {
-  padding: 20px;
+  padding: 20px 0 20px 0;
   font-weight: 400;
   transition: background-color 0.3s;
 }

@@ -96,13 +96,7 @@ export default createStore({
         },
       }).then((res) => (res.json()))
         .then((res) => {
-          if (res.errors) {
-            console.log(res.errors)
-          }
-          else {
-            commit("setPrograms", res.programs);
-          }
-          return res;
+          commit("setPrograms", res.programs);
         })
     },
     createSemester({ commit }, payload) {
