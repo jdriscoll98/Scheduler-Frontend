@@ -10,7 +10,7 @@
       <a class="link" href="http://one.uf.edu" target="_blank">ONE.UF |</a>
     </h1>
     <h2 class="label">SCHEDULER</h2>
-    <div class="user-logged-in" v-if="$store.state.loggedIn">
+    <div class="desktop-only user-logged-in" v-if="$store.state.loggedIn">
       <img @mouseenter="showDropdown" class="user-icon" src="../assets/images/user-icon.svg" />
       <div
         @mouseleave="hideDropdown"
@@ -28,7 +28,11 @@
         </div>
       </div>
     </div>
+
     <button v-else class="login-btn" @click="$router.push('/login')">Log in</button>
+    <div v-if="$store.state.loggedIn" class="mobile-only">
+      <button @click="logout" class="mobile-logout">Logout</button>
+    </div>
     <div v-if="$store.state.loggedIn" class="subnav">
       <div class="left-nav nav-div">
         <h3 @click="$router.push('/')" class="nav-item not-current">OVERVIEW</h3>
@@ -49,7 +53,6 @@ export default {
   methods: {
     showDropdown: function (e) {
       e.target.nextElementSibling.style.display = "block";
-      e.target.nextElementSibling.focus();
       setTimeout(function () {
         e.target.nextElementSibling.style.opacity = 1;
       }, 20);
@@ -66,14 +69,6 @@ export default {
     logout: function () {
       localStorage.clear();
       window.location.href = "/login";
-    },
-    handleFocusOut: function (e) {
-      e.target.style.opacity = 0;
-      e.addEventListener("transitionend", function (e) {
-        if (e.target.style.display === "none") {
-          e.target.style.display = "none";
-        }
-      });
     },
   },
 };
@@ -272,15 +267,34 @@ export default {
   position: absolute;
   left: 60px;
 }
-
+.mobile-logout {
+  color: white;
+  font-size: 16px;
+  float: right;
+  position: relative;
+  top: 15px;
+  right: 10px;
+  height: 30px;
+  background-color: #285797;
+  border: none;
+  outline: none;
+}
+.mobile-only {
+  display: none;
+}
 @media only screen and (max-width: 415px) {
   .logo,
   .oneuf {
     display: none;
   }
-
+  .mobile-only {
+    display: block;
+  }
   .nav-item {
     font-size: 4vw;
+  }
+  .desktop-only {
+    display: none;
   }
 }
 </style>

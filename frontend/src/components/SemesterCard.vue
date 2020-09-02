@@ -16,7 +16,7 @@
             <th>Name</th>
             <th>Credits</th>
           </tr>
-          <tr v-for="course in semester.courses" :key="course.code">
+          <tr v-for="course in filteredCourses(semester.courses)" :key="course.code">
             <td>{{ course.code }}</td>
             <td>{{ course.name }}</td>
             <td>{{ course.credits }}</td>
@@ -52,6 +52,19 @@ export default {
       this.$store.state.semesterID = semester.id;
       this.$store.state.semesterForm = semester;
       this.$router.push("form");
+    },
+    filteredCourses: function (courses) {
+      let courseMap = {};
+      return courses.filter((course) => {
+        if (course.code === "User-Added") {
+          return course;
+        } else {
+          if (!(course.code in courseMap)) {
+            courseMap[course.code] = true;
+            return course;
+          }
+        }
+      });
     },
   },
 };

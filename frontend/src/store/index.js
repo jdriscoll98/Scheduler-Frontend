@@ -78,6 +78,13 @@ export default createStore({
         })
     },
     removeSemester(state, id) {
+      state.semesterForm = {
+        number: "",
+        term: "Fall",
+        year: "2020",
+        courses: [],
+        notes: "",
+      }
       state.semesters = state.semesters.filter((semester) => {
         return semester.id !== id;
       })
@@ -149,6 +156,7 @@ export default createStore({
           console.log(res.non_field_errors)
         }
         else {
+
           commit("removeSemester", id)
           commit("updatePrograms", res)
         }

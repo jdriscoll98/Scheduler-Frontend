@@ -657,6 +657,10 @@
           </select>
         </div>
         <div class="semester-list">
+          <div
+            class="warning"
+            v-if="this.$store.state.semesterID"
+          >Some courses may appear more than once if they belong to multiple categories</div>
           <div class="errors" v-if="this.errors">
             <p class="error-text" v-for="error in this.errors" :key="error[0]">{{ error }}</p>
           </div>
@@ -956,6 +960,10 @@ export default {
 </script>
 
 <style scoped>
+.warning {
+  text-align: center;
+  float: left;
+}
 .errors {
   width: 75%;
   margin: auto;
