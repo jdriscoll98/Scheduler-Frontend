@@ -29,21 +29,21 @@
           </tr>
           <tr>
             <th>Class</th>
-            <th>Name</th>
-            <th>Credits Required</th>
-            <th>Credits Taken or In Progress</th>
+            <th class="desktop-only">Name</th>
+            <th class="desktop-only">Credits Required</th>
+            <th class="desktop-only">Credits Taken or In Progress</th>
             <th>Status</th>
-            <th>Description</th>
+            <th class="desktop-only">Description</th>
           </tr>
           <tr class="tooltip" v-for="course in category.courses" :key="course.code">
             <td>{{ course.code }}</td>
-            <td>{{ course.name }}</td>
-            <td>{{ course.credits_required }}</td>
-            <td>{{ course.credits }}</td>
+            <td class="desktop-only">{{ course.name }}</td>
+            <td class="desktop-only">{{ course.credits_required }}</td>
+            <td class="desktop-only">{{ course.credits }}</td>
             <td class="met" v-if="course.passed || course.inProgress">MET</td>
             <td class="not-met" v-else>NOT MET</td>
-            <td v-if="course.description">{{ course.description }}</td>
-            <td v-else>N/A</td>
+            <td class="desktop-only" v-if="course.description">{{ course.description }}</td>
+            <td class="desktop-only" v-else>N/A</td>
           </tr>
         </table>
       </div>
@@ -198,5 +198,28 @@ th {
 
 tr:nth-child(even) {
   background-color: #dddddd;
+}
+@media only screen and (max-width: 415px) {
+  .desktop-only {
+    display: none;
+  }
+  .college {
+    font-size: 16px;
+  }
+  .category-section {
+    padding: 2px;
+    width: 100%;
+  }
+  .category-title {
+    font-size: 16px;
+    padding: 20px;
+    bottom: 0;
+  }
+  .progress-ring {
+    display: none;
+  }
+  .arrow {
+    display: none;
+  }
 }
 </style>

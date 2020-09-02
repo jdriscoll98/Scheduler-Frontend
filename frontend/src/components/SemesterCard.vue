@@ -118,4 +118,11 @@ tr:nth-child(even) {
   left: 0;
   top: 75px;
 }
+
+@media only screen and (max-width: 415px) {
+  .card {
+    width: 90vw;
+    margin: 25px auto 25px auto;
+  }
+}
 </style>

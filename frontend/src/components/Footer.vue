@@ -85,6 +85,32 @@
         </div>
       </div>
     </div>
+    <div class="mobile-contact">
+      <div class="contact">
+        <div class="uf-logo">
+          <img style="width: 200px;" src="../assets/images/uflogo.png" />
+        </div>
+        <div class="social">
+          <a class="social-btn">
+            <img class="social-img" src="../assets/images/facebook.png" />
+          </a>
+          <a class="social-btn">
+            <img class="social-img" src="../assets/images/twitter.png" />
+          </a>
+          <a class="social-btn">
+            <img class="social-img" src="../assets/images/instagram.png" />
+          </a>
+          <a class="social-btn">
+            <img class="social-img" src="../assets/images/youtube.png" />
+          </a>
+        </div>
+        <div class="address">
+          <p>University of Florida</p>
+          <p>Gainesville, FL 32611</p>
+          <p>(352) 392-3261</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -132,5 +158,16 @@ footer {
   display: inline-block;
   vertical-align: middle;
   height: 50%;
+}
+.mobile-contact {
+  display: none;
+}
+@media only screen and (max-width: 415px) {
+  .categories {
+    display: none;
+  }
+  .mobile-contact {
+    display: block;
+  }
 }
 </style>

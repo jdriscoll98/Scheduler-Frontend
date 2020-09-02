@@ -7,12 +7,17 @@
       <img class="logo" src="../assets/images/logo-uf.svg" />
     </a>
     <h1 class="oneuf">
-      <a class="link" href="http://one.uf.edu" target="_blank">ONE.UF</a>
+      <a class="link" href="http://one.uf.edu" target="_blank">ONE.UF |</a>
     </h1>
-    <h2 class="label">| SCHEDULER</h2>
+    <h2 class="label">SCHEDULER</h2>
     <div class="user-logged-in" v-if="$store.state.loggedIn">
       <img @mouseenter="showDropdown" class="user-icon" src="../assets/images/user-icon.svg" />
-      <div @mouseleave="hideDropdown" id="dropdown" class="profile-drop-down">
+      <div
+        @mouseleave="hideDropdown"
+        @focusout="handleFocusOut($event)"
+        id="dropdown"
+        class="profile-drop-down"
+      >
         <div class="user">
           <img class="small-user-icon" src="../assets/images/user-icon-small.svg" />
           <h4 class="username">{{ $store.state.profile.username }}</h4>
@@ -44,6 +49,7 @@ export default {
   methods: {
     showDropdown: function (e) {
       e.target.nextElementSibling.style.display = "block";
+      e.target.nextElementSibling.focus();
       setTimeout(function () {
         e.target.nextElementSibling.style.opacity = 1;
       }, 20);
@@ -60,6 +66,14 @@ export default {
     logout: function () {
       localStorage.clear();
       window.location.href = "/login";
+    },
+    handleFocusOut: function (e) {
+      e.target.style.opacity = 0;
+      e.addEventListener("transitionend", function (e) {
+        if (e.target.style.display === "none") {
+          e.target.style.display = "none";
+        }
+      });
     },
   },
 };
@@ -129,6 +143,8 @@ export default {
 .user-logged-in {
   position: absolute;
   right: 0;
+  top: 0;
+  width: 60px;
   height: 60px;
 }
 
@@ -193,16 +209,19 @@ export default {
 }
 .oneuf {
   color: white;
-  position: absolute;
-  left: 110px;
+  position: relative;
+  left: 30px;
+  width: 100px;
   padding: 18px;
   font-size: 18px;
   font-weight: 500;
+  float: left;
 }
 .label {
   color: white;
-  position: absolute;
-  left: 180px;
+  position: relative;
+  float: left;
+  width: 60px;
   padding: 18px;
   font-size: 18px;
   font-weight: 500;
@@ -231,9 +250,9 @@ export default {
   border-bottom: 4px solid #e0812e;
   font-size: 20px;
 }
-.nav .menu {
-  position: absolute;
-  left: 0;
+.menu {
+  position: relative;
+  float: left;
   width: 60px;
   height: 60px;
   margin: 0;
@@ -252,5 +271,16 @@ export default {
   padding: 14px;
   position: absolute;
   left: 60px;
+}
+
+@media only screen and (max-width: 415px) {
+  .logo,
+  .oneuf {
+    display: none;
+  }
+
+  .nav-item {
+    font-size: 4vw;
+  }
 }
 </style>

@@ -18,15 +18,17 @@ export default {
     Footer,
   },
   created() {
-    if (
-      !(this.$store.state.semesters && this.$store.state.semesters.length > 0)
-    ) {
-      this.getSemesters();
-    }
-    if (
-      !(this.$store.state.programs && this.$store.state.programs.length > 0)
-    ) {
-      this.getPrograms();
+    if (this.$store.state.profile.token) {
+      if (
+        !(this.$store.state.semesters && this.$store.state.semesters.length > 0)
+      ) {
+        this.getSemesters();
+      }
+      if (
+        !(this.$store.state.programs && this.$store.state.programs.length > 0)
+      ) {
+        this.getPrograms();
+      }
     }
   },
   methods: {
@@ -47,6 +49,7 @@ export default {
 body {
   background-color: whitesmoke;
   width: 100vw;
+  overflow-x: hidden;
 }
 * {
   margin: 0;

@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="container">
-      <div class="courses">
+      <div class="courses" id="courses">
         <h1 class="courses-header">Search For Courses</h1>
         <div class="search-form">
           <div class="filters collapsible">
@@ -557,7 +557,8 @@
                 <tr>
                   <th>Code</th>
                   <th>Course Title</th>
-                  <th>Credits</th>
+                  <th class="desktop-only">Credits</th>
+                  <th class="mobile-only">Add</th>
                 </tr>
               </thead>
               <tbody>
@@ -572,7 +573,10 @@
                 >
                   <td>{{ course.code }}</td>
                   <td>{{ course.name }}</td>
-                  <td>{{ course.credits }}</td>
+                  <td class="desktop-only">{{ course.credits }}</td>
+                  <td class="mobile-only">
+                    <button @click.prevent @click="addCourse(course)" class="add-course">Add</button>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -591,7 +595,8 @@
                 <tr>
                   <th>Code</th>
                   <th>Course Title</th>
-                  <th>Credits</th>
+                  <th class="desktop-only">Credits</th>
+                  <th class="mobile-only">Add</th>
                 </tr>
               </thead>
               <tbody>
@@ -606,12 +611,19 @@
                 >
                   <td>{{ course.code }}</td>
                   <td>{{ course.name }}</td>
-                  <td>{{ course.credits }}</td>
+                  <td class="desktop-only">{{ course.credits }}</td>
+                  <td class="mobile-only">
+                    <button @click.prevent @click="addCourse(course)" class="add-course">Add</button>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
+      </div>
+      <div class="filters-button">
+        <button @click="showFilters()" id="show-filters" class="show-filters">Show Filters</button>
+        <button @click="hideFilters()" id="hide-filters" class="hide-filters">Hide Filters</button>
       </div>
       <div class="semester-builder">
         <h1 class="semester-header">Semester {{ semesterForm.number }}</h1>
@@ -645,15 +657,15 @@
           </select>
         </div>
         <div class="semester-list">
-          <div v-if="this.errors">
+          <div class="errors" v-if="this.errors">
             <p class="error-text" v-for="error in this.errors" :key="error[0]">{{ error }}</p>
           </div>
           <table>
             <thead>
               <tr>
                 <th>Code</th>
-                <th>Course Title</th>
-                <th>Credits</th>
+                <th class="desktop-only">Course Title</th>
+                <th class="desktop-only">Credits</th>
                 <th>
                   Audit Requirement
                   <span
@@ -680,10 +692,10 @@
             <tbody>
               <tr v-for="(course, index) in semesterForm.courses" :key="index">
                 <td>{{ course.code }}</td>
-                <td>{{ course.name }}</td>
-                <td>{{ course.credits }}</td>
+                <td class="desktop-only">{{ course.name }}</td>
+                <td class="desktop-only">{{ course.credits }}</td>
                 <td>
-                  <select @change="updateCategory($event, course)">
+                  <select class="cat-select" @change="updateCategory($event, course)">
                     <option selected>{{ course.category }}</option>
                     <option value="Auto">Auto</option>
                     <option v-for="(category, index) in categories" :key="index">{{ category.name }}</option>
@@ -851,6 +863,11 @@ export default {
       this.semesterForm.courses.push(this.dragSrcEl);
       return false;
     },
+    addCourse: function (course) {
+      course["category"] = "Auto";
+      course["description"] = "User Added Course";
+      this.semesterForm.courses.push(course);
+    },
     handleDragEnd: function (e) {
       e.target.style.opacity = "1";
       let items = document.querySelectorAll(".box");
@@ -913,11 +930,36 @@ export default {
           }
         });
     },
+    showFilters: function () {
+      let filters = document.getElementById("courses");
+      let showFilters = document.getElementById("show-filters");
+      let hideFilters = document.getElementById("hide-filters");
+      let form = document.getElementsByClassName("semester-builder")[0];
+      form.style.opacity = 0.5;
+
+      showFilters.style.display = "none";
+      hideFilters.style.display = "block";
+      filters.style.left = 0;
+    },
+    hideFilters: function () {
+      let filters = document.getElementById("courses");
+      let showFilters = document.getElementById("show-filters");
+      let hideFilters = document.getElementById("hide-filters");
+      let form = document.getElementsByClassName("semester-builder")[0];
+      form.style.opacity = 1;
+      showFilters.style.display = "block";
+      hideFilters.style.display = "none";
+      filters.style.left = "-100vw";
+    },
   },
 };
 </script>
 
 <style scoped>
+.errors {
+  width: 75%;
+  margin: auto;
+}
 .main {
   padding-bottom: 0;
 }
@@ -1242,5 +1284,81 @@ label {
   color: white;
   font-size: 24px;
   font-weight: 700;
+}
+
+.filters-button {
+  display: none;
+  width: 100vw;
+}
+.mobile-only {
+  display: none;
+}
+
+@media only screen and (max-width: 415px) {
+  .cat-select {
+    width: 100%;
+    max-width: 90%;
+  }
+  .mobile-only {
+    display: block;
+  }
+  .add-course {
+    background-color: green;
+    width: 35px;
+    color: white;
+    font-weight: 600;
+  }
+  .desktop-only {
+    display: none;
+  }
+  .semester-builder {
+    transition: opacity 0.5s ease-in-out;
+  }
+  .courses {
+    position: absolute;
+    top: 50px;
+    left: -100vw;
+    transition: left 0.5s cubic-bezier(0.47, 1.64, 0.41, 0.8);
+    width: 70vw;
+    z-index: 1;
+    background-color: white;
+  }
+  .filters-button {
+    display: block;
+    position: relative;
+    top: 80px;
+    left: 10px;
+    float: left;
+  }
+  .show-filters,
+  .hide-filters {
+    background-color: #285797;
+    color: white;
+    height: 25px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 5px 5px #888888;
+    font-weight: 600;
+    padding: 5px;
+    outline: none;
+  }
+  .show-filters {
+    float: left;
+    left: 20px;
+  }
+  .hide-filters {
+    float: right;
+    right: 20px;
+    position: relative;
+    display: none;
+  }
+  .semester-builder {
+    float: left;
+    width: 100vw;
+  }
+  .notes {
+    width: 90vw;
+    height: 100px;
+  }
 }
 </style>
