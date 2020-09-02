@@ -18,7 +18,7 @@ export default {
     Footer,
   },
   created() {
-    if (this.$store.state.profile.token) {
+    if (this.$store.state.loggedIn) {
       if (
         !(this.$store.state.semesters && this.$store.state.semesters.length > 0)
       ) {

@@ -197,6 +197,7 @@ export default createStore({
         .then(response => response.json())
         .then(response => {
           if (response.token) {
+
             commit('login', response)
           }
           else {
