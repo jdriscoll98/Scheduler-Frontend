@@ -11,7 +11,11 @@
     </h1>
     <h2 class="label">SCHEDULER</h2>
     <div class="desktop-only user-logged-in" v-if="$store.state.loggedIn">
-      <img @mouseenter="showDropdown" class="user-icon" src="../assets/images/user-icon.svg" />
+      <img
+        @mouseenter="showDropdown"
+        class="user-icon"
+        src="../assets/images/user-icon.svg"
+      />
       <div
         @mouseleave="hideDropdown"
         @focusout="handleFocusOut($event)"
@@ -19,7 +23,10 @@
         class="profile-drop-down"
       >
         <div class="user">
-          <img class="small-user-icon" src="../assets/images/user-icon-small.svg" />
+          <img
+            class="small-user-icon"
+            src="../assets/images/user-icon-small.svg"
+          />
           <h4 class="username">{{ $store.state.profile.username }}</h4>
         </div>
         <hr />
@@ -29,19 +36,39 @@
       </div>
     </div>
 
-    <button v-else class="login-btn" @click="$router.push('/login')">Log in</button>
+    <button v-else class="login-btn" @click="$router.push('/login')">
+      Log in
+    </button>
     <div v-if="$store.state.loggedIn" class="mobile-only">
       <button @click="logout" class="mobile-logout">Logout</button>
     </div>
     <div v-if="$store.state.loggedIn" class="subnav">
       <div class="left-nav nav-div">
-        <h3 @click="$router.push('/')" class="nav-item not-current">OVERVIEW</h3>
+        <h3
+          @click="switchPage('/', 'overview')"
+          id="overview"
+          class="nav-item current"
+        >
+          OVERVIEW
+        </h3>
       </div>
       <div class="left-nav nav-div">
-        <h3 @click="$router.push('/form')" class="nav-item not-current">SEMESTER FORM</h3>
+        <h3
+          @click="switchPage('/form', 'form')"
+          id="form"
+          class="nav-item not-current"
+        >
+          SEMESTER FORM
+        </h3>
       </div>
       <div class="right-nav nav-div">
-        <h3 @click="$router.push('/program')" class="nav-item not-current">DEGREE AUDIT</h3>
+        <h3
+          @click="switchPage('/program', 'program')"
+          id="program"
+          class="nav-item not-current"
+        >
+          DEGREE AUDIT
+        </h3>
       </div>
     </div>
   </div>
@@ -51,24 +78,35 @@
 export default {
   name: "Navbar",
   methods: {
-    showDropdown: function (e) {
+    showDropdown: function(e) {
       e.target.nextElementSibling.style.display = "block";
-      setTimeout(function () {
+      setTimeout(function() {
         e.target.nextElementSibling.style.opacity = 1;
       }, 20);
     },
-    hideDropdown: function (e) {
+    hideDropdown: function(e) {
       let dropdown = document.getElementById(e.target.id);
       e.target.style.opacity = 0;
-      dropdown.addEventListener("transitionend", function (e) {
+      dropdown.addEventListener("transitionend", function(e) {
         if (e.target.style.display === "none") {
           e.target.style.display = "none";
         }
       });
     },
-    logout: function () {
+    logout: function() {
       localStorage.clear();
       window.location.href = "/login";
+    },
+    switchPage: function(url, id) {
+      let current = document.getElementsByClassName("current")[0];
+      current.classList.remove("current");
+      current.classList.add("not-current");
+
+      let new_current = document.getElementById(id);
+      new_current.classList.remove("not-current");
+      new_current.classList.add("current");
+
+      this.$router.push(url);
     },
   },
 };

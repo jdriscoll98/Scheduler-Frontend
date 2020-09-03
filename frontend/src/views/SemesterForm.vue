@@ -14,503 +14,746 @@
               <form @submit.prevent="fetchCourses">
                 <div class="form-group">
                   <label class="form-label">Program Level</label>
-                  <select class="form-input" v-model="searchForm.level" name="level">
+                  <select
+                    class="form-input"
+                    v-model="searchForm.level"
+                    name="level"
+                  >
                     <option value class selected="selected">--</option>
-                    <option label="Undergraduate" value="UGRD">Undergraduate</option>
+                    <option label="Undergraduate" value="UGRD"
+                      >Undergraduate</option
+                    >
                     <option label="Graduate" value="GRAD">Graduate</option>
                     <option label="Law" value="LAW">Law</option>
-                    <option label="Medical School" value="MED">Medical School</option>
+                    <option label="Medical School" value="MED"
+                      >Medical School</option
+                    >
                     <option label="Pharmacy" value="PHM">Pharmacy</option>
-                    <option label="Physician Assistant" value="PA">Physician Assistant</option>
-                    <option label="Professional" value="PROF">Professional</option>
-                    <option label="Veterinary Medicine" value="VEM">Veterinary Medicine</option>
+                    <option label="Physician Assistant" value="PA"
+                      >Physician Assistant</option
+                    >
+                    <option label="Professional" value="PROF"
+                      >Professional</option
+                    >
+                    <option label="Veterinary Medicine" value="VEM"
+                      >Veterinary Medicine</option
+                    >
                   </select>
                 </div>
                 <div class="form-group">
                   <label class="form-label">Department</label>
-                  <select class="form-input" v-model="searchForm.department" name="department">
+                  <select
+                    class="form-input"
+                    v-model="searchForm.department"
+                    name="department"
+                  >
                     <option value class selected="selected">--</option>
                     <option
                       label="Accounting, Fisher School of"
                       value="17030000"
-                    >Accounting, Fisher School of</option>
-                    <option label="Advertising" value="23020000">Advertising</option>
-                    <option
-                      label="African American Studies"
-                      value="16620000"
-                    >African American Studies</option>
-                    <option label="African Studies" value="16600000">African Studies</option>
+                      >Accounting, Fisher School of</option
+                    >
+                    <option label="Advertising" value="23020000"
+                      >Advertising</option
+                    >
+                    <option label="African American Studies" value="16620000"
+                      >African American Studies</option
+                    >
+                    <option label="African Studies" value="16600000"
+                      >African Studies</option
+                    >
                     <option
                       label="Agricultural &amp; Life Sciences-General"
                       value="60030000"
-                    >Agricultural &amp; Life Sciences-General</option>
+                      >Agricultural &amp; Life Sciences-General</option
+                    >
                     <option
                       label="Agricultural Education and Communication"
                       value="60260000"
-                    >Agricultural Education and Communication</option>
+                      >Agricultural Education and Communication</option
+                    >
                     <option
                       label="Agricultural Operations Management"
                       value="60079998"
-                    >Agricultural Operations Management</option>
+                      >Agricultural Operations Management</option
+                    >
                     <option
                       label="Agricultural and Biological Engineering"
                       value="60070000"
-                    >Agricultural and Biological Engineering</option>
+                      >Agricultural and Biological Engineering</option
+                    >
                     <option label="Agronomy" value="60080000">Agronomy</option>
-                    <option label="Animal Sciences" value="60090000">Animal Sciences</option>
-                    <option label="Anthropology" value="16040000">Anthropology</option>
+                    <option label="Animal Sciences" value="60090000"
+                      >Animal Sciences</option
+                    >
+                    <option label="Anthropology" value="16040000"
+                      >Anthropology</option
+                    >
                     <option
                       label="Applied Physiology &amp; Kinesiology"
                       value="26030000"
-                    >Applied Physiology &amp; Kinesiology</option>
-                    <option label="Architecture, School of" value="15020000">Architecture, School of</option>
-                    <option label="Art and Art History" value="13020000">Art and Art History</option>
-                    <option label="Arts-General" value="13010000">Arts-General</option>
-                    <option label="Astronomy" value="16060000">Astronomy</option>
+                      >Applied Physiology &amp; Kinesiology</option
+                    >
+                    <option label="Architecture, School of" value="15020000"
+                      >Architecture, School of</option
+                    >
+                    <option label="Art and Art History" value="13020000"
+                      >Art and Art History</option
+                    >
+                    <option label="Arts-General" value="13010000"
+                      >Arts-General</option
+                    >
+                    <option label="Astronomy" value="16060000"
+                      >Astronomy</option
+                    >
                     <option
                       label="Behavioral Science &amp; Community Health"
                       value="33040000"
-                    >Behavioral Science &amp; Community Health</option>
-                    <option label="Biological Sciences" value="16900300">Biological Sciences</option>
-                    <option label="Biomedical Engineering" value="19340000">Biomedical Engineering</option>
-                    <option label="Biostatistics" value="36010000">Biostatistics</option>
+                      >Behavioral Science &amp; Community Health</option
+                    >
+                    <option label="Biological Sciences" value="16900300"
+                      >Biological Sciences</option
+                    >
+                    <option label="Biomedical Engineering" value="19340000"
+                      >Biomedical Engineering</option
+                    >
+                    <option label="Biostatistics" value="36010000"
+                      >Biostatistics</option
+                    >
                     <option label="Botany" value="16900500">Botany</option>
-                    <option label="Business Admin-General" value="17010000">Business Admin-General</option>
-                    <option label="Chemical Engineering" value="19030000">Chemical Engineering</option>
-                    <option label="Chemistry" value="16120000">Chemistry</option>
+                    <option label="Business Admin-General" value="17010000"
+                      >Business Admin-General</option
+                    >
+                    <option label="Chemical Engineering" value="19030000"
+                      >Chemical Engineering</option
+                    >
+                    <option label="Chemistry" value="16120000"
+                      >Chemistry</option
+                    >
                     <option
                       label="Civil and Coastal Engineering"
                       value="19040000"
-                    >Civil and Coastal Engineering</option>
+                      >Civil and Coastal Engineering</option
+                    >
                     <option label="Classics" value="16140000">Classics</option>
-                    <option label="Classics-Greek Studies" value="16140300">Classics-Greek Studies</option>
-                    <option label="Classics-Latin" value="16140500">Classics-Latin</option>
-                    <option
-                      label="Clinical/Health Psychology"
-                      value="33070000"
-                    >Clinical/Health Psychology</option>
+                    <option label="Classics-Greek Studies" value="16140300"
+                      >Classics-Greek Studies</option
+                    >
+                    <option label="Classics-Latin" value="16140500"
+                      >Classics-Latin</option
+                    >
+                    <option label="Clinical/Health Psychology" value="33070000"
+                      >Clinical/Health Psychology</option
+                    >
                     <option
                       label="College of Public Health &amp; Health Professions"
                       value="33000000"
-                    >College of Public Health &amp; Health Professions</option>
+                      >College of Public Health &amp; Health Professions</option
+                    >
                     <option
                       label="Comparative, Diagnostic &amp; Population Medicine"
                       value="28060000"
-                    >Comparative, Diagnostic &amp; Population Medicine</option>
+                      >Comparative, Diagnostic &amp; Population Medicine</option
+                    >
                     <option
                       label="Computer &amp; Information Science &amp; Engineering"
                       value="19140000"
                     >
-                      Computer &amp; Information Science &amp;
-                      Engineering
+                      Computer &amp; Information Science &amp; Engineering
                     </option>
                     <option
                       label="Construction Management, Rinker School of"
                       value="15030000"
-                    >Construction Management, Rinker School of</option>
-                    <option label="Criminology" value="16920300">Criminology</option>
-                    <option label="Dentistry-Endodontics" value="34110000">Dentistry-Endodontics</option>
-                    <option label="Dentistry-General" value="34010000">Dentistry-General</option>
+                      >Construction Management, Rinker School of</option
+                    >
+                    <option label="Criminology" value="16920300"
+                      >Criminology</option
+                    >
+                    <option label="Dentistry-Endodontics" value="34110000"
+                      >Dentistry-Endodontics</option
+                    >
+                    <option label="Dentistry-General" value="34010000"
+                      >Dentistry-General</option
+                    >
                     <option
                       label="Dentistry-Oral &amp; Maxillofacial Diagnostic Sci"
                       value="34160000"
-                    >Dentistry-Oral &amp; Maxillofacial Diagnostic Sci</option>
-                    <option label="Dentistry-Oral Biology" value="34030000">Dentistry-Oral Biology</option>
-                    <option label="Dentistry-Orthodontics" value="34070000">Dentistry-Orthodontics</option>
-                    <option label="Dentistry-Periodontics" value="34130000">Dentistry-Periodontics</option>
-                    <option
-                      label="Dentistry-Prosthodontics"
-                      value="34140000"
-                    >Dentistry-Prosthodontics</option>
+                      >Dentistry-Oral &amp; Maxillofacial Diagnostic Sci</option
+                    >
+                    <option label="Dentistry-Oral Biology" value="34030000"
+                      >Dentistry-Oral Biology</option
+                    >
+                    <option label="Dentistry-Orthodontics" value="34070000"
+                      >Dentistry-Orthodontics</option
+                    >
+                    <option label="Dentistry-Periodontics" value="34130000"
+                      >Dentistry-Periodontics</option
+                    >
+                    <option label="Dentistry-Prosthodontics" value="34140000"
+                      >Dentistry-Prosthodontics</option
+                    >
                     <option
                       label="Design, Construction &amp; Planning-General"
                       value="15010000"
-                    >Design, Construction &amp; Planning-General</option>
-                    <option
-                      label="Digital Worlds Institute"
-                      value="13050000"
-                    >Digital Worlds Institute</option>
-                    <option label="Economics" value="17050000">Economics</option>
-                    <option label="Economics" value="16030000">Economics</option>
+                      >Design, Construction &amp; Planning-General</option
+                    >
+                    <option label="Digital Worlds Institute" value="13050000"
+                      >Digital Worlds Institute</option
+                    >
+                    <option label="Economics" value="17050000"
+                      >Economics</option
+                    >
+                    <option label="Economics" value="16030000"
+                      >Economics</option
+                    >
                     <option
                       label="Education-Human Devel and Org Studies in Ed"
                       value="18070000"
-                    >Education-Human Devel and Org Studies in Ed</option>
+                      >Education-Human Devel and Org Studies in Ed</option
+                    >
                     <option
                       label="Education-Spec Ed/Schl Psych/Early Child Stu"
                       value="18080000"
-                    >Education-Spec Ed/Schl Psych/Early Child Stu</option>
+                      >Education-Spec Ed/Schl Psych/Early Child Stu</option
+                    >
                     <option
                       label="Education-Teaching and Learning"
                       value="18050000"
-                    >Education-Teaching and Learning</option>
+                      >Education-Teaching and Learning</option
+                    >
                     <option
                       label="Electrical and Computer Engineering"
                       value="19050000"
-                    >Electrical and Computer Engineering</option>
-                    <option label="Engineering-General" value="19400000">Engineering-General</option>
+                      >Electrical and Computer Engineering</option
+                    >
+                    <option label="Engineering-General" value="19400000"
+                      >Engineering-General</option
+                    >
                     <option label="English" value="16200000">English</option>
-                    <option
-                      label="Entomology and Nematology"
-                      value="60140000"
-                    >Entomology and Nematology</option>
+                    <option label="Entomology and Nematology" value="60140000"
+                      >Entomology and Nematology</option
+                    >
                     <option
                       label="Environmental Engineering Science"
                       value="19100000"
-                    >Environmental Engineering Science</option>
-                    <option
-                      label="Environmental Horticulture"
-                      value="60180000"
-                    >Environmental Horticulture</option>
+                      >Environmental Engineering Science</option
+                    >
+                    <option label="Environmental Horticulture" value="60180000"
+                      >Environmental Horticulture</option
+                    >
                     <option
                       label="Environmental and Global Health"
                       value="33160000"
-                    >Environmental and Global Health</option>
-                    <option label="Epidemiology" value="36020000">Epidemiology</option>
-                    <option label="European Studies" value="16660000">European Studies</option>
+                      >Environmental and Global Health</option
+                    >
+                    <option label="Epidemiology" value="36020000"
+                      >Epidemiology</option
+                    >
+                    <option label="European Studies" value="16660000"
+                      >European Studies</option
+                    >
                     <option
                       label="Family, Youth, and Community Sciences"
                       value="60320000"
-                    >Family, Youth, and Community Sciences</option>
+                      >Family, Youth, and Community Sciences</option
+                    >
                     <option label="Finance" value="17060000">Finance</option>
-                    <option label="First Year Florida" value="16010000">First Year Florida</option>
+                    <option label="First Year Florida" value="16010000"
+                      >First Year Florida</option
+                    >
                     <option
                       label="Fisheries &amp; Aquatic Science - SFRC"
                       value="60469000"
-                    >Fisheries &amp; Aquatic Science - SFRC</option>
-                    <option label="Flexible Learning" value="52033000">Flexible Learning</option>
+                      >Fisheries &amp; Aquatic Science - SFRC</option
+                    >
+                    <option label="Flexible Learning" value="52033000"
+                      >Flexible Learning</option
+                    >
                     <option
                       label="Food Science and Human Nutrition"
                       value="60150000"
-                    >Food Science and Human Nutrition</option>
-                    <option
-                      label="Food and Resource Economics"
-                      value="60060000"
-                    >Food and Resource Economics</option>
+                      >Food Science and Human Nutrition</option
+                    >
+                    <option label="Food and Resource Economics" value="60060000"
+                      >Food and Resource Economics</option
+                    >
                     <option
                       label="Forest Resources and Conservation - SFRC"
                       value="60460000"
-                    >Forest Resources and Conservation - SFRC</option>
-                    <option label="Geography" value="16220000">Geography</option>
+                      >Forest Resources and Conservation - SFRC</option
+                    >
+                    <option label="Geography" value="16220000"
+                      >Geography</option
+                    >
                     <option label="Geology" value="16240000">Geology</option>
-                    <option label="Geomatics - SFRC" value="60466000">Geomatics - SFRC</option>
+                    <option label="Geomatics - SFRC" value="60466000"
+                      >Geomatics - SFRC</option
+                    >
                     <option
                       label="Health Education and Behavior"
                       value="26050000"
-                    >Health Education and Behavior</option>
+                      >Health Education and Behavior</option
+                    >
                     <option
                       label="Health Services Administration"
                       value="33080000"
-                    >Health Services Administration</option>
+                      >Health Services Administration</option
+                    >
                     <option label="History" value="16280000">History</option>
-                    <option label="Honors Office" value="02030000">Honors Office</option>
-                    <option label="Horticultural Sciences" value="60230000">Horticultural Sciences</option>
+                    <option label="Honors Office" value="02030000"
+                      >Honors Office</option
+                    >
+                    <option label="Horticultural Sciences" value="60230000"
+                      >Horticultural Sciences</option
+                    >
                     <option
                       label="Industrial and Systems Engineering"
                       value="19060000"
-                    >Industrial and Systems Engineering</option>
+                      >Industrial and Systems Engineering</option
+                    >
                     <option
                       label="Infectious Diseases &amp; Immunology"
                       value="28100800"
-                    >Infectious Diseases &amp; Immunology</option>
+                      >Infectious Diseases &amp; Immunology</option
+                    >
                     <option
                       label="Info Systems and Operations Management"
                       value="17070000"
-                    >Info Systems and Operations Management</option>
-                    <option label="Innovation Academy" value="02070400">Innovation Academy</option>
-                    <option
-                      label="Interdisciplinary Studies"
-                      value="16000000"
-                    >Interdisciplinary Studies</option>
-                    <option label="Interior Design" value="15050000">Interior Design</option>
-                    <option label="Jewish Studies" value="16740000">Jewish Studies</option>
-                    <option label="Journalism" value="23040000">Journalism</option>
-                    <option label="Landscape Architecture" value="15040000">Landscape Architecture</option>
+                      >Info Systems and Operations Management</option
+                    >
+                    <option label="Innovation Academy" value="02070400"
+                      >Innovation Academy</option
+                    >
+                    <option label="Interdisciplinary Studies" value="16000000"
+                      >Interdisciplinary Studies</option
+                    >
+                    <option label="Interior Design" value="15050000"
+                      >Interior Design</option
+                    >
+                    <option label="Jewish Studies" value="16740000"
+                      >Jewish Studies</option
+                    >
+                    <option label="Journalism" value="23040000"
+                      >Journalism</option
+                    >
+                    <option label="Landscape Architecture" value="15040000"
+                      >Landscape Architecture</option
+                    >
                     <option
                       label="Languages, Literatures &amp; Cultures"
                       value="16860000"
-                    >Languages, Literatures &amp; Cultures</option>
+                      >Languages, Literatures &amp; Cultures</option
+                    >
                     <option
                       label="Languages, Literatures &amp; Cultures-Akan"
                       value="16860300"
-                    >Languages, Literatures &amp; Cultures-Akan</option>
+                      >Languages, Literatures &amp; Cultures-Akan</option
+                    >
                     <option
                       label="Languages, Literatures &amp; Cultures-Amharic"
                       value="16860400"
-                    >Languages, Literatures &amp; Cultures-Amharic</option>
+                      >Languages, Literatures &amp; Cultures-Amharic</option
+                    >
                     <option
                       label="Languages, Literatures &amp; Cultures-Arabic"
                       value="16860500"
-                    >Languages, Literatures &amp; Cultures-Arabic</option>
+                      >Languages, Literatures &amp; Cultures-Arabic</option
+                    >
                     <option
                       label="Languages, Literatures &amp; Cultures-Chinese"
                       value="16860600"
-                    >Languages, Literatures &amp; Cultures-Chinese</option>
+                      >Languages, Literatures &amp; Cultures-Chinese</option
+                    >
                     <option
                       label="Languages, Literatures &amp; Cultures-Czech"
                       value="16860700"
-                    >Languages, Literatures &amp; Cultures-Czech</option>
+                      >Languages, Literatures &amp; Cultures-Czech</option
+                    >
                     <option
                       label="Languages, Literatures &amp; Cultures-French"
                       value="16860900"
-                    >Languages, Literatures &amp; Cultures-French</option>
+                      >Languages, Literatures &amp; Cultures-French</option
+                    >
                     <option
                       label="Languages, Literatures &amp; Cultures-German"
                       value="16861000"
-                    >Languages, Literatures &amp; Cultures-German</option>
+                      >Languages, Literatures &amp; Cultures-German</option
+                    >
                     <option
                       label="Languages, Literatures &amp; Cultures-Haitian/Creo"
                       value="16861100"
-                    >Languages, Literatures &amp; Cultures-Haitian/Creo</option>
+                      >Languages, Literatures &amp;
+                      Cultures-Haitian/Creo</option
+                    >
                     <option
                       label="Languages, Literatures &amp; Cultures-Hebrew"
                       value="16861200"
-                    >Languages, Literatures &amp; Cultures-Hebrew</option>
+                      >Languages, Literatures &amp; Cultures-Hebrew</option
+                    >
                     <option
                       label="Languages, Literatures &amp; Cultures-Italian"
                       value="16861400"
-                    >Languages, Literatures &amp; Cultures-Italian</option>
+                      >Languages, Literatures &amp; Cultures-Italian</option
+                    >
                     <option
                       label="Languages, Literatures &amp; Cultures-Japanese"
                       value="16861500"
-                    >Languages, Literatures &amp; Cultures-Japanese</option>
+                      >Languages, Literatures &amp; Cultures-Japanese</option
+                    >
                     <option
                       label="Languages, Literatures &amp; Cultures-Korean"
                       value="16861600"
-                    >Languages, Literatures &amp; Cultures-Korean</option>
+                      >Languages, Literatures &amp; Cultures-Korean</option
+                    >
                     <option
                       label="Languages, Literatures &amp; Cultures-Polish"
                       value="16861700"
-                    >Languages, Literatures &amp; Cultures-Polish</option>
+                      >Languages, Literatures &amp; Cultures-Polish</option
+                    >
                     <option
                       label="Languages, Literatures &amp; Cultures-Russian"
                       value="16861800"
-                    >Languages, Literatures &amp; Cultures-Russian</option>
+                      >Languages, Literatures &amp; Cultures-Russian</option
+                    >
                     <option
                       label="Languages, Literatures &amp; Cultures-Swahili"
                       value="16862000"
-                    >Languages, Literatures &amp; Cultures-Swahili</option>
+                      >Languages, Literatures &amp; Cultures-Swahili</option
+                    >
                     <option
                       label="Languages, Literatures &amp; Cultures-Vietnamese"
                       value="16862200"
-                    >Languages, Literatures &amp; Cultures-Vietnamese</option>
+                      >Languages, Literatures &amp; Cultures-Vietnamese</option
+                    >
                     <option
                       label="Languages, Literatures &amp; Cultures-Wolof"
                       value="16862300"
-                    >Languages, Literatures &amp; Cultures-Wolof</option>
+                      >Languages, Literatures &amp; Cultures-Wolof</option
+                    >
                     <option
                       label="Languages, Literatures &amp; Cultures-Yoruba"
                       value="16862500"
-                    >Languages, Literatures &amp; Cultures-Yoruba</option>
+                      >Languages, Literatures &amp; Cultures-Yoruba</option
+                    >
                     <option
                       label="Large Animal Clinical Science"
                       value="28040000"
-                    >Large Animal Clinical Science</option>
-                    <option label="Latin American Studies" value="57140000">Latin American Studies</option>
+                      >Large Animal Clinical Science</option
+                    >
+                    <option label="Latin American Studies" value="57140000"
+                      >Latin American Studies</option
+                    >
                     <option label="Law" value="24010000">Law</option>
-                    <option label="Law-Taxation" value="24050000">Law-Taxation</option>
-                    <option label="Linguistics" value="16300000">Linguistics</option>
-                    <option label="Management" value="17020000">Management</option>
-                    <option label="Marketing" value="17080000">Marketing</option>
-                    <option label="Mass Communication" value="23200000">Mass Communication</option>
+                    <option label="Law-Taxation" value="24050000"
+                      >Law-Taxation</option
+                    >
+                    <option label="Linguistics" value="16300000"
+                      >Linguistics</option
+                    >
+                    <option label="Management" value="17020000"
+                      >Management</option
+                    >
+                    <option label="Marketing" value="17080000"
+                      >Marketing</option
+                    >
+                    <option label="Mass Communication" value="23200000"
+                      >Mass Communication</option
+                    >
                     <option
                       label="Materials Science and Engineering"
                       value="19090000"
-                    >Materials Science and Engineering</option>
-                    <option label="Mathematics" value="16320000">Mathematics</option>
+                      >Materials Science and Engineering</option
+                    >
+                    <option label="Mathematics" value="16320000"
+                      >Mathematics</option
+                    >
                     <option
                       label="Mechanical/Aerospace Engineering"
                       value="19020000"
-                    >Mechanical/Aerospace Engineering</option>
+                      >Mechanical/Aerospace Engineering</option
+                    >
                     <option
                       label="Medicine-Aging/Geriatric Research"
                       value="29310000"
-                    >Medicine-Aging/Geriatric Research</option>
-                    <option label="Medicine-Anatomy" value="29260000">Medicine-Anatomy</option>
-                    <option label="Medicine-Anesthesiology" value="29040000">Medicine-Anesthesiology</option>
+                      >Medicine-Aging/Geriatric Research</option
+                    >
+                    <option label="Medicine-Anatomy" value="29260000"
+                      >Medicine-Anatomy</option
+                    >
+                    <option label="Medicine-Anesthesiology" value="29040000"
+                      >Medicine-Anesthesiology</option
+                    >
                     <option
                       label="Medicine-Biochemistry/Molecular Biology"
                       value="29030000"
-                    >Medicine-Biochemistry/Molecular Biology</option>
+                      >Medicine-Biochemistry/Molecular Biology</option
+                    >
                     <option
                       label="Medicine-Community Health and Family Medicine"
                       value="29160000"
-                    >Medicine-Community Health and Family Medicine</option>
-                    <option
-                      label="Medicine-Emergency Medicine"
-                      value="29290200"
-                    >Medicine-Emergency Medicine</option>
-                    <option label="Medicine-General" value="29010000">Medicine-General</option>
+                      >Medicine-Community Health and Family Medicine</option
+                    >
+                    <option label="Medicine-Emergency Medicine" value="29290200"
+                      >Medicine-Emergency Medicine</option
+                    >
+                    <option label="Medicine-General" value="29010000"
+                      >Medicine-General</option
+                    >
                     <option
                       label="Medicine-Health Outcomes &amp; Biomedical Informat"
                       value="29240100"
-                    >Medicine-Health Outcomes &amp; Biomedical Informat</option>
-                    <option label="Medicine-Medicine" value="29050000">Medicine-Medicine</option>
+                      >Medicine-Health Outcomes &amp; Biomedical
+                      Informat</option
+                    >
+                    <option label="Medicine-Medicine" value="29050000"
+                      >Medicine-Medicine</option
+                    >
                     <option
                       label="Medicine-Molecular Genetics &amp; Microbiology"
                       value="29060000"
-                    >Medicine-Molecular Genetics &amp; Microbiology</option>
+                      >Medicine-Molecular Genetics &amp; Microbiology</option
+                    >
                     <option
                       label="Medicine-Neurological Surgery"
                       value="29190000"
-                    >Medicine-Neurological Surgery</option>
-                    <option label="Medicine-Neurology" value="29180000">Medicine-Neurology</option>
-                    <option label="Medicine-Neuroscience" value="29020000">Medicine-Neuroscience</option>
+                      >Medicine-Neurological Surgery</option
+                    >
+                    <option label="Medicine-Neurology" value="29180000"
+                      >Medicine-Neurology</option
+                    >
+                    <option label="Medicine-Neuroscience" value="29020000"
+                      >Medicine-Neuroscience</option
+                    >
                     <option
                       label="Medicine-Obstetrics &amp; Gynecology"
                       value="29070000"
-                    >Medicine-Obstetrics &amp; Gynecology</option>
-                    <option label="Medicine-Ophthalmology" value="29150000">Medicine-Ophthalmology</option>
+                      >Medicine-Obstetrics &amp; Gynecology</option
+                    >
+                    <option label="Medicine-Ophthalmology" value="29150000"
+                      >Medicine-Ophthalmology</option
+                    >
                     <option
                       label="Medicine-Orthopaedics and Rehabilitation"
                       value="29170000"
-                    >Medicine-Orthopaedics and Rehabilitation</option>
-                    <option label="Medicine-Otolaryngology" value="29210000">Medicine-Otolaryngology</option>
-                    <option label="Medicine-Pathology" value="29080000">Medicine-Pathology</option>
-                    <option label="Medicine-Pediatrics" value="29090000">Medicine-Pediatrics</option>
+                      >Medicine-Orthopaedics and Rehabilitation</option
+                    >
+                    <option label="Medicine-Otolaryngology" value="29210000"
+                      >Medicine-Otolaryngology</option
+                    >
+                    <option label="Medicine-Pathology" value="29080000"
+                      >Medicine-Pathology</option
+                    >
+                    <option label="Medicine-Pediatrics" value="29090000"
+                      >Medicine-Pediatrics</option
+                    >
                     <option
                       label="Medicine-Pharmacology &amp; Therapeutics"
                       value="29100000"
-                    >Medicine-Pharmacology &amp; Therapeutics</option>
-                    <option label="Medicine-Physiology" value="29110000">Medicine-Physiology</option>
-                    <option label="Medicine-Psychiatry" value="29120000">Medicine-Psychiatry</option>
-                    <option
-                      label="Medicine-Radiation Oncology"
-                      value="29200000"
-                    >Medicine-Radiation Oncology</option>
-                    <option label="Medicine-Radiology" value="29130000">Medicine-Radiology</option>
+                      >Medicine-Pharmacology &amp; Therapeutics</option
+                    >
+                    <option label="Medicine-Physiology" value="29110000"
+                      >Medicine-Physiology</option
+                    >
+                    <option label="Medicine-Psychiatry" value="29120000"
+                      >Medicine-Psychiatry</option
+                    >
+                    <option label="Medicine-Radiation Oncology" value="29200000"
+                      >Medicine-Radiation Oncology</option
+                    >
+                    <option label="Medicine-Radiology" value="29130000"
+                      >Medicine-Radiology</option
+                    >
                     <option
                       label="Medicine-School of Physician Assistant Studies"
                       value="29710000"
-                    >Medicine-School of Physician Assistant Studies</option>
-                    <option label="Medicine-Surgery" value="29140000">Medicine-Surgery</option>
+                      >Medicine-School of Physician Assistant Studies</option
+                    >
+                    <option label="Medicine-Surgery" value="29140000"
+                      >Medicine-Surgery</option
+                    >
                     <option
                       label="Medieval &amp; Early Modern Studies"
                       value="16820000"
-                    >Medieval &amp; Early Modern Studies</option>
+                      >Medieval &amp; Early Modern Studies</option
+                    >
                     <option
                       label="Microbiology and Cell Science"
                       value="60100000"
-                    >Microbiology and Cell Science</option>
-                    <option
-                      label="Military Science-Air Force"
-                      value="25020000"
-                    >Military Science-Air Force</option>
-                    <option label="Military Science-Army" value="25010000">Military Science-Army</option>
-                    <option label="Military Science-Navy" value="25050000">Military Science-Navy</option>
+                      >Microbiology and Cell Science</option
+                    >
+                    <option label="Military Science-Air Force" value="25020000"
+                      >Military Science-Air Force</option
+                    >
+                    <option label="Military Science-Army" value="25010000"
+                      >Military Science-Army</option
+                    >
+                    <option label="Military Science-Navy" value="25050000"
+                      >Military Science-Navy</option
+                    >
                     <option label="Music" value="13030000">Music</option>
                     <option
                       label="Natural Resources and Environment, School of"
                       value="60170000"
-                    >Natural Resources and Environment, School of</option>
+                      >Natural Resources and Environment, School of</option
+                    >
                     <option
                       label="New World School of the Arts-Dance"
                       value="13100500"
-                    >New World School of the Arts-Dance</option>
+                      >New World School of the Arts-Dance</option
+                    >
                     <option
                       label="New World School of the Arts-Music"
                       value="13100300"
-                    >New World School of the Arts-Music</option>
+                      >New World School of the Arts-Music</option
+                    >
                     <option
                       label="New World School of the Arts-Theatre"
                       value="13100400"
-                    >New World School of the Arts-Theatre</option>
+                      >New World School of the Arts-Theatre</option
+                    >
                     <option
                       label="New World School of the Arts-Visual Arts"
                       value="13100200"
-                    >New World School of the Arts-Visual Arts</option>
+                      >New World School of the Arts-Visual Arts</option
+                    >
                     <option
                       label="Nuclear and Radiological Engineering"
                       value="19080000"
-                    >Nuclear and Radiological Engineering</option>
+                      >Nuclear and Radiological Engineering</option
+                    >
                     <option label="Nursing" value="31010000">Nursing</option>
-                    <option label="Occupational Therapy" value="33030000">Occupational Therapy</option>
-                    <option label="Packaging Sciences" value="60079999">Packaging Sciences</option>
-                    <option label="Pathobiology" value="28100000">Pathobiology</option>
+                    <option label="Occupational Therapy" value="33030000"
+                      >Occupational Therapy</option
+                    >
+                    <option label="Packaging Sciences" value="60079999"
+                      >Packaging Sciences</option
+                    >
+                    <option label="Pathobiology" value="28100000"
+                      >Pathobiology</option
+                    >
                     <option
                       label="Pharmacy-Medicinal Chemistry"
                       value="32030000"
-                    >Pharmacy-Medicinal Chemistry</option>
-                    <option label="Pharmacy-Pharmaceutics" value="32020000">Pharmacy-Pharmaceutics</option>
-                    <option
-                      label="Pharmacy-Pharmacodynamics"
-                      value="32040000"
-                    >Pharmacy-Pharmacodynamics</option>
+                      >Pharmacy-Medicinal Chemistry</option
+                    >
+                    <option label="Pharmacy-Pharmaceutics" value="32020000"
+                      >Pharmacy-Pharmaceutics</option
+                    >
+                    <option label="Pharmacy-Pharmacodynamics" value="32040000"
+                      >Pharmacy-Pharmacodynamics</option
+                    >
                     <option
                       label="Pharmacy-Pharmacy Outcomes and Policy"
                       value="32050000"
-                    >Pharmacy-Pharmacy Outcomes and Policy</option>
-                    <option
-                      label="Pharmacy-Pharmacy Practice"
-                      value="32060000"
-                    >Pharmacy-Pharmacy Practice</option>
-                    <option label="Philosophy" value="16340000">Philosophy</option>
-                    <option label="Physical Therapy" value="33050000">Physical Therapy</option>
+                      >Pharmacy-Pharmacy Outcomes and Policy</option
+                    >
+                    <option label="Pharmacy-Pharmacy Practice" value="32060000"
+                      >Pharmacy-Pharmacy Practice</option
+                    >
+                    <option label="Philosophy" value="16340000"
+                      >Philosophy</option
+                    >
+                    <option label="Physical Therapy" value="33050000"
+                      >Physical Therapy</option
+                    >
                     <option label="Physics" value="16360000">Physics</option>
-                    <option label="Physiological Science" value="28050000">Physiological Science</option>
-                    <option label="Plant Pathology" value="60190000">Plant Pathology</option>
-                    <option label="Political Science" value="16380000">Political Science</option>
-                    <option label="Portuguese" value="16880500">Portuguese</option>
-                    <option label="Psychology" value="16400000">Psychology</option>
+                    <option label="Physiological Science" value="28050000"
+                      >Physiological Science</option
+                    >
+                    <option label="Plant Pathology" value="60190000"
+                      >Plant Pathology</option
+                    >
+                    <option label="Political Science" value="16380000"
+                      >Political Science</option
+                    >
+                    <option label="Portuguese" value="16880500"
+                      >Portuguese</option
+                    >
+                    <option label="Psychology" value="16400000"
+                      >Psychology</option
+                    >
                     <option
                       label="Public Health &amp; Health Professions - Undergrad"
                       value="33010000"
-                    >Public Health &amp; Health Professions - Undergrad</option>
-                    <option label="Public Relations" value="23060000">Public Relations</option>
+                      >Public Health &amp; Health Professions -
+                      Undergrad</option
+                    >
+                    <option label="Public Relations" value="23060000"
+                      >Public Relations</option
+                    >
                     <option
                       label="Rehabilitation Science Doctoral Program"
                       value="33120000"
-                    >Rehabilitation Science Doctoral Program</option>
+                      >Rehabilitation Science Doctoral Program</option
+                    >
                     <option label="Religion" value="16420000">Religion</option>
-                    <option
-                      label="Small Animal Clinic Science"
-                      value="28090000"
-                    >Small Animal Clinic Science</option>
-                    <option label="Sociology" value="16920500">Sociology</option>
-                    <option label="Soil and Water Sciences" value="60210000">Soil and Water Sciences</option>
+                    <option label="Small Animal Clinic Science" value="28090000"
+                      >Small Animal Clinic Science</option
+                    >
+                    <option label="Sociology" value="16920500"
+                      >Sociology</option
+                    >
+                    <option label="Soil and Water Sciences" value="60210000"
+                      >Soil and Water Sciences</option
+                    >
                     <option label="Spanish" value="16880300">Spanish</option>
                     <option
                       label="Speech, Language, and Hearing Sciences"
                       value="33060000"
-                    >Speech, Language, and Hearing Sciences</option>
-                    <option label="Sport Management" value="26040000">Sport Management</option>
-                    <option label="Statistics" value="16480000">Statistics</option>
-                    <option label="Telecommunication" value="23030000">Telecommunication</option>
-                    <option label="Theatre and Dance" value="13040000">Theatre and Dance</option>
+                      >Speech, Language, and Hearing Sciences</option
+                    >
+                    <option label="Sport Management" value="26040000"
+                      >Sport Management</option
+                    >
+                    <option label="Statistics" value="16480000"
+                      >Statistics</option
+                    >
+                    <option label="Telecommunication" value="23030000"
+                      >Telecommunication</option
+                    >
+                    <option label="Theatre and Dance" value="13040000"
+                      >Theatre and Dance</option
+                    >
                     <option
                       label="Tourism Recreation and Sport Management"
                       value="26020000"
-                    >Tourism Recreation and Sport Management</option>
+                      >Tourism Recreation and Sport Management</option
+                    >
                     <option
                       label="Tourism, Hospitality &amp; Event Management"
                       value="26090000"
-                    >Tourism, Hospitality &amp; Event Management</option>
-                    <option
-                      label="Undergraduate Studies -SFCC"
-                      value="02070000"
-                    >Undergraduate Studies -SFCC</option>
-                    <option
-                      label="Urban and Regional Planning"
-                      value="15060000"
-                    >Urban and Regional Planning</option>
-                    <option
-                      label="Veterinary Medical Sciences"
-                      value="28011100"
-                    >Veterinary Medical Sciences</option>
+                      >Tourism, Hospitality &amp; Event Management</option
+                    >
+                    <option label="Undergraduate Studies -SFCC" value="02070000"
+                      >Undergraduate Studies -SFCC</option
+                    >
+                    <option label="Urban and Regional Planning" value="15060000"
+                      >Urban and Regional Planning</option
+                    >
+                    <option label="Veterinary Medical Sciences" value="28011100"
+                      >Veterinary Medical Sciences</option
+                    >
                     <option
                       label="Veterinary Medicine Dean's Office"
                       value="28010000"
-                    >Veterinary Medicine Dean's Office</option>
+                      >Veterinary Medicine Dean's Office</option
+                    >
                     <option
                       label="Wildlife Ecology and Conservation"
                       value="60470000"
-                    >Wildlife Ecology and Conservation</option>
-                    <option label="Womens Studies" value="16800000">Womens Studies</option>
-                    <option label="Writing Program" value="02060000">Writing Program</option>
+                      >Wildlife Ecology and Conservation</option
+                    >
+                    <option label="Womens Studies" value="16800000"
+                      >Womens Studies</option
+                    >
+                    <option label="Writing Program" value="02060000"
+                      >Writing Program</option
+                    >
                     <option
                       label="Written &amp; Oral Communication, Dial Center"
                       value="16580100"
-                    >Written &amp; Oral Communication, Dial Center</option>
+                      >Written &amp; Oral Communication, Dial Center</option
+                    >
                     <option label="Zoology" value="16900700">Zoology</option>
                   </select>
                 </div>
@@ -575,7 +818,13 @@
                   <td>{{ course.name }}</td>
                   <td class="desktop-only">{{ course.credits }}</td>
                   <td class="mobile-only">
-                    <button @click.prevent @click="addCourse(course)" class="add-course">Add</button>
+                    <button
+                      @click.prevent
+                      @click="addCourse(course)"
+                      class="add-course"
+                    >
+                      Add
+                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -613,7 +862,13 @@
                   <td>{{ course.name }}</td>
                   <td class="desktop-only">{{ course.credits }}</td>
                   <td class="mobile-only">
-                    <button @click.prevent @click="addCourse(course)" class="add-course">Add</button>
+                    <button
+                      @click.prevent
+                      @click="addCourse(course)"
+                      class="add-course"
+                    >
+                      Add
+                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -622,8 +877,12 @@
         </div>
       </div>
       <div class="filters-button">
-        <button @click="showFilters()" id="show-filters" class="show-filters">Show Filters</button>
-        <button @click="hideFilters()" id="hide-filters" class="hide-filters">Hide Filters</button>
+        <button @click="showFilters()" id="show-filters" class="show-filters">
+          Show Filters
+        </button>
+        <button @click="hideFilters()" id="hide-filters" class="hide-filters">
+          Hide Filters
+        </button>
       </div>
       <div class="semester-builder">
         <h1 class="semester-header">Semester {{ semesterForm.number }}</h1>
@@ -632,12 +891,16 @@
           v-if="this.$store.state.semesterID"
           @click="updateSemester"
           class="save-button"
-        >Update</button>
+        >
+          Update
+        </button>
         <button
           v-if="this.$store.state.semesterID"
           @click="deleteSemester"
           class="delete-button"
-        >Delete</button>
+        >
+          Delete
+        </button>
         <button v-else @click="createSemester" class="save-button">Save</button>
         <div class="semester-term">
           <label class="term-label" for="term">Term:</label>
@@ -653,16 +916,18 @@
           </select>
           <label class="term-label" for="term">Year:</label>
           <select id="year" v-model="semesterForm.year" class="semester-select">
-            <option v-for="i in 30" :key="i">{{ 2012 + i}}</option>
+            <option v-for="i in 30" :key="i">{{ 2012 + i }}</option>
           </select>
         </div>
         <div class="semester-list">
-          <div
-            class="warning"
-            v-if="this.$store.state.semesterID"
-          >Some courses may appear more than once if they belong to multiple categories</div>
+          <div class="warning" v-if="this.$store.state.semesterID">
+            Some courses may appear more than once if they belong to multiple
+            categories
+          </div>
           <div class="errors" v-if="this.errors">
-            <p class="error-text" v-for="error in this.errors" :key="error[0]">{{ error }}</p>
+            <p class="error-text" v-for="error in this.errors" :key="error[0]">
+              {{ error }}
+            </p>
           </div>
           <table>
             <thead>
@@ -676,17 +941,29 @@
                     @mouseenter="showDropdown($event)"
                     @mouseleave="hideDropdown($event)"
                     class="info"
-                  >i</span>
+                    >i</span
+                  >
                   <div id="help-box" class="help-box">
                     <strong>What is this?</strong>
-                    <p>Certain Audit categories do not specificy which courses will satisify its requirement (i.e. electives). To correctly fill an ambigous category, select the correct category below.</p>
-                    <p>If a course belongs to a category with a code but also an elective category, choose the elective category and the code will also be met.</p>
                     <p>
-                      <strong>Auto -></strong> Detect requirement by searching audit for course code
+                      Certain Audit categories do not specificy which courses
+                      will satisify its requirement (i.e. electives). To
+                      correctly fill an ambigous category, select the correct
+                      category below.
+                    </p>
+                    <p>
+                      If a course belongs to a category with a code but also an
+                      elective category, choose the elective category and the
+                      code will also be met.
+                    </p>
+                    <p>
+                      <strong>Auto -></strong> Detect requirement by searching
+                      audit for course code
                     </p>
                     <p>
                       <strong>Other Categories -></strong>
-                      Add a course to a specific category ( this will also search for the course code and fufill those requirements)
+                      Add a course to a specific category ( this will also
+                      search for the course code and fufill those requirements)
                     </p>
                   </div>
                 </th>
@@ -699,14 +976,23 @@
                 <td class="desktop-only">{{ course.name }}</td>
                 <td class="desktop-only">{{ course.credits }}</td>
                 <td>
-                  <select class="cat-select" @change="updateCategory($event, course)">
+                  <select
+                    class="cat-select"
+                    @change="updateCategory($event, course)"
+                  >
                     <option selected>{{ course.category }}</option>
                     <option value="Auto">Auto</option>
-                    <option v-for="(category, index) in categories" :key="index">{{ category.name }}</option>
+                    <option
+                      v-for="(category, index) in categories"
+                      :key="index"
+                      >{{ category.name }}</option
+                    >
                   </select>
                 </td>
                 <td>
-                  <button @click="remove(course)" class="remove-btn">Delete</button>
+                  <button @click="remove(course)" class="remove-btn">
+                    Delete
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -721,7 +1007,9 @@
                     @dragEnter="handleDragEnter($event)"
                     @dragLeave="handleDragLeave($event)"
                     id="list"
-                  >Drag Courses Here to Add</div>
+                  >
+                    Drag Courses Here to Add
+                  </div>
                 </td>
               </tr>
             </tfoot>
@@ -739,7 +1027,7 @@
 <script>
 export default {
   name: "SemesterForm",
-  data: function () {
+  data: function() {
     return {
       searchForm: {
         level: "",
@@ -750,7 +1038,6 @@ export default {
         term_code: "2208",
       },
       errors: {},
-      categories: [],
       dragSrcEl: null,
       dragCat: null,
       availableCourses: [],
@@ -782,19 +1069,24 @@ export default {
     courseList() {
       return this.courses;
     },
+    categories() {
+      return this.$store.state.categories;
+    },
   },
   created() {
-    this.$store.dispatch("getCategories").then((response) => {
-      this.categories = response.filter((course) => {
-        return course.description !== "N/A";
+    if (this.$store.state.categories.length == 0) {
+      this.$store.dispatch("getCategories").then((response) => {
+        this.$store.state.categories = response.filter((course) => {
+          return course.description !== "N/A";
+        });
       });
-    });
+    }
     this.semesterForm = this.$store.state.semesterForm;
     this.semesterForm.number =
       this.semesterForm.number || this.$store.state.semesters.length + 1;
   },
   methods: {
-    updateTermCode: function (e) {
+    updateTermCode: function(e) {
       let code, term, term_code;
       term = e.target.value;
       if (term === "Fall") {
@@ -807,10 +1099,10 @@ export default {
       code = "220".concat(term_code);
       this.searchForm.term_code = code;
     },
-    updateCategory: function (e, course) {
+    updateCategory: function(e, course) {
       course["category"] = e.target.value;
     },
-    updateSemester: function () {
+    updateSemester: function() {
       this.$store.dispatch("updateSemester", this.semesterForm).then((res) => {
         if (res.non_field_errors) {
           this.errors = res.non_field_errors;
@@ -819,7 +1111,7 @@ export default {
         }
       });
     },
-    createSemester: function () {
+    createSemester: function() {
       this.$store.dispatch("createSemester", this.semesterForm).then((res) => {
         if (res.non_field_errors) {
           this.errors = res.non_field_errors;
@@ -828,7 +1120,7 @@ export default {
         }
       });
     },
-    deleteSemester: function () {
+    deleteSemester: function() {
       this.$store
         .dispatch("deleteSemester", this.$store.state.semesterID)
         .then((res) => {
@@ -839,12 +1131,12 @@ export default {
           }
         });
     },
-    remove: function (courseToRemove) {
+    remove: function(courseToRemove) {
       this.semesterForm.courses = this.semesterForm.courses.filter((course) => {
         return course !== courseToRemove;
       });
     },
-    handleDragStart: function (event, course) {
+    handleDragStart: function(event, course) {
       event.target.style.opacity = "0.4";
       this.dragSrcEl = course;
       this.dragSrcEl["category"] = "Auto";
@@ -853,40 +1145,40 @@ export default {
       event.dataTransfer.effectAllowed = "copy";
       event.dataTransfer.setData("text/html", course.innerHTML);
     },
-    handleDragOver: function (e) {
+    handleDragOver: function(e) {
       if (e.preventDefault) {
         e.preventDefault();
       }
 
       return false;
     },
-    handleDrop: function (e) {
+    handleDrop: function(e) {
       if (e.stopPropagation) {
         e.stopPropagation();
       }
       this.semesterForm.courses.push(this.dragSrcEl);
       return false;
     },
-    addCourse: function (course) {
+    addCourse: function(course) {
       course["category"] = "Auto";
       course["description"] = "User Added Course";
       this.semesterForm.courses.push(course);
     },
-    handleDragEnd: function (e) {
+    handleDragEnd: function(e) {
       e.target.style.opacity = "1";
       let items = document.querySelectorAll(".box");
 
-      items.forEach(function (item) {
+      items.forEach(function(item) {
         item.classList.remove("over");
       });
     },
-    handleDragEnter: function (e) {
+    handleDragEnter: function(e) {
       e.target.classList.add("over");
     },
-    handleDragLeave: function (e) {
+    handleDragLeave: function(e) {
       e.target.classList.remove("over");
     },
-    toggleCollapse: function (e) {
+    toggleCollapse: function(e) {
       e.target.classList.toggle("active");
       var content = e.target.nextElementSibling;
       if (!content.style.maxHeight) {
@@ -900,7 +1192,7 @@ export default {
         content.style.maxHeight = 0 + "px";
       }
     },
-    fetchCourses: function () {
+    fetchCourses: function() {
       fetch("http://localhost:8000/api/fetch/", {
         method: "post",
         headers: {
@@ -911,30 +1203,29 @@ export default {
       })
         .then((res) => res.json())
         .then((res) => {
-          console.log(res);
           this.availableCourses = res.parsed_courses;
           document.getElementById("results").style.maxHeight = "100%";
         });
     },
-    showDropdown: function (e) {
+    showDropdown: function(e) {
       e.target.nextElementSibling.style.display = "block";
       e.target.nextElementSibling.style.zIndex = 1;
-      setTimeout(function () {
+      setTimeout(function() {
         e.target.nextElementSibling.style.opacity = 1;
       }, 20);
     },
-    hideDropdown: function (e) {
+    hideDropdown: function(e) {
       e.target.nextElementSibling.style.opacity = 0;
       document
         .getElementById("help-box")
-        .addEventListener("transitionend", function (e) {
+        .addEventListener("transitionend", function(e) {
           if (e.target.style.opacity === "0") {
             e.target.style.zIndex = -1;
             e.target.style.display = "none";
           }
         });
     },
-    showFilters: function () {
+    showFilters: function() {
       let filters = document.getElementById("courses");
       let showFilters = document.getElementById("show-filters");
       let hideFilters = document.getElementById("hide-filters");
@@ -945,7 +1236,7 @@ export default {
       hideFilters.style.display = "block";
       filters.style.left = 0;
     },
-    hideFilters: function () {
+    hideFilters: function() {
       let filters = document.getElementById("courses");
       let showFilters = document.getElementById("show-filters");
       let hideFilters = document.getElementById("hide-filters");

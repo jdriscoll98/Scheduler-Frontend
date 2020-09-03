@@ -16,6 +16,7 @@ export default createStore({
     registered: false,
     semesters: [],
     programs: [],
+    categories: [],
     semesterForm: {
       number: "",
       term: "Fall",
@@ -220,6 +221,19 @@ export default createStore({
           commit("registered")
           return response;
         })
+    },
+    uploadAudit({ commit }, payload) {
+      return fetch("http://localhost:8000/api/upload/", {
+        method: "post",
+        headers: {
+          Authorization: "Token ".concat(this.state.profile.token),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload)
+      }).then((res) => (res.json())).then((res) => {
+        commit('setPrograms', res.programs)
+        commit('setSemesters', res.semesters)
+      })
     }
 
   },

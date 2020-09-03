@@ -48,7 +48,6 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(to.name);
   if (to.name !== 'Login' && !store.state.loggedIn) next({ name: 'Login' })
   else next()
 })
